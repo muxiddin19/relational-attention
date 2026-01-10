@@ -1,0 +1,21 @@
+# Paper submission folder - excluded for blind review
+emnlp26/
+
+# Common ignores
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+*.log
+*.aux
+*.bbl
+*.blg
+*.out
+*.toc
+*.synctex.gz
+.idea/
+.vscode/
+*.egg-info/
+dist/
+build/
+.env

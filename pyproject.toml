@@ -1,0 +1,81 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "relational-attention"
+version = "0.1.0"
+description = "Relational Attention: A Set-Theoretic Foundation for Neural Structured Reasoning"
+readme = "relational_attention/README.md"
+license = {file = "LICENSE"}
+authors = [
+    {name = "Anonymous", email = "anonymous@example.com"}
+]
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+keywords = [
+    "attention",
+    "transformer",
+    "relational-algebra",
+    "structured-reasoning",
+    "text-to-sql",
+    "deep-learning",
+    "pytorch",
+]
+dependencies = [
+    "torch>=1.9.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0",
+    "pytest-cov>=2.0",
+    "black>=22.0",
+    "isort>=5.0",
+    "flake8>=4.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/anonymous/relational-attention"
+Paper = "https://arxiv.org/abs/XXXX.XXXXX"
+Repository = "https://github.com/anonymous/relational-attention"
+
+[tool.setuptools.packages.find]
+exclude = ["tests*", "examples*", "emnlp26*"]
+
+[tool.black]
+line-length = 100
+target-version = ['py38', 'py39', 'py310', 'py311']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+    | \.mypy_cache
+    | \.venv
+    | build
+    | dist
+    | emnlp26
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 100
+skip = [".git", ".venv", "build", "dist", "emnlp26"]
+
+[tool.pytest.ini_options]
+testpaths = ["relational_attention/tests"]
+python_files = "test_*.py"
+python_functions = "test_*"
