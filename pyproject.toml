@@ -48,9 +48,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/anonymous/relational-attention"
-Paper = "https://arxiv.org/abs/XXXX.XXXXX"
-Repository = "https://github.com/anonymous/relational-attention"
+Homepage = "https://github.com/muxiddin19/relational-attention"
+Paper = "https://anonymous.4open.science/r/relational-attention/"
+Repository = "https://github.com/muxiddin19/relational-attention"
 
 [tool.setuptools.packages.find]
 exclude = ["tests*", "examples*", "emnlp26*"]

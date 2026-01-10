@@ -22,7 +22,9 @@ The key innovation is the **Join Attention** mechanism, which computes attention
 ## Installation
 
 ```bash
-git clone https://github.com/muxiddin19/relational-attention.git
+git clone https://anonymous.4open.science/r/relational-attention/
+# Or from GitHub:
+# git clone https://github.com/muxiddin19/relational-attention.git
 cd relational-attention
 pip install -e .
 ```

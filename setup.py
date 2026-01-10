@@ -27,7 +27,7 @@ setup(
     description="Relational Attention: A Set-Theoretic Foundation for Neural Structured Reasoning",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/anonymous/relational-attention",
+    url="https://github.com/muxiddin19/relational-attention",
     packages=find_packages(exclude=["tests", "tests.*", "examples", "examples.*", "emnlp26", "emnlp26.*"]),
     classifiers=[
         "Development Status :: 3 - Alpha",
@@ -66,7 +66,7 @@ setup(
         "pytorch",
     ],
     project_urls={
-        "Paper": "https://arxiv.org/abs/XXXX.XXXXX",
-        "Source": "https://github.com/anonymous/relational-attention",
+        "Paper": "https://anonymous.4open.science/r/relational-attention/",
+        "Source": "https://github.com/muxiddin19/relational-attention",
     },
 )
