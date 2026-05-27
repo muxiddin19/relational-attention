@@ -4,7 +4,7 @@
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-1.9+-ee4c2c.svg)](https://pytorch.org/)
 
-Official implementation of **"Relational Attention Is All You Need: A Set-Theoretic Foundation for Neural Structured Reasoning"** (EMNLP 2026).
+Official implementation of **"Attribute-Decomposed Attention: A Relational Inductive Bias for Structured Reasoning"** (ICDE 2027).
 
 ## Abstract
 
@@ -121,9 +121,8 @@ Relational Attention maintains **O(n²d)** complexity, matching standard attenti
   title={Relational Attention Is All You Need: A Set-Theoretic Foundation
          for Neural Structured Reasoning},
   author={Anonymous},
-  booktitle={Proceedings of the 2026 Conference on Empirical Methods
-             in Natural Language Processing (EMNLP)},
-  year={2026}
+  booktitle={Proceedings of the 43rd IEEE International Conference on Data Engineering (ICDE)},
+  year={2027}
 }
 ```
 
