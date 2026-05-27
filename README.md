@@ -1,4 +1,4 @@
-# Relational Attention
+# Attribute-Decomposed Attention
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
@@ -8,7 +8,7 @@ Official implementation of **"Attribute-Decomposed Attention: A Relational Induc
 
 ## Abstract
 
-We introduce **Relational Attention**, an attention mechanism grounded in relational algebra that treats token representations as tuples with typed attributes. By reformulating attention through the lens of database operations—selection (σ), projection (π), and join (⋈)—our approach provides a principled framework for structured reasoning in neural networks.
+We introduce **Attribute-Decomposed Attention**, an attention mechanism grounded in relational algebra that treats token representations as tuples with typed attributes. By reformulating attention through the lens of database operations—selection (σ), projection (π), and join (⋈)—our approach provides a principled framework for structured reasoning in neural networks.
 
 The key innovation is the **Join Attention** mechanism, which computes attention scores based on specific attribute pairs rather than full representations, enabling more targeted relational reasoning with improved compositional generalization.
 
