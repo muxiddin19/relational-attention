@@ -40,7 +40,9 @@ run_one() {
     local DATASET="$3"
     local SEED="$4"
 
-    local CONFIG="configs/${MODEL}_transformer_${SIZE}.yaml"
+    local CFG_PREFIX="rel"
+    [ "$MODEL" = "standard" ] && CFG_PREFIX="std"
+    local CONFIG="configs/${CFG_PREFIX}_transformer_${SIZE}.yaml"
     local OUT_DIR="$OUT_ROOT/${MODEL}_${SIZE}_${DATASET}_s${SEED}"
 
     if [ -f "$OUT_DIR/best_model/model.pt" ]; then
