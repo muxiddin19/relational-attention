@@ -68,6 +68,8 @@ run_one() {
         --checkpoint "$OUT_DIR/best_model" \
         --dataset "$DATASET" \
         --nas-dir "$NAS_DIR" \
+        --max-tgt-len 64 \
+        --batch-size 64 \
         --output-file "$OUT_DIR/eval_results.json" \
         2>&1 | tee "$OUT_DIR/eval.log"
 
