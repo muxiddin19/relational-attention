@@ -119,12 +119,27 @@ def eval_spider(predictions: List[str], examples: List[Dict],
                 nas_dir: str, split: str) -> Dict:
     spider_dir = Path(nas_dir) / "spider"
     eval_script = spider_dir / "test-suite-sql-eval" / "evaluation.py"
-    if not eval_script.exists():
-        log.warning("Spider eval script not found; falling back to exact-match.")
-        preds = [p.strip().lower() for p in predictions]
-        golds = [e["target"].strip().lower() for e in examples]
+    db_dir = spider_dir / "database"
+
+    if not eval_script.exists() or not db_dir.exists():
+        reason = "eval script" if not eval_script.exists() else "database dir"
+        log.warning(f"Spider {reason} not found; falling back to exact-match.")
+        preds = [normalize(p) for p in predictions]
+        golds = [normalize(e["target"]) for e in examples]
         em = sum(p == g for p, g in zip(preds, golds)) / len(golds)
-        return {"exact_match": em, "execution_accuracy": None}
+        # Token-level F1 as secondary metric
+        def token_f1(pred, gold):
+            p_toks, g_toks = set(pred.split()), set(gold.split())
+            if not p_toks or not g_toks:
+                return 0.0
+            common = p_toks & g_toks
+            if not common:
+                return 0.0
+            prec = len(common) / len(p_toks)
+            rec  = len(common) / len(g_toks)
+            return 2 * prec * rec / (prec + rec)
+        f1 = sum(token_f1(p, g) for p, g in zip(preds, golds)) / len(golds)
+        return {"exact_match": em, "token_f1": f1, "execution_accuracy": None}
 
     gold_file = spider_dir / ("train_spider.json" if split == "train" else "dev.json")
     with tempfile.NamedTemporaryFile(mode="w", suffix=".sql", delete=False) as pred_f:
