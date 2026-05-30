@@ -64,28 +64,30 @@ run_one() {
         --fp16
 
     echo "--- Evaluating: $OUT_DIR ---"
+    # Use dataset-specific max_tgt_len: COGS/CFQ logical forms are long (avg 80-200 tokens)
+    MAX_TGT_LEN=128
+    [ "$DATASET" = "cogs" ] && MAX_TGT_LEN=256
+    [ "$DATASET" = "cfq"  ] && MAX_TGT_LEN=256
+    [ "$DATASET" = "scan" ] && MAX_TGT_LEN=128
     $PYTHON scripts/evaluate.py \
         --checkpoint "$OUT_DIR/best_model" \
         --dataset "$DATASET" \
         --nas-dir "$NAS_DIR" \
-        --max-tgt-len 64 \
-        --batch-size 64 \
+        --max-tgt-len "$MAX_TGT_LEN" \
+        --batch-size 32 \
         --output-file "$OUT_DIR/eval_results.json" \
         2>&1 | tee "$OUT_DIR/eval.log"
 
-    # Append to summary CSV
-    METRIC=$($PYTHON -c "
+    # Append to summary CSV (comma-separated metric name and value)
+    $PYTHON -c "
 import json, sys
 d = json.load(open('$OUT_DIR/eval_results.json'))
 m = d.get('metrics', {})
 for k, v in m.items():
     if v is not None and isinstance(v, float):
-        print(k, v)
+        print('$MODEL,$SIZE,$DATASET,$SEED,' + k + ',' + str(round(v, 6)))
         break
-" 2>/dev/null | head -1)
-    if [ -n "$METRIC" ]; then
-        echo "$MODEL,$SIZE,$DATASET,$SEED,$METRIC" >> "$SUMMARY"
-    fi
+" 2>/dev/null >> "$SUMMARY"
 }
 
 # ---- Main loop ----
