@@ -1,0 +1,34 @@
+# RelTransformer 125M — Attribute-Decomposed Attention (k=8)
+# ~125M parameters: d=512, 12 enc + 12 dec layers, 8 heads
+# Used in: Table 1 (Spider), Table 2 (COGS/SCAN/CFQ/GSM8K)
+
+model_type: relational
+hidden_dim: 512
+num_encoder_layers: 12
+num_decoder_layers: 12
+num_heads: 8
+num_attributes: 8        # k=8 attribute slots (paper §III, Table 5)
+ffn_dim: 2048
+max_seq_len: 512
+dropout: 0.1
+vocab_size: 32000
+
+learning_rate: 5.0e-4
+weight_decay: 0.01
+warmup_steps: 4000
+max_steps: 100000
+batch_size: 32
+gradient_accumulation: 1
+max_grad_norm: 1.0
+label_smoothing: 0.1
+
+eval_every: 1000
+save_every: 10000
+patience: 15
+
+max_src_len: 256
+max_tgt_len: 128
+
+fp16: true
+num_workers: 4
+log_every: 100

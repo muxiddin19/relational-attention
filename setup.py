@@ -22,9 +22,9 @@ else:
 setup(
     name="relational-attention",
     version="0.1.0",
-    author="Anonymous",
-    author_email="anonymous@example.com",
-    description="Relational Attention: A Set-Theoretic Foundation for Neural Structured Reasoning",
+    author="Mukhiddin Toshpulatov, Wookey Lee, Youn-Kyoung Seo",
+    author_email="muhiddin1979@inha.edu",
+    description="Attribute-Decomposed Attention: A Relational Inductive Bias for Structured Reasoning",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/muxiddin19/relational-attention",
@@ -66,7 +66,6 @@ setup(
         "pytorch",
     ],
     project_urls={
-        "Paper": "https://anonymous.4open.science/r/relational-attention/",
         "Source": "https://github.com/muxiddin19/relational-attention",
     },
 )

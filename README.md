@@ -6,11 +6,13 @@
 
 Official implementation of **"Attribute-Decomposed Attention: A Relational Inductive Bias for Structured Reasoning"** (ICDE 2027).
 
+**Authors:** Mukhiddin Toshpulatov, Wookey Lee, Youn-Kyoung Seo — Gachon University / Inha University
+
 ## Abstract
 
-We introduce **Attribute-Decomposed Attention**, an attention mechanism grounded in relational algebra that treats token representations as tuples with typed attributes. By reformulating attention through the lens of database operations—selection (σ), projection (π), and join (⋈)—our approach provides a principled framework for structured reasoning in neural networks.
+We introduce **Attribute-Decomposed Attention** (RelAttn), an attention mechanism grounded in the relational model that treats token representations as typed attribute tuples. The design implements database operations—selection (σ), projection (π), and join (⋈)—as differentiable attention operations, providing a principled relational inductive bias for structured reasoning.
 
-The key innovation is the **Join Attention** mechanism, which computes attention scores based on specific attribute pairs rather than full representations, enabling more targeted relational reasoning with improved compositional generalization.
+The key innovation is **Join Attention**, which computes attention based on specific attribute pairs rather than full representations: each head implements a soft foreign-key join between typed attribute subspaces, enabling targeted structured reasoning with systematic compositional generalization.
 
 ## Key Features
 
@@ -22,14 +24,12 @@ The key innovation is the **Join Attention** mechanism, which computes attention
 ## Installation
 
 ```bash
-git clone https://anonymous.4open.science/r/relational-attention/
-# Or from GitHub:
-# git clone https://github.com/muxiddin19/relational-attention.git
+git clone https://github.com/muxiddin19/relational-attention.git
 cd relational-attention
-pip install -e .
+pip install -e ".[experiments]"
 ```
 
-**Requirements:** Python ≥ 3.8, PyTorch ≥ 1.9
+**Requirements:** Python ≥ 3.8, PyTorch ≥ 2.0
 
 ## Quick Start
 
@@ -117,19 +117,43 @@ Relational Attention maintains **O(n²d)** complexity, matching standard attenti
 ## Citation
 
 ```bibtex
-@inproceedings{anonymous2026relational,
-  title={Relational Attention Is All You Need: A Set-Theoretic Foundation
-         for Neural Structured Reasoning},
-  author={Anonymous},
-  booktitle={Proceedings of the 43rd IEEE International Conference on Data Engineering (ICDE)},
-  year={2027}
+@inproceedings{toshpulatov2027relational,
+  title     = {Attribute-Decomposed Attention: A Relational Inductive Bias for Structured Reasoning},
+  author    = {Toshpulatov, Mukhiddin and Lee, Wookey and Seo, Youn-Kyoung},
+  booktitle = {Proceedings of the 43rd IEEE International Conference on Data Engineering (ICDE)},
+  year      = {2027},
+  address   = {Copenhagen, Denmark}
 }
 ```
+
+## Reproducing Experiments
+
+See [`scripts/`](scripts/) for the full experiment pipeline:
+
+```bash
+# 1. Server environment
+bash scripts/setup_env.sh
+
+# 2. Download all datasets to NAS
+NAS_DIR=/nas/Dataset bash scripts/download_datasets.sh
+
+# 3. Run all experiments (3 seeds × 2 sizes × 5 datasets)
+NAS_DIR=/nas/Dataset bash scripts/run_experiments.sh
+```
+
+See [Fairness of Comparisons](#fairness-of-comparisons) below for details on ensuring identical conditions across models.
+
+## Fairness of Comparisons
+
+All from-scratch comparisons (RelTransformer vs Standard Transformer) use:
+- Identical architecture depth, width, and parameter count
+- Identical training data, tokenizer (SentencePiece, 32k vocab), and batch schedule
+- Identical constrained decoding applied uniformly to all models
+- 3 seeds {42, 43, 44}; results reported as mean ± std
+- Spider: official `evaluation.py` from the Spider repository (EX + EM)
+
+PICARD and RESDSQL use pretrained T5-Large/3B — not size-matched; presented as reference only (paper §V).
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-We thank the anonymous reviewers for their constructive feedback.
