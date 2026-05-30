@@ -29,26 +29,39 @@ SPIDER_DIR="$NAS_DIR/spider"
 if [ ! -d "$SPIDER_DIR/train_spider.json" ] && [ ! -f "$SPIDER_DIR/train_spider.json" ]; then
     echo "--- Downloading Spider ---"
     mkdir -p "$SPIDER_DIR"
-    # Primary: HuggingFace datasets (downloads train/dev splits + tables)
+    # HuggingFace: try multiple known Spider dataset paths
     $PYTHON - <<'EOF'
 from datasets import load_dataset
-import json, os, shutil
+import json, os
 
-nas = os.environ.get("NAS_DIR", "/nas/Dataset")
+nas = os.environ.get("NAS_DIR", "/nas/Dataset/nlp")
 out = f"{nas}/spider"
 os.makedirs(out, exist_ok=True)
 
-print("  Loading Spider from HuggingFace...")
-ds = load_dataset("spider", trust_remote_code=True)
+# Try known HuggingFace dataset names in order
+candidates = ["xlangai/spider", "spider-db/spider", "spider"]
+ds = None
+for name in candidates:
+    try:
+        print(f"  Trying HuggingFace dataset: {name}")
+        ds = load_dataset(name)
+        print(f"  Loaded from: {name}")
+        break
+    except Exception as e:
+        print(f"  {name} failed: {e}")
 
-for split in ["train", "validation"]:
-    fname = "train_spider.json" if split == "train" else "dev.json"
-    rows = [dict(r) for r in ds[split]]
-    with open(f"{out}/{fname}", "w") as f:
-        json.dump(rows, f, indent=2)
-    print(f"  Saved {len(rows)} rows -> {out}/{fname}")
-
-print("  Spider download complete.")
+if ds is None:
+    print("  WARNING: Could not load Spider from HuggingFace. Skipping NL/SQL pairs.")
+    print("  Please manually download from https://yale-nlp.github.io/spider/")
+else:
+    split_map = {"train": "train_spider.json", "validation": "dev.json", "test": "test.json"}
+    for split in ds:
+        fname = split_map.get(split, f"{split}.json")
+        rows = [dict(r) for r in ds[split]]
+        with open(f"{out}/{fname}", "w") as f:
+            json.dump(rows, f, indent=2)
+        print(f"  Saved {len(rows)} rows -> {out}/{fname}")
+    print("  Spider NL/SQL pairs done.")
 EOF
     # Download database files (tables.json + SQLite DBs)
     wget -q -O "$SPIDER_DIR/spider_data.zip" \
@@ -82,7 +95,7 @@ out = f"{nas}/cogs"
 os.makedirs(out, exist_ok=True)
 
 print("  Loading COGS from HuggingFace...")
-ds = load_dataset("najoungkim/COGS", trust_remote_code=True)
+ds = load_dataset("najoungkim/COGS")
 for split in ds:
     rows = ds[split].to_pandas()
     fname = {"train": "train.tsv", "validation": "dev.tsv",
