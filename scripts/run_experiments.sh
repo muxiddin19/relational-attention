@@ -11,13 +11,23 @@
 
 set -e
 
-NAS_DIR="${NAS_DIR:-/nas/Dataset}"
+NAS_DIR="${NAS_DIR:-/nas/Dataset/nlp}"
 GPU="${GPU:-0}"
 SEEDS=(42 43 44)
 DATASETS=(spider cogs scan cfq gsm8k)
 MODELS=(relational standard)   # standard = baseline with identical architecture
 SIZES=(125m 350m)
 OUT_ROOT="./outputs"
+
+# Use conda env python if available
+PYTHON="${PYTHON:-python3}"
+for p in \
+    "$HOME/anaconda3/envs/relattn/bin/python" \
+    "$HOME/miniconda3/envs/relattn/bin/python" \
+    "$(which python3)"; do
+    [ -x "$p" ] && { PYTHON="$p"; break; }
+done
+echo "Using Python: $PYTHON"
 SUMMARY="$OUT_ROOT/results_summary.csv"
 
 export CUDA_VISIBLE_DEVICES="$GPU"
@@ -43,7 +53,7 @@ run_one() {
     echo " Training: model=$MODEL size=$SIZE dataset=$DATASET seed=$SEED"
     echo "=========================================="
 
-    python scripts/train.py \
+    $PYTHON scripts/train.py \
         --config "$CONFIG" \
         --dataset "$DATASET" \
         --nas-dir "$NAS_DIR" \
@@ -52,7 +62,7 @@ run_one() {
         --fp16
 
     echo "--- Evaluating: $OUT_DIR ---"
-    python scripts/evaluate.py \
+    $PYTHON scripts/evaluate.py \
         --checkpoint "$OUT_DIR/best_model" \
         --dataset "$DATASET" \
         --nas-dir "$NAS_DIR" \
@@ -60,7 +70,7 @@ run_one() {
         2>&1 | tee "$OUT_DIR/eval.log"
 
     # Append to summary CSV
-    METRIC=$(python3 -c "
+    METRIC=$($PYTHON -c "
 import json, sys
 d = json.load(open('$OUT_DIR/eval_results.json'))
 m = d.get('metrics', {})
@@ -93,7 +103,7 @@ echo "=========================================="
 cat "$SUMMARY"
 
 # ---- Aggregate results (mean ± std over seeds) ----
-python3 - <<'EOF'
+$PYTHON - <<'EOF'
 import csv, collections, statistics, sys
 
 rows = list(csv.DictReader(open("outputs/results_summary.csv")))
