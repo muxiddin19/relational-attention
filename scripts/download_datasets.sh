@@ -1,13 +1,22 @@
 #!/usr/bin/env bash
 # Download all benchmark datasets to NAS storage.
-# Usage: NAS_DIR=/nas/Dataset bash scripts/download_datasets.sh
+# Usage: NAS_DIR=/nas/Dataset/nlp bash scripts/download_datasets.sh
 #
 # Downloads: Spider, COGS, SCAN, CFQ, GSM8K
-# Requires: wget, python3, huggingface_hub (pip install huggingface_hub)
+# Requires: wget, python3 with datasets/pandas installed
 
 set -e
 
-NAS_DIR="${NAS_DIR:-/nas/Dataset}"
+NAS_DIR="${NAS_DIR:-/nas/Dataset/nlp}"
+# Use conda env python if available, fall back to system python3
+PYTHON="${PYTHON:-$(which python3)}"
+for p in \
+    "$HOME/anaconda3/envs/relattn/bin/python" \
+    "$HOME/miniconda3/envs/relattn/bin/python" \
+    "$(which python3)"; do
+    [ -x "$p" ] && { PYTHON="$p"; break; }
+done
+echo "Using Python: $PYTHON"
 mkdir -p "$NAS_DIR"
 
 echo "=== Downloading datasets to $NAS_DIR ==="
@@ -21,7 +30,7 @@ if [ ! -d "$SPIDER_DIR/train_spider.json" ] && [ ! -f "$SPIDER_DIR/train_spider.
     echo "--- Downloading Spider ---"
     mkdir -p "$SPIDER_DIR"
     # Primary: HuggingFace datasets (downloads train/dev splits + tables)
-    python3 - <<'EOF'
+    $PYTHON - <<'EOF'
 from datasets import load_dataset
 import json, os, shutil
 
@@ -64,7 +73,7 @@ COGS_DIR="$NAS_DIR/cogs"
 if [ ! -f "$COGS_DIR/train.tsv" ]; then
     echo "--- Downloading COGS ---"
     mkdir -p "$COGS_DIR"
-    python3 - <<'EOF'
+    $PYTHON - <<'EOF'
 from datasets import load_dataset
 import os
 
@@ -94,7 +103,7 @@ SCAN_DIR="$NAS_DIR/scan"
 if [ ! -f "$SCAN_DIR/simple_train.json" ]; then
     echo "--- Downloading SCAN ---"
     mkdir -p "$SCAN_DIR"
-    python3 - <<'EOF'
+    $PYTHON - <<'EOF'
 from datasets import load_dataset
 import json, os
 
@@ -125,7 +134,7 @@ CFQ_DIR="$NAS_DIR/cfq"
 if [ ! -f "$CFQ_DIR/mcd1_train.json" ]; then
     echo "--- Downloading CFQ ---"
     mkdir -p "$CFQ_DIR"
-    python3 - <<'EOF'
+    $PYTHON - <<'EOF'
 from datasets import load_dataset
 import json, os
 
@@ -159,7 +168,7 @@ GSM8K_DIR="$NAS_DIR/gsm8k"
 if [ ! -f "$GSM8K_DIR/train.json" ]; then
     echo "--- Downloading GSM8K ---"
     mkdir -p "$GSM8K_DIR"
-    python3 - <<'EOF'
+    $PYTHON - <<'EOF'
 from datasets import load_dataset
 import json, os
 
