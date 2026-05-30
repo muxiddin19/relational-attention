@@ -132,24 +132,56 @@ fi
 
 # -------------------------------------------------------
 # 3. SCAN (systematic compositional generalization)
+# HuggingFace 4.x dropped script-based datasets; clone from GitHub instead.
 # -------------------------------------------------------
 SCAN_DIR="$NAS_DIR/scan"
 if [ ! -f "$SCAN_DIR/simple_train.json" ]; then
     echo "--- Downloading SCAN ---"
     mkdir -p "$SCAN_DIR"
     $PYTHON - <<'EOF'
-from datasets import load_dataset
-import json, os
+import os, json, subprocess, re
 
 nas = os.environ.get("NAS_DIR", "/nas/Dataset/nlp")
 out = f"{nas}/scan"
 os.makedirs(out, exist_ok=True)
 
-for split_type in ["simple", "addprim_jump", "length"]:
-    print(f"  Loading SCAN ({split_type})...")
-    ds = load_dataset("scan", split_type)
-    for split in ds:
-        rows = [dict(r) for r in ds[split]]
+repo = f"{out}/_repo"
+if not os.path.isdir(repo):
+    print("  Cloning SCAN from GitHub...")
+    subprocess.run(["git", "clone", "--quiet", "--depth=1",
+                    "https://github.com/brendenlake/SCAN.git", repo], check=True)
+
+def parse_scan_file(path):
+    rows = []
+    with open(path) as f:
+        for line in f:
+            line = line.strip()
+            if not line: continue
+            m = re.match(r"IN:\s*(.+?)\s+OUT:\s*(.+)", line)
+            if m:
+                rows.append({"commands": m.group(1), "actions": m.group(2)})
+    return rows
+
+splits = {
+    "simple": {
+        "train": f"{repo}/simple_split/tasks_train_simple.txt",
+        "test":  f"{repo}/simple_split/tasks_test_simple.txt",
+    },
+    "addprim_jump": {
+        "train": f"{repo}/add_prim_split/tasks_train_addprim_jump.txt",
+        "test":  f"{repo}/add_prim_split/tasks_test_addprim_jump.txt",
+    },
+    "length": {
+        "train": f"{repo}/length_split/tasks_train_length.txt",
+        "test":  f"{repo}/length_split/tasks_test_length.txt",
+    },
+}
+for split_type, files in splits.items():
+    for split, path in files.items():
+        if not os.path.exists(path):
+            print(f"  WARNING: {path} not found, skipping")
+            continue
+        rows = parse_scan_file(path)
         fname = f"{split_type}_{split}.json"
         with open(f"{out}/{fname}", "w") as f:
             json.dump(rows, f, indent=2)
@@ -163,31 +195,39 @@ fi
 
 # -------------------------------------------------------
 # 4. CFQ (compositional Freebase questions)
+# HuggingFace 4.x dropped script-based datasets; use google-research GitHub.
 # -------------------------------------------------------
 CFQ_DIR="$NAS_DIR/cfq"
 if [ ! -f "$CFQ_DIR/mcd1_train.json" ]; then
     echo "--- Downloading CFQ ---"
     mkdir -p "$CFQ_DIR"
     $PYTHON - <<'EOF'
-from datasets import load_dataset
-import json, os
+import os, json, subprocess
 
 nas = os.environ.get("NAS_DIR", "/nas/Dataset/nlp")
 out = f"{nas}/cfq"
 os.makedirs(out, exist_ok=True)
 
-for split_type in ["mcd1", "mcd2", "mcd3", "random_split"]:
-    print(f"  Loading CFQ ({split_type})...")
-    try:
-        ds = load_dataset("cfq", split_type)
-        for split in ds:
-            rows = [dict(r) for r in ds[split]]
-            fname = f"{split_type}_{split}.json"
-            with open(f"{out}/{fname}", "w") as f:
-                json.dump(rows, f, indent=2)
-            print(f"  Saved {len(rows)} rows -> {out}/{fname}")
-    except Exception as e:
-        print(f"  WARNING: {split_type} failed: {e}")
+# CFQ is available as a TFRecords file from Google; use the pre-split HF parquet
+# Try HF datasets with parquet (doesn't need loading script)
+try:
+    from datasets import load_dataset
+    print("  Trying CFQ from HuggingFace (google-research-datasets/cfq)...")
+    for split_type in ["mcd1", "mcd2", "mcd3"]:
+        try:
+            ds = load_dataset("google-research-datasets/cfq", split_type)
+            for split in ds:
+                rows = [dict(r) for r in ds[split]]
+                fname = f"{split_type}_{split}.json"
+                with open(f"{out}/{fname}", "w") as f:
+                    json.dump(rows, f, indent=2)
+                print(f"  Saved {len(rows)} rows -> {out}/{fname}")
+        except Exception as e:
+            print(f"  {split_type}: {e}")
+except Exception as e:
+    print(f"  HF failed: {e}")
+    print("  CFQ requires manual download from: https://storage.googleapis.com/cfq_dataset/cfq1.1.tar.gz")
+
 print("  CFQ done.")
 EOF
     echo "  CFQ done: $CFQ_DIR"
