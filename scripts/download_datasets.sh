@@ -5,7 +5,9 @@
 # Downloads: Spider, COGS, SCAN, CFQ, GSM8K
 # Requires: wget, python3 with datasets/pandas installed
 
-set -e
+set -euo pipefail
+# Continue past individual dataset failures
+download_with_fallback() { "$@" || echo "  WARNING: command failed, continuing."; }
 
 NAS_DIR="${NAS_DIR:-/nas/Dataset/nlp}"
 # Use conda env python if available, fall back to system python3
@@ -63,12 +65,26 @@ else:
         print(f"  Saved {len(rows)} rows -> {out}/{fname}")
     print("  Spider NL/SQL pairs done.")
 EOF
-    # Download database files (tables.json + SQLite DBs)
-    wget -q -O "$SPIDER_DIR/spider_data.zip" \
-        "https://drive.usercontent.google.com/download?id=1iRDVHLr4mX2wQKSgA9OEtSZJqypKHrD&confirm=t" \
-        || echo "  WARNING: Spider DB zip failed (need Google Drive access). Download manually."
-    if [ -f "$SPIDER_DIR/spider_data.zip" ]; then
-        unzip -q "$SPIDER_DIR/spider_data.zip" -d "$SPIDER_DIR" && rm "$SPIDER_DIR/spider_data.zip"
+    # Download SQLite DB files via gdown (Google Drive)
+    if [ ! -d "$SPIDER_DIR/database" ]; then
+        echo "  Installing gdown for Google Drive download..."
+        "$PYTHON" -m pip install -q gdown
+        "$PYTHON" -c "
+import gdown, zipfile, os
+out = os.environ.get('NAS_DIR', '/nas/Dataset/nlp') + '/spider'
+zip_path = f'{out}/spider_data.zip'
+print('  Downloading Spider DB files from Google Drive...')
+gdown.download(id='1iRDVHLr4mX2wQKSgA9OEtSZJqypKHrD', output=zip_path, quiet=False)
+if os.path.exists(zip_path) and os.path.getsize(zip_path) > 1e6:
+    print('  Extracting...')
+    with zipfile.ZipFile(zip_path) as zf:
+        zf.extractall(out)
+    os.remove(zip_path)
+    print('  Spider DB files done.')
+else:
+    print('  WARNING: DB download failed. Exec eval will not be available.')
+    if os.path.exists(zip_path): os.remove(zip_path)
+" || echo "  WARNING: Spider DB download failed. Download spider.zip manually."
     fi
     # Clone official evaluation script
     if [ ! -d "$SPIDER_DIR/test-suite-sql-eval" ]; then
@@ -87,21 +103,26 @@ if [ ! -f "$COGS_DIR/train.tsv" ]; then
     echo "--- Downloading COGS ---"
     mkdir -p "$COGS_DIR"
     $PYTHON - <<'EOF'
-from datasets import load_dataset
-import os
+import os, json, subprocess, shutil, csv
 
-nas = os.environ.get("NAS_DIR", "/nas/Dataset")
+nas = os.environ.get("NAS_DIR", "/nas/Dataset/nlp")
 out = f"{nas}/cogs"
 os.makedirs(out, exist_ok=True)
 
-print("  Loading COGS from HuggingFace...")
-ds = load_dataset("najoungkim/COGS")
-for split in ds:
-    rows = ds[split].to_pandas()
-    fname = {"train": "train.tsv", "validation": "dev.tsv",
-             "test": "test.tsv", "gen": "gen.tsv"}.get(split, f"{split}.tsv")
-    rows.to_csv(f"{out}/{fname}", sep="\t", index=False)
-    print(f"  Saved {len(rows)} rows -> {out}/{fname}")
+# COGS: clone from official GitHub (HuggingFace path changed)
+repo_dir = f"{out}/_repo"
+if not os.path.isdir(repo_dir):
+    print("  Cloning COGS from GitHub...")
+    subprocess.run(["git", "clone", "--quiet", "--depth=1",
+                    "https://github.com/najoungkim/COGS.git", repo_dir], check=True)
+
+data_dir = f"{repo_dir}/data"
+for fname in os.listdir(data_dir):
+    if fname.endswith(".tsv"):
+        shutil.copy(f"{data_dir}/{fname}", f"{out}/{fname}")
+        with open(f"{data_dir}/{fname}") as f:
+            n = sum(1 for _ in f) - 1
+        print(f"  Copied {n} rows -> {out}/{fname}")
 print("  COGS done.")
 EOF
     echo "  COGS done: $COGS_DIR"
@@ -120,7 +141,7 @@ if [ ! -f "$SCAN_DIR/simple_train.json" ]; then
 from datasets import load_dataset
 import json, os
 
-nas = os.environ.get("NAS_DIR", "/nas/Dataset")
+nas = os.environ.get("NAS_DIR", "/nas/Dataset/nlp")
 out = f"{nas}/scan"
 os.makedirs(out, exist_ok=True)
 
@@ -151,7 +172,7 @@ if [ ! -f "$CFQ_DIR/mcd1_train.json" ]; then
 from datasets import load_dataset
 import json, os
 
-nas = os.environ.get("NAS_DIR", "/nas/Dataset")
+nas = os.environ.get("NAS_DIR", "/nas/Dataset/nlp")
 out = f"{nas}/cfq"
 os.makedirs(out, exist_ok=True)
 
@@ -185,7 +206,7 @@ if [ ! -f "$GSM8K_DIR/train.json" ]; then
 from datasets import load_dataset
 import json, os
 
-nas = os.environ.get("NAS_DIR", "/nas/Dataset")
+nas = os.environ.get("NAS_DIR", "/nas/Dataset/nlp")
 out = f"{nas}/gsm8k"
 os.makedirs(out, exist_ok=True)
 
