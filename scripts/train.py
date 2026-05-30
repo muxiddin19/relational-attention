@@ -202,10 +202,12 @@ def load_dataset_examples(dataset: str, split: str, nas_dir: str) -> List[Dict]:
                  "target": r["query"]} for r in data]
 
     elif dataset == "cogs":
-        fname = {"train": "train.tsv", "dev": "dev.tsv",
-                 "test": "test.tsv", "gen": "gen.tsv"}[split]
+        split_map = {"train": "train.tsv", "dev": "dev.tsv",
+                     "validation": "dev.tsv", "test": "test.tsv", "gen": "gen.tsv"}
+        fname = split_map.get(split, f"{split}.tsv")
         import pandas as pd
-        df = pd.read_csv(base / "cogs" / fname, sep="\t")
+        df = pd.read_csv(base / "cogs" / fname, sep="\t",
+                         header=None, names=["sentence", "logical_form", "category"])
         return [{"source": row["sentence"], "target": row["logical_form"]}
                 for _, row in df.iterrows()]
 
@@ -224,8 +226,7 @@ def load_dataset_examples(dataset: str, split: str, nas_dir: str) -> List[Dict]:
         path = base / "cfq" / fname
         with open(path) as f:
             data = json.load(f)
-        return [{"source": r["questionPatternModEntities"],
-                 "target": r["sparqlPatternModEntities"]} for r in data]
+        return [{"source": r["question"], "target": r["query"]} for r in data]
 
     elif dataset == "gsm8k":
         fname = "train.json" if split == "train" else "test.json"
@@ -310,7 +311,7 @@ def train(cfg: TrainingConfig):
 
     # Datasets
     train_exs = load_dataset_examples(cfg.dataset, "train", cfg.nas_dir)
-    dev_split = "validation" if cfg.dataset in ("cogs",) else "dev"
+    dev_split = "dev"
     try:
         dev_exs = load_dataset_examples(cfg.dataset, dev_split, cfg.nas_dir)
     except Exception:
