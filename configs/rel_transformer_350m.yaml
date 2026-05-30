@@ -1,0 +1,33 @@
+# RelTransformer 350M — Attribute-Decomposed Attention (k=8)
+# ~350M parameters: d=1024, 16 enc + 16 dec layers, 16 heads
+
+model_type: relational
+hidden_dim: 1024
+num_encoder_layers: 16
+num_decoder_layers: 16
+num_heads: 16
+num_attributes: 8
+ffn_dim: 4096
+max_seq_len: 512
+dropout: 0.1
+vocab_size: 32000
+
+learning_rate: 3.0e-4
+weight_decay: 0.01
+warmup_steps: 8000
+max_steps: 150000
+batch_size: 16
+gradient_accumulation: 2    # effective batch = 32
+max_grad_norm: 1.0
+label_smoothing: 0.1
+
+eval_every: 1000
+save_every: 10000
+patience: 15
+
+max_src_len: 256
+max_tgt_len: 128
+
+fp16: true
+num_workers: 4
+log_every: 100
