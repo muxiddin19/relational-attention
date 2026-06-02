@@ -195,7 +195,11 @@ class JoinAttention(nn.Module):
         # Compute attribute-wise similarity
         # α_it = (a_i^{(j)} · b_t^{(l)}) / τ
         scores = torch.matmul(query_attr, key_attr.transpose(-2, -1))
-        scores = scores * self.scale / self.temperature
+        # Clamp temperature away from zero to prevent fp16 overflow → NaN
+        temp = self.temperature.clamp(min=1e-2)
+        scores = scores * self.scale / temp
+        # Clamp scores before softmax to prevent fp16 overflow
+        scores = scores.clamp(min=-1e4, max=1e4)
 
         # Apply mask if provided
         # Mask can be: (S_q, S_k) causal, (B, S_k) padding, (B, S_q, S_k), or (B, 1, 1, S_k)
@@ -215,8 +219,10 @@ class JoinAttention(nn.Module):
                 mask = mask.squeeze(1)
             scores = scores.masked_fill(mask == 0, float('-inf'))
 
-        # Compute attention weights
-        attn_weights = F.softmax(scores, dim=-1)
+        # Compute attention weights — use float32 for softmax stability
+        attn_weights = F.softmax(scores.float(), dim=-1).to(scores.dtype)
+        # Guard against NaN (e.g. all-masked rows produce -inf → NaN softmax)
+        attn_weights = torch.nan_to_num(attn_weights, nan=0.0)
         attn_weights = self.dropout(attn_weights)
 
         # Compute weighted sum of values
@@ -334,6 +340,8 @@ class RelationalAttentionHead(nn.Module):
 
         # Output projection
         output = self.out_proj(selected)
+        # Safety guard — propagating NaN crashes training
+        output = torch.nan_to_num(output, nan=0.0, posinf=1e4, neginf=-1e4)
 
         return output, attn_weights
 

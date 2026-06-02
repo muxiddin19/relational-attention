@@ -1,21 +1,21 @@
-# Paper submission folder - excluded for blind review
-emnlp26/
-
-# Common ignores
-__pycache__/
+# Model checkpoints and outputs (too large for git)
+outputs/
 *.pyc
-*.pyo
-.DS_Store
+__pycache__/
+*.pth
+*.pt
+*.bin
+*.safetensors
+
+# Temporary files
+*.tmp
 *.log
-*.aux
-*.bbl
-*.blg
-*.out
-*.toc
-*.synctex.gz
-.idea/
-.vscode/
-*.egg-info/
-dist/
-build/
-.env
+*.swp
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Sensitive
+*.env
+credentials.json

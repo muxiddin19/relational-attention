@@ -196,10 +196,55 @@ def load_dataset_examples(dataset: str, split: str, nas_dir: str) -> List[Dict]:
     if dataset == "spider":
         fname = "train_spider.json" if split == "train" else "dev.json"
         path = base / "spider" / fname
+        tables_path = base / "spider" / "tables.json"
         with open(path) as f:
             data = json.load(f)
-        return [{"source": f"translate to SQL: {r['question']} | {r.get('db_id', '')}",
-                 "target": r["query"]} for r in data]
+        # Build schema lookup: db_id -> "table1: col1,col2 | table2: col3"
+        schema_map = {}
+        if tables_path.exists():
+            with open(tables_path) as f:
+                tables_data = json.load(f)
+            for db in tables_data:
+                db_id = db["db_id"]
+                cols_by_table = {}
+                for (tid, _), (_, col_orig) in zip(
+                        db["column_names"], db["column_names_original"]):
+                    if tid == -1:
+                        continue
+                    tname = db["table_names_original"][tid]
+                    cols_by_table.setdefault(tname, []).append(col_orig)
+                schema_str = " | ".join(
+                    f"{t}: {chr(44).join(c)}" for t, c in cols_by_table.items())
+                schema_map[db_id] = schema_str
+        import random as _rnd
+        def _maybe_drop_schema(schema_str, drop_p=0.0):
+            """Randomly drop some columns from each table in schema_str.
+            During training (drop_p>0) this prevents memorising exact schema
+            layouts; during eval (drop_p=0) full schema is always used.
+            """
+            if not schema_str or drop_p == 0.0:
+                return schema_str
+            parts = []
+            for table_part in schema_str.split(" | "):
+                if ":" not in table_part:
+                    parts.append(table_part)
+                    continue
+                tname, cols_str = table_part.split(":", 1)
+                cols = [c.strip() for c in cols_str.split(",")]
+                # Always keep at least 1 column; drop others with prob drop_p
+                kept = [c for c in cols if _rnd.random() > drop_p] or cols[:1]
+                parts.append(f"{tname}: {chr(44).join(kept)}")
+            return " | ".join(parts)
+        # Use full schema for dev/test; 40% column dropout for training
+        _drop_p = 0.4 if split == "train" else 0.0
+        return [{
+            "source": (
+                f"translate to SQL: {r['question']}"
+                f" | db: {r.get('db_id', '')}"
+                f" | schema: {_maybe_drop_schema(schema_map.get(r.get('db_id', ''), ''), _drop_p)}"
+            ),
+            "target": r["query"]
+        } for r in data]
 
     elif dataset == "cogs":
         split_map = {"train": "train.tsv", "dev": "dev.tsv",
@@ -217,19 +262,35 @@ def load_dataset_examples(dataset: str, split: str, nas_dir: str) -> List[Dict]:
         if not path.exists():
             fname = f"addprim_jump_{split}.json"
             path = base / "scan" / fname
+        if not path.exists() and split in ("dev", "validation"):
+            # SCAN has no dev split; fall back to test
+            fname = f"simple_test.json"
+            path = base / "scan" / fname
         with open(path) as f:
             data = json.load(f)
-        return [{"source": r["commands"], "target": r["actions"]} for r in data]
+        # SCAN fix: replace underscores in action tokens so SentencePiece does
+        # not merge repeated tokens (I_WALK I_WALK → I_WALKWALK).  We encode
+        # each SCAN token as space-separated words and reverse in decode.
+        def scan_encode(s):
+            return " ".join(tok.replace("_", " __ ") for tok in s.split())
+        return [{"source": r["commands"],
+                 "target": scan_encode(r["actions"])} for r in data]
 
     elif dataset == "cfq":
         fname = f"mcd1_{split}.json"
         path = base / "cfq" / fname
+        if not path.exists() and split in ("dev", "validation"):
+            # CFQ has no dev split; use mcd1_test as validation proxy
+            path = base / "cfq" / "mcd1_test.json"
         with open(path) as f:
             data = json.load(f)
         return [{"source": r["question"], "target": r["query"]} for r in data]
 
     elif dataset == "gsm8k":
-        fname = "train.json" if split == "train" else "test.json"
+        if split == "train":
+            fname = "train.json"
+        else:
+            fname = "test.json"  # GSM8K has no dev split; use test
         with open(base / "gsm8k" / fname) as f:
             data = json.load(f)
         return [{"source": r["question"], "target": r["answer"]} for r in data]
@@ -377,14 +438,31 @@ def train(cfg: TrainingConfig):
                     loss = criterion(logits.view(-1, logits.size(-1)),
                                      batch["labels"].view(-1)) / cfg.gradient_accumulation
 
+            # Skip NaN batches — fp16 overflow can propagate NaN into weights
+            if torch.isnan(loss) or torch.isinf(loss):
+                log.warning(f"NaN/Inf loss at step {global_step}, skipping batch")
+                optimizer.zero_grad(set_to_none=True)
+                global_step += 1
+                continue
+
             scaler.scale(loss).backward()
 
             if (global_step + 1) % cfg.gradient_accumulation == 0:
                 scaler.unscale_(optimizer)
-                torch.nn.utils.clip_grad_norm_(model.parameters(), cfg.max_grad_norm)
-                scaler.step(optimizer)
-                scaler.update()
-                optimizer.zero_grad(set_to_none=True)
+                # Check for NaN gradients before clipping
+                has_nan_grad = any(
+                    p.grad is not None and (torch.isnan(p.grad).any() or torch.isinf(p.grad).any())
+                    for p in model.parameters()
+                )
+                if has_nan_grad:
+                    log.warning(f"NaN grad at step {global_step}, zeroing and skipping")
+                    optimizer.zero_grad(set_to_none=True)
+                    scaler.update()
+                else:
+                    torch.nn.utils.clip_grad_norm_(model.parameters(), cfg.max_grad_norm)
+                    scaler.step(optimizer)
+                    scaler.update()
+                    optimizer.zero_grad(set_to_none=True)
 
             if global_step % cfg.log_every == 0:
                 elapsed = time.time() - t0

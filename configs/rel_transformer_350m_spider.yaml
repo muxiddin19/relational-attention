@@ -1,0 +1,27 @@
+# RelTransformer 350M — Spider (Text-to-SQL with schema-augmented input)
+model_type: relational
+hidden_dim: 768
+num_encoder_layers: 24
+num_decoder_layers: 24
+num_heads: 12
+num_attributes: 8
+ffn_dim: 3072
+max_seq_len: 512
+dropout: 0.1
+vocab_size: 32000
+learning_rate: 3.0e-4
+weight_decay: 0.01
+warmup_steps: 4000
+max_steps: 100000
+batch_size: 8
+gradient_accumulation: 4
+max_grad_norm: 1.0
+label_smoothing: 0.1
+eval_every: 1000
+save_every: 10000
+patience: 15
+max_src_len: 512
+max_tgt_len: 200
+fp16: true
+num_workers: 4
+log_every: 100

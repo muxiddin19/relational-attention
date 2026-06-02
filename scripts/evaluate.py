@@ -163,17 +163,26 @@ def eval_spider(predictions: List[str], examples: List[Dict],
         "--etype", "exec",
     ]
     try:
-        result = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=3600)
         output = result.stdout + result.stderr
         log.info("Spider eval output:\n" + output)
         # Parse EX from output
+        # test-suite eval prints: "execution  0.750  0.680  ..." (decimal, not %)
         ex = None
         for line in output.splitlines():
-            if "execution" in line.lower() and "%" in line:
-                try:
-                    ex = float(line.split()[-1].replace("%", "")) / 100
-                except ValueError:
-                    pass
+            line_low = line.lower()
+            if "execution" in line_low and "accuracy" not in line_low:
+                parts = line.split()
+                for p in reversed(parts):
+                    try:
+                        val = float(p.replace("%", ""))
+                        if 0.0 <= val <= 1.0:
+                            ex = val
+                        elif 0.0 < val <= 100.0:
+                            ex = val / 100.0
+                        break
+                    except ValueError:
+                        continue
         return {"execution_accuracy": ex, "eval_output": output}
     except Exception as e:
         log.error(f"Spider eval failed: {e}")
@@ -184,14 +193,27 @@ def eval_spider(predictions: List[str], examples: List[Dict],
 # Generic exact-match evaluation
 # ---------------------------------------------------------------------------
 
-def eval_exact_match(predictions: List[str], examples: List[Dict]) -> Dict:
+def eval_exact_match(predictions: List[str], examples: List[Dict], dataset: str = "") -> Dict:
     preds = [p.strip() for p in predictions]
     golds = [e["target"].strip() for e in examples]
+    # SCAN: gold targets in examples may contain the encoded form (I __ WALK);
+    # normalise back to canonical I_WALK form for fair comparison
+    if dataset == "scan":
+        def _undo_scan_enc(s):
+            toks = s.split(); result = []; i = 0
+            while i < len(toks):
+                if i + 2 < len(toks) and toks[i+1] == "__":
+                    result.append(toks[i] + "_" + toks[i+2]); i += 3
+                else:
+                    result.append(toks[i]); i += 1
+            return " ".join(result)
+        golds = [_undo_scan_enc(g) for g in golds]
     correct = sum(normalize(p) == normalize(g) for p, g in zip(preds, golds))
     return {"exact_match": correct / len(golds), "n": len(golds)}
 
 
 def normalize(s: str) -> str:
+    s = s.replace("⁇", ";")  # SentencePiece sp32k maps ASCII ; to U+2047
     return " ".join(s.lower().split())
 
 
@@ -252,13 +274,45 @@ def main():
                            max_tgt_len=args.max_tgt_len,
                            batch_size=args.batch_size)
 
+    # SCAN post-process: reverse the space-separated encoding applied in train.py
+    # "I __ WALK I __ RUN" → "I_WALK I_RUN"
+    if args.dataset == "scan":
+        def scan_decode(s):
+            return " ".join(tok.replace(" __ ", "_").replace("__", "_")
+                           for tok in s.replace(" __ ", "__").split())
+        def scan_decode_v2(s):
+            # Handle "I __ WALK" → "I_WALK" pattern
+            import re
+            s = re.sub(r"I\s+__\s+(\w+)", r"I_", s)
+            return s
+        # Also fix the gold targets for eval_exact_match
+        from train import load_dataset_examples as _lde
+        # Simpler: just un-encode the space-split pattern
+        def _scan_postproc(pred):
+            # Replace "I __ WALK" → "I_WALK", "TURN __ LEFT" → "TURN_LEFT" etc.
+            toks = pred.split()
+            result = []
+            i = 0
+            while i < len(toks):
+                if i + 2 < len(toks) and toks[i+1] == "__":
+                    result.append(toks[i] + "_" + toks[i+2])
+                    i += 3
+                elif i + 1 < len(toks) and toks[i] == "__":
+                    # orphaned __, skip
+                    i += 1
+                else:
+                    result.append(toks[i])
+                    i += 1
+            return " ".join(result)
+        predictions = [_scan_postproc(p) for p in predictions]
+
     # Evaluate
     if args.dataset == "spider":
         metrics = eval_spider(predictions, examples, args.nas_dir, args.split)
     elif args.dataset == "gsm8k":
         metrics = eval_gsm8k(predictions, examples)
     else:
-        metrics = eval_exact_match(predictions, examples)
+        metrics = eval_exact_match(predictions, examples, dataset=args.dataset)
 
     log.info(f"=== Results ({args.dataset}/{args.split}) ===")
     for k, v in metrics.items():
