@@ -19,3 +19,8 @@ __pycache__/
 # Sensitive
 *.env
 credentials.json
+
+# Claude Code config (not for public repo)
+CLAUDE.md
+memory/
+.claude/
