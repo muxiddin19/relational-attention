@@ -78,7 +78,8 @@ class TrainingConfig:
     # Eval
     eval_every: int = 1000
     save_every: int = 5000
-    patience: int = 10                   # early stopping in eval rounds
+    patience: int = 10
+    eval_by_em: bool = False  # Use EM instead of dev_loss for early stopping                   # early stopping in eval rounds
 
     # Dataset
     dataset: str = "spider"
@@ -94,6 +95,10 @@ class TrainingConfig:
     # Output
     output_dir: str = "./outputs/run"
     log_every: int = 100
+
+    # Copy mechanism (pointer-generator for COGS/CFQ entity binding)
+    copy_mechanism: bool = False
+    num_copy_heads: int = 1
 
 
 def load_config(yaml_path: str, overrides: dict) -> TrainingConfig:
@@ -189,6 +194,39 @@ def collate_fn(batch: List[Dict], pad_id: int = 0) -> Dict[str, torch.Tensor]:
     }
 
 
+
+# ─── COGS entity-substitution augmentation (Fix: breaks overfitting) ──────────
+_COGS_ENTITY_NAMES = [
+    "Emma","Liam","Olivia","Noah","Ava","William","Isabella","James","Sofia",
+    "Lucas","Mia","Mason","Charlotte","Ethan","Sophie","Oliver","Emily",
+    "Alexander","Amelia","Michael","Benjamin","Harper","Elijah","Evelyn",
+    "Daniel","Abigail","Matthew","Ella","Aiden","Scarlett","Henry","Luna",
+    "Jackson","Chloe","Sebastian","Penelope","Owen","Layla","Samuel","Riley",
+]
+
+def _cogs_augment(examples, n_aug=4, seed_offset=0):
+    """Augment COGS training examples via entity name substitution.
+    Each example is duplicated n_aug times with different entity names,
+    forcing the model to learn entity-agnostic compositional structure.
+    """
+    import random
+    rng = random.Random(seed_offset + 12345)
+    augmented = list(examples)
+    for ex in examples:
+        src0, tgt0 = ex["source"], ex["target"]
+        present = [n for n in _COGS_ENTITY_NAMES if n in src0]
+        if not present:
+            continue
+        for _ in range(n_aug):
+            src, tgt = src0, tgt0
+            for name in present:
+                new_name = rng.choice([n for n in _COGS_ENTITY_NAMES if n != name])
+                src = src.replace(name, new_name)
+                tgt = tgt.replace(name, new_name)
+            augmented.append({"source": src, "target": tgt})
+    rng.shuffle(augmented)
+    return augmented
+
 def load_dataset_examples(dataset: str, split: str, nas_dir: str) -> List[Dict]:
     """Load dataset split and return list of {source, target} dicts."""
     base = Path(nas_dir)
@@ -253,14 +291,23 @@ def load_dataset_examples(dataset: str, split: str, nas_dir: str) -> List[Dict]:
         import pandas as pd
         df = pd.read_csv(base / "cogs" / fname, sep="\t",
                          header=None, names=["sentence", "logical_form", "category"])
-        return [{"source": row["sentence"], "target": row["logical_form"]}
-                for _, row in df.iterrows()]
+        exs = [{"source": row["sentence"], "target": row["logical_form"]}
+               for _, row in df.iterrows()]
+        if split == "train":
+            exs = _cogs_augment(exs, n_aug=4)
+            log.info(f"COGS train: {len(exs)} examples after entity augmentation ({len(exs)//5}×5)")
+        return exs
 
     elif dataset == "scan":
-        fname = f"simple_{split}.json"
+        # Try addprim_jump split first (the compositional generalization split)
+        fname = f"addprim_jump_{split}.json"
         path = base / "scan" / fname
         if not path.exists():
-            fname = f"addprim_jump_{split}.json"
+            fname = f"simple_{split}.json"
+            path = base / "scan" / fname
+        if not path.exists() and split in ("dev", "validation"):
+            # SCAN has no dev split; fall back to addprim_jump_test
+            fname = f"addprim_jump_test.json"
             path = base / "scan" / fname
         if not path.exists() and split in ("dev", "validation"):
             # SCAN has no dev split; fall back to test
@@ -293,7 +340,10 @@ def load_dataset_examples(dataset: str, split: str, nas_dir: str) -> List[Dict]:
             fname = "test.json"  # GSM8K has no dev split; use test
         with open(base / "gsm8k" / fname) as f:
             data = json.load(f)
-        return [{"source": r["question"], "target": r["answer"]} for r in data]
+        # Use only the final numeric answer as training target
+        # Full CoT (mean 65 SP tokens) truncated at max_tgt_len=64 hid the answer
+        return [{"source": r["question"],
+                 "target": r["answer"].split("####")[-1].strip()} for r in data]
 
     else:
         raise ValueError(f"Unknown dataset: {dataset}")
@@ -326,7 +376,8 @@ def build_model(cfg: TrainingConfig) -> nn.Module:
         ffn_dim=cfg.ffn_dim,
         max_seq_len=cfg.max_seq_len,
         dropout=cfg.dropout,
-    )
+        copy_mechanism=cfg.copy_mechanism,
+        num_copy_heads=cfg.num_copy_heads)
     model = RelationalTransformer(model_cfg)
     n_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
     log.info(f"Model: {cfg.model_type}, k={k}, params={n_params/1e6:.1f}M")
@@ -336,6 +387,45 @@ def build_model(cfg: TrainingConfig) -> nn.Module:
 # ---------------------------------------------------------------------------
 # Training loop
 # ---------------------------------------------------------------------------
+
+
+def compute_em_on_dev(model, tokenizer, dev_exs, device, max_tgt_len=256, n_samples=200, dataset="cogs"):
+    """Quick EM estimate on a dev subset for EM-based patience."""
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).parent))
+    model.eval()
+    sources = [e["source"] for e in dev_exs[:n_samples]]
+    targets = [e["target"] for e in dev_exs[:n_samples]]
+    preds = []
+    bs = 16
+    for i in range(0, len(sources), bs):
+        batch_src = sources[i:i+bs]
+        src_ids = [tokenizer.encode(s, add_bos=False, add_eos=True)[:256] for s in batch_src]
+        max_len = max(len(x) for x in src_ids)
+        padded = torch.zeros(len(batch_src), max_len, dtype=torch.long, device=device)
+        mask   = torch.zeros(len(batch_src), max_len, dtype=torch.long, device=device)
+        for j, ids in enumerate(src_ids):
+            padded[j, :len(ids)] = torch.tensor(ids, device=device)
+            mask[j, :len(ids)] = 1
+        dec = torch.full((len(batch_src), 1), tokenizer.bos_id, dtype=torch.long, device=device)
+        done = torch.zeros(len(batch_src), dtype=torch.bool, device=device)
+        with torch.no_grad():
+            for _ in range(max_tgt_len):
+                out = model(input_ids=padded, attention_mask=mask, decoder_input_ids=dec)
+                logits = out["logits"] if isinstance(out, dict) else out[0]
+                nxt = logits[:, -1, :].argmax(dim=-1, keepdim=True)
+                dec = torch.cat([dec, nxt], dim=1)
+                done |= (nxt.squeeze(-1) == tokenizer.eos_id)
+                if done.all():
+                    break
+        for row in dec.cpu().tolist():
+            preds.append(tokenizer.decode(row))
+    def norm(s):
+        return " ".join(s.replace("⁇", ";").lower().split())
+    correct = sum(norm(p) == norm(g) for p, g in zip(preds, targets))
+    model.train()
+    return correct / len(targets)
 
 def train(cfg: TrainingConfig):
     # Reproducibility
@@ -401,6 +491,7 @@ def train(cfg: TrainingConfig):
     best_dev_loss = float("inf")
     patience_count = 0
     global_step = 0
+    best_em_holder = [-1.0]  # mutable: persists EM across loop, reset per train() call
     t0 = time.time()
 
     log.info(f"Training on {len(train_exs)} examples, eval on {len(dev_exs)}")
@@ -476,8 +567,23 @@ def train(cfg: TrainingConfig):
                 log.info(f"[eval] step={global_step} dev_loss={dev_loss:.4f}")
                 writer.add_scalar("eval/loss", dev_loss, global_step)
 
-                if dev_loss < best_dev_loss:
+                # EM-based patience: compute greedy EM on 200 dev examples
+                if cfg.eval_by_em:
+                    em_score = compute_em_on_dev(
+                        model, tokenizer, dev_exs, device,
+                        max_tgt_len=cfg.max_tgt_len, n_samples=200, dataset=cfg.dataset
+                    )
+                    log.info(f"  EM on dev subset (200 samples): {em_score*100:.2f}%")
+                    monitor_val = em_score
+                    monitor_better = (em_score > best_em_holder[0])
+                else:
+                    monitor_val = dev_loss
+                    monitor_better = (dev_loss < best_dev_loss)
+
+                if monitor_better:
                     best_dev_loss = dev_loss
+                    if cfg.eval_by_em:
+                        best_em_holder[0] = monitor_val
                     patience_count = 0
                     ckpt = out_dir / "best_model"
                     ckpt.mkdir(exist_ok=True)

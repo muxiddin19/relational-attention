@@ -1,0 +1,27 @@
+# Standard Transformer 125M -- CFQ (safe lr=2e-4)
+model_type: standard
+hidden_dim: 512
+num_encoder_layers: 12
+num_decoder_layers: 12
+num_heads: 8
+num_attributes: 1
+ffn_dim: 2048
+max_seq_len: 512
+dropout: 0.1
+vocab_size: 32000
+learning_rate: 2.0e-4
+weight_decay: 0.01
+warmup_steps: 4000
+max_steps: 100000
+batch_size: 32
+gradient_accumulation: 1
+max_grad_norm: 1.0
+label_smoothing: 0.1
+eval_every: 1000
+save_every: 10000
+patience: 20
+max_src_len: 256
+max_tgt_len: 512
+fp16: false
+num_workers: 4
+log_every: 100

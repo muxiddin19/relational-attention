@@ -55,6 +55,9 @@ class RelationalTransformerConfig:
     # Join attention configuration
     join_temperature: float = 1.0
     learnable_temperature: bool = True
+    copy_mechanism: bool = False
+    num_copy_heads: int = 1
+    eval_by_em: bool = False
 
 
 class RelationalTransformerEncoder(nn.Module):
@@ -388,6 +391,9 @@ class RelationalTransformer(nn.Module):
             self.decoder.embedding.token_embedding.weight = \
                 self.encoder.embedding.token_embedding.weight
 
+        if config.copy_mechanism:
+            from relational_attention.copy_mechanism import TypedRelCopyGate
+            self.copy_gate = TypedRelCopyGate(config.hidden_dim, config.vocab_size, config.num_copy_heads)
         # Initialize weights
         self._init_weights()
 
@@ -482,24 +488,17 @@ class RelationalTransformer(nn.Module):
             cross_attention_mask=attention_mask
         )
 
-        # Get logits with type constraints: (B, T, D) -> (B, T, V)
         logits = self.output(decoder_output, valid_token_mask)
-
-        output = {
-            'logits': logits,
-            'encoder_output': encoder_output
-        }
-
-        # Compute loss if labels provided
+        use_copy = hasattr(self, "copy_gate")
+        if use_copy:
+            logits = self.copy_gate(decoder_output, encoder_output, input_ids, logits, attention_mask)
+        output = {"logits": logits, "copy_enabled": use_copy, "encoder_output": encoder_output}
         if labels is not None:
-            loss_fn = nn.CrossEntropyLoss(ignore_index=self.padding_idx)
-            # Flatten for loss: (B*T, V) vs (B*T,)
-            loss = loss_fn(
-                logits.view(-1, self.vocab_size),
-                labels.view(-1)
-            )
-            output['loss'] = loss
-
+            if use_copy:
+                loss = F.nll_loss(logits.view(-1, self.vocab_size), labels.view(-1), ignore_index=self.padding_idx)
+            else:
+                loss = F.cross_entropy(logits.view(-1, self.vocab_size), labels.view(-1), ignore_index=self.padding_idx)
+            output["loss"] = loss
         return output
 
     @torch.no_grad()

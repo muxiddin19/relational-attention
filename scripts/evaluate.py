@@ -39,7 +39,15 @@ logging.basicConfig(format="%(asctime)s | %(levelname)s | %(message)s",
 
 def load_model(checkpoint_dir: str, device: torch.device) -> tuple:
     ckpt = Path(checkpoint_dir)
-    with open(ckpt / "config.yaml") as f:
+    cfg_path = ckpt / "config.yaml"
+    if not cfg_path.exists():
+        # Fallback: look in sibling best_model dir (for periodic checkpoints)
+        fallback = ckpt.parent / "best_model" / "config.yaml"
+        if fallback.exists():
+            cfg_path = fallback
+        else:
+            raise FileNotFoundError(f"config.yaml not found in {ckpt} or {fallback}")
+    with open(cfg_path) as f:
         cfg_dict = yaml.safe_load(f)
 
     k = cfg_dict.get("num_attributes", 8)
@@ -56,6 +64,8 @@ def load_model(checkpoint_dir: str, device: torch.device) -> tuple:
         num_attributes=k,
         ffn_dim=cfg_dict.get("ffn_dim", cfg_dict["hidden_dim"] * 4),
         max_seq_len=cfg_dict.get("max_seq_len", 512),
+        copy_mechanism=cfg_dict.get("copy_mechanism", False),
+        num_copy_heads=cfg_dict.get("num_copy_heads", 1),
     )
     model = RelationalTransformer(model_cfg)
     state = torch.load(ckpt / "model.pt", map_location=device)
@@ -230,7 +240,8 @@ def eval_gsm8k(predictions: List[str], examples: List[Dict]) -> Dict:
 
     correct = 0
     for pred, ex in zip(predictions, examples):
-        gold_ans = extract_answer(ex["target"])
+        # Handle both "#### N" (CoT format) and "N" (direct answer format)
+        gold_ans = extract_answer(ex["target"]) or ex["target"].strip().split()[-1]
         pred_ans = extract_answer(pred) or pred.strip().split()[-1]
         if gold_ans and pred_ans:
             try:
