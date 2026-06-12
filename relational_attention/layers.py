@@ -273,7 +273,9 @@ class RelationalTransformerBlock(nn.Module):
         num_attributes: int = 8,
         ffn_dim: Optional[int] = None,
         dropout: float = 0.1,
-        activation: str = 'gelu'
+        activation: str = 'gelu',
+        use_gating: bool = True,
+        use_mixing: bool = True
     ):
         super().__init__()
 
@@ -282,7 +284,9 @@ class RelationalTransformerBlock(nn.Module):
             hidden_dim=hidden_dim,
             num_heads=num_heads,
             num_attributes=num_attributes,
-            dropout=dropout
+            dropout=dropout,
+            use_gating=use_gating,
+            use_mixing=use_mixing
         )
 
         # Feed-Forward Network

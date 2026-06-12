@@ -254,7 +254,8 @@ class RelationalAttentionHead(nn.Module):
         num_attributes: int,
         query_attr_idx: int,
         key_attr_idx: int,
-        dropout: float = 0.1
+        dropout: float = 0.1,
+        use_gating: bool = True
     ):
         super().__init__()
 
@@ -266,6 +267,7 @@ class RelationalAttentionHead(nn.Module):
         self.attr_dim = hidden_dim // num_attributes
         self.query_attr_idx = query_attr_idx
         self.key_attr_idx = key_attr_idx
+        self.use_gating = use_gating
 
         # Q, K, V projections
         self.q_proj = nn.Linear(hidden_dim, hidden_dim)
@@ -279,10 +281,11 @@ class RelationalAttentionHead(nn.Module):
         )
 
         # Neural Selection (operates on joined representation)
-        self.selection = NeuralSelection(
-            attr_dim=self.attr_dim,
-            dropout=dropout
-        )
+        if use_gating:
+            self.selection = NeuralSelection(
+                attr_dim=self.attr_dim,
+                dropout=dropout
+            )
 
         # Output projection
         self.out_proj = nn.Linear(hidden_dim, hidden_dim)
@@ -335,8 +338,11 @@ class RelationalAttentionHead(nn.Module):
         joined, attn_weights = self.join_attention(q_attr, k_attr, V, mask)
 
         # Apply Neural Selection using the query attribute
-        selection_attr = self._get_attribute(Q, self.query_attr_idx)
-        selected = self.selection(joined, selection_attr)
+        if self.use_gating:
+            selection_attr = self._get_attribute(Q, self.query_attr_idx)
+            selected = self.selection(joined, selection_attr)
+        else:
+            selected = joined
 
         # Output projection
         output = self.out_proj(selected)
@@ -368,7 +374,9 @@ class MultiRelationAttention(nn.Module):
         hidden_dim: int,
         num_heads: int,
         num_attributes: int = 8,
-        dropout: float = 0.1
+        dropout: float = 0.1,
+        use_gating: bool = True,
+        use_mixing: bool = True
     ):
         super().__init__()
 
@@ -379,6 +387,7 @@ class MultiRelationAttention(nn.Module):
         self.num_heads = num_heads
         self.num_attributes = num_attributes
         self.head_dim = hidden_dim // num_heads
+        self.use_mixing = use_mixing
 
         # Create heads with different attribute pairs
         # Each head learns to join on different attribute combinations
@@ -394,12 +403,14 @@ class MultiRelationAttention(nn.Module):
                     num_attributes=num_attributes,
                     query_attr_idx=query_attr,
                     key_attr_idx=key_attr,
-                    dropout=dropout
+                    dropout=dropout,
+                    use_gating=use_gating
                 )
             )
 
-        # Output projection
-        self.out_proj = nn.Linear(hidden_dim * num_heads, hidden_dim)
+        # Output projection (W^O mixes attribute-head outputs; disabled in -mixing ablation)
+        if use_mixing:
+            self.out_proj = nn.Linear(hidden_dim * num_heads, hidden_dim)
         self.dropout = nn.Dropout(dropout)
 
     def forward(
@@ -432,9 +443,12 @@ class MultiRelationAttention(nn.Module):
             if return_attention:
                 attention_weights.append(attn)
 
-        # Concatenate heads and project
-        concat = torch.cat(head_outputs, dim=-1)
-        output = self.out_proj(concat)
+        # Concatenate heads and project (or average for -mixing ablation)
+        if self.use_mixing:
+            concat = torch.cat(head_outputs, dim=-1)
+            output = self.out_proj(concat)
+        else:
+            output = torch.stack(head_outputs, dim=0).sum(0) / len(head_outputs)
         output = self.dropout(output)
 
         if return_attention:

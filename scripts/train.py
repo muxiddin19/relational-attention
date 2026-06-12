@@ -60,6 +60,8 @@ class TrainingConfig:
     num_decoder_layers: int = 12
     num_heads: int = 8
     num_attributes: int = 8              # k; set to 1 for standard attention
+    use_gating: bool = True             # ablation: set False to disable NeuralSelection
+    use_mixing: bool = True             # ablation: set False to use averaging instead of W^O
     ffn_dim: int = 2048
     max_seq_len: int = 512
     dropout: float = 0.1

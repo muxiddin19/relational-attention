@@ -1,0 +1,29 @@
+# STD Transformer 125M — SCAN (space-separated action encoding)
+# fp32 for stability; lower lr; action tokens encoded with spaces to prevent
+# SentencePiece merging repeated actions
+model_type: standard
+hidden_dim: 512
+num_encoder_layers: 12
+num_decoder_layers: 12
+num_heads: 8
+num_attributes: 1
+ffn_dim: 2048
+max_seq_len: 512
+dropout: 0.1
+vocab_size: 32000
+learning_rate: 2.0e-4
+weight_decay: 0.01
+warmup_steps: 2000
+max_steps: 100000
+batch_size: 8
+gradient_accumulation: 8
+max_grad_norm: 1.0
+label_smoothing: 0.05
+eval_every: 500
+save_every: 5000
+patience: 20
+max_src_len: 128
+max_tgt_len: 256
+fp16: false
+num_workers: 4
+log_every: 50

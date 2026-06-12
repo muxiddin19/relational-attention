@@ -42,6 +42,8 @@ class RelationalTransformerConfig:
     num_decoder_layers: int = 12
     num_heads: int = 12
     num_attributes: int = 8
+    use_gating: bool = True
+    use_mixing: bool = True
     ffn_dim: Optional[int] = None  # Defaults to 4 * hidden_dim
     max_seq_len: int = 2048
     dropout: float = 0.1
@@ -112,7 +114,9 @@ class RelationalTransformerEncoder(nn.Module):
                 num_heads=config.num_heads,
                 num_attributes=config.num_attributes,
                 ffn_dim=config.ffn_dim,
-                dropout=config.dropout
+                dropout=config.dropout,
+                use_gating=config.use_gating,
+                use_mixing=config.use_mixing
             )
             for _ in range(config.num_encoder_layers)
         ])
