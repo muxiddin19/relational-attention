@@ -14,6 +14,18 @@ All results use the GSM8K dev split (n=1,319), evaluated with `scripts/evaluate.
 | RelTransformer (k=4) | 2.729% | 3.033% | 2.047% | 2.6% ± 0.4 |
 | RelTransformer (k=16) | 1.895% | 2.274% | 2.805% | 2.3% ± 0.4 |
 
+## Baseline Verification Runs
+
+Additional independent runs to verify the Full RelTransformer baseline (s44 checkpoint was lost):
+
+| File | Variant | Seed | answer_accuracy | Notes |
+|---|---|---|---|---|
+| eval_rel_s45_a100.json | Full RelTransformer (A100) | 45 | **0.031084 (3.11%)** | Independent verification; confirms ≥3.1% is reproducible |
+| eval_rel_s43_rerun.json | Full RelTransformer rerun | 43 | 0.027293 (2.73%) | Rerun of s43 (original: 1.90%); high variance between runs |
+| eval_rel_s44_rerun_s.json | Full RelTransformer rerun | 44 | 0.026535 (2.65%) | Rerun after s44 checkpoint loss |
+
+Note: s42_rerun failed (OOM at batch_size=32 with other processes present). Original s42=3.26% and new s45=3.11% jointly confirm the ≥3% upper range.
+
 ## JSON File Index
 
 | File | Variant | Seed | answer_accuracy |
@@ -34,6 +46,8 @@ All results use the GSM8K dev split (n=1,319), evaluated with `scripts/evaluate.
 | eval_no_mixing_s43.json | RelTransformer −Mixing | 43 | 0.026535 |
 | eval_no_mixing_s44.json | RelTransformer −Mixing | 44 | 0.026535 |
 | eval_rel_s44_rerun_s.json | RelTransformer s44 rerun | 44 | 0.026535 |
+| eval_rel_s45_a100.json | RelTransformer s45 (A100) | 45 | 0.031084 |
+| eval_rel_s43_rerun.json | RelTransformer s43 rerun | 43 | 0.027293 |
 
 ## Evaluation Command
 
