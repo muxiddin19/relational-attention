@@ -26,6 +26,8 @@ Fisher discriminability F = σ²_B/σ²_W measured on the GSM8K-trained checkpoi
 
 ## Key Idea
 
+![Standard vs Relational Attention](figures/fig5_concept.png)
+
 Standard multi-head attention conflates all semantic aspects of a token into one similarity score. A token like `enrollment.student_id` simultaneously plays entity identifier, first join key, and second join key roles — yet vanilla attention scores them with a single dot product.
 
 **RelAttn** decomposes every token into **k typed attribute slots** and assigns each head to a specific *pair* of slots:
@@ -48,6 +50,10 @@ The cyclic pairing is **provably unique** (Theorem: Unique Cyclic Optimality). E
 ---
 
 ## Architecture
+
+![Relational Attention Layer](figures/fig3_architecture.png)
+
+Each token is decomposed into **k attribute slots** (Tuple Embedding), then processed through three components inside the Relational Attention Layer:
 
 ```
 Input Tokens
@@ -159,9 +165,13 @@ Training ongoing (~300K steps required). Early evaluations (step 20K) show 0% EX
 
 F = σ²_B/σ²_W. Role labels from Spider taxonomy analogy: quantity-variable → Identity, relational-predicate → FD, structural-template → Schema. Validated with inverse-frequency weighting to rule out class-imbalance artifacts. Random-initialization baseline: F ≈ 1.0 (all slots).
 
-![Slot 0 Entity Identity](viz/animations/slot1_entity_identity_specialization.gif)
-![Slot 1 Functional Dependency](viz/animations/slot2_functional_specialization.gif)
-![Slot 2 Schema Structure](viz/animations/slot3_schema_specialization.gif)
+| Slot 0 → Entity Identity | Slot 1 → Functional Dependency | Slot 2 → Schema Structure |
+|:---:|:---:|:---:|
+| ![Slot 0 Entity Identity](viz/animations/slot1_entity_identity_specialization.gif) | ![Slot 1 Functional Dependency](viz/animations/slot2_functional_specialization.gif) | ![Slot 2 Schema Structure](viz/animations/slot3_schema_specialization.gif) |
+
+**Attention head heatmaps** (real trained weights on COGS, heads 0-1 → 1-2 → 2-3 → 3-0 cyclic pairs):
+
+![Attention Heatmaps](figures/fig1_attention_patterns.png)
 
 ---
 
