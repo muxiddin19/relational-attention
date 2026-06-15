@@ -108,7 +108,7 @@ All models trained from scratch, FP32, 12 enc/dec layers, d=512.
 | Model | Params | GSM8K dev | Seeds |
 |---|:---:|:---:|---|
 | **Full RelTransformer** (k=8) | 464M | **3.1% ± 0.9** | s42=3.26%, s43=1.90%; s45=3.11% (A100 rerun) |
-| − Join Attention (≡ Std Transformer) | 464M* | 2.6% ± 0.6 | |
+| − Join Attention (≡ Std Transformer) | 613M | 2.6% ± 0.6 | restores standard MHA; identical to Std Transformer |
 | Standard Transformer (k=1) | 613M | 2.6% ± 0.6 | s42=2.81%, s43=1.82%, s44=3.03% |
 | Std FFN=2900 (param. control) | 464M | 2.7% ± 0.0 | rules out FFN-width as confound |
 
