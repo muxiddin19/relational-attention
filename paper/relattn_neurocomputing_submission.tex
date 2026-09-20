@@ -94,7 +94,7 @@ Standard dot-product attention~\cite{vaswani2017attention} computes token simila
 \end{equation}
 This formulation conflates all semantic aspects of a token its entity identity, its role in a join predicate, its table membership into a single similarity score. For database-oriented tasks, where the distinction between \emph{which attribute is being compared} matters structurally, this is a fundamental mismatch.
 
-\paragraph{Motivating Example.}
+\paragraph{Motivating Example}
 Consider the question \textit{``Find all students enrolled in both Databases and Algorithms''}. The correct SQL requires a self-join:
 \begin{verbatim}
 SELECT s.name FROM student s
@@ -431,7 +431,7 @@ We design a complete architecture that replaces each transformer block, replacin
 \paragraph{Attribute Embedding}
 Each layer has its own $k$ projections $W_j^{(e)} \in \R^{(d/k) \times d}$ (not shared). This allows different layers to specialize attributes independently.
 
-\paragraph{Parameter Matching.}
+\paragraph{Parameter Matching}
 RelAttn with $k{=}8$, $d{=}512$ uses 464M parameters vs.\ Standard Transformer's 613M at the same architectural capacity ($d{=}512$, 12~enc/dec layers). Attribute decomposition into $d/k{=}64$-dimensional slots reduces per-head projection size, making RelAttn \emph{more parameter-efficient} at equal architectural capacity. The comparison is by architectural configuration (same $d$, layers, ffn), not by total parameter count. A parameter-redistribution control (Std~FFN=2900, reducing standard FFN to approximately match RelAttn) is included in Table~\ref{tab:modern_attn} to isolate the effect of architectural structure from parameter reallocation, though we note in Sec.~\ref{sec:limitations} that we have not yet executed this specific control run.
 
 \paragraph{Schema-Aware Positional Encoding}
@@ -678,7 +678,7 @@ Architectural decomposition into typed slots is often assumed, implicitly or exp
 \section{Discussion}
 \label{sec:discussion}
 
-\paragraph{Why does attribute decomposition help on some tasks but not others?}
+\paragraph{Why Attribute Decomposition Helps on Some Tasks but Not Others}
 Standard attention aggregates all $k$ diagonal attribute-pair signals into a single undifferentiated similarity score; RelAttn isolates each pair as an independently parameterized unit (Proposition~\ref{prop:interference}), reducing multi-join-style tasks to independent typed comparisons. This structural restriction appears to help most when a task's compositional structure closely matches typed attribute-pair decomposition: COGS shows the clearest, largest, and most reproducible gain ($d{=}2.12$); GSM8K shows a smaller, real gain that we caveat given mode collapse in the underlying predictions; Spider shows no gain once both architectures have a copy mechanism, consistent with schema-linking dominating that task. We do not have a principled account of exactly which tasks benefit and by how much beyond this post-hoc pattern, and flag understanding it better as important future work --- particularly since, as Sec.~\ref{sec:analysis} shows, the behavioral gains are not accompanied by any detectable interpretable specialization at the representation level, so \emph{why} the restriction helps on COGS specifically remains an open mechanistic question, not one we can currently answer from probing.
 
 \paragraph{Comparison to relation-aware attention (RAT-SQL)}
