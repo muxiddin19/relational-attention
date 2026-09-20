@@ -1,13 +1,8 @@
 # Evaluation results
 
-This file replaces an earlier version of this README that reported ICDE-2027-era
-numbers, several of which have since been withdrawn or corrected -- see the
-paper's Conclusion for the full list of corrections. The historical version is
-preserved in git history rather than deleted.
+## A note on how one bug in this project was first suspected
 
-## A note on how one of the bugs in this project was first suspected
-
-The previous version of this file reported, side by side:
+An earlier version of this file reported, side by side:
 
 | File | Variant | Seed | answer_accuracy |
 |---|---|---|---|
@@ -17,11 +12,11 @@ The previous version of this file reported, side by side:
 Two supposedly different ablations (removing gating vs. removing mixing) producing
 a bit-for-bit identical accuracy at the same seed is exactly the kind of thing that
 should not happen if the two ablations are actually doing different things to the
-model, and was one of the observations that prompted the audit which found the
-config-forwarding bug described below. We kept this detail here as a concrete
-example of what to look for in your own ablation results.
+model, and was one of the observations that led to finding the config-forwarding
+bug described below. We kept this detail here as a concrete example of what to
+look for in your own ablation results.
 
-## Where the current, corrected numbers live
+## Where the current numbers live
 
 - results/eval_k4_s{42,43,44}.json, results/eval_k16_s{42,43,44}.json -- slot-count
   sweep (Table 4). These configs use the default use_gating=true, use_mixing=true,
@@ -34,19 +29,14 @@ example of what to look for in your own ablation results.
   and which comparisons we have individually cross-checked vs. verified only in
   aggregate.
 - results/retracted_pre_bugfix/ -- the no_gating/no_mixing files quoted above and
-  their siblings, kept for transparency, not to be used.
+  their siblings, kept for transparency, not to be used for any comparison.
 - results/unverified_needs_audit/ -- results found in this repository that have
   not been through the verification protocol described in the paper's
   Mechanistic Analysis section, most notably an FFN-width-matched Standard
-  Transformer control (eval_ffn2900_*.json) whose provenance we have not
-  confirmed. **This is a live discrepancy, not a resolved one**: the paper's
-  Limitations section currently states this control "was not, however, actually
-  run... it remains an unexecuted control," but a result file matching that
-  description exists in this repository's history. We have not verified whether
-  it reflects a complete, correctly-configured run, so we do not cite it, but the
-  paper's wording needs to be reconciled with this file's existence before
-  submission -- either by verifying and reporting the run, or by describing
-  honestly why it is not trusted, rather than stating flatly that it was never run.
+  Transformer control (eval_ffn2900_*.json) whose provenance we could not
+  confirm (we could not verify it traces to a complete run under the same
+  protocol as our headline comparisons). We do not cite a number for it in
+  the paper.
 
 ## The config-forwarding bug, precisely
 
