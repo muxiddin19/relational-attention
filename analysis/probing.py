@@ -149,6 +149,10 @@ def main():
         num_decoder_layers=cfg["num_decoder_layers"],
         num_heads=cfg["num_heads"],
         num_attributes=k,
+        use_gating=cfg.get("use_gating", True),
+        use_mixing=cfg.get("use_mixing", True),
+        pairing_strategy=cfg.get("pairing_strategy", "cyclic"),
+        pairing_seed=cfg.get("pairing_seed", 1234),
         ffn_dim=cfg.get("ffn_dim", cfg["hidden_dim"] * 4),
         max_seq_len=cfg.get("max_seq_len", 512),
     )

@@ -1,14 +1,13 @@
 # Attribute-Decomposed Attention (RelAttn)
 
-[![arXiv](https://img.shields.io/badge/arXiv-2027.XXXXX-b31b1b.svg)](https://arxiv.org/abs/2027.XXXXX)
-[![ICDE 2027](https://img.shields.io/badge/ICDE-2027-blue.svg)](https://icde2027.github.io)
+[![Status: manuscript in preparation](https://img.shields.io/badge/status-manuscript%20in%20preparation-lightgrey.svg)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch 2.4](https://img.shields.io/badge/PyTorch-2.4-ee4c2c.svg)](https://pytorch.org/)
 
-**Official implementation of "Attribute-Decomposed Attention: A Relational Inductive Bias for Structured Reasoning" — ICDE 2027**
+**Official implementation of "Attribute-Decomposed Attention: A Relational Inductive Bias for Structured Reasoning" (manuscript in preparation; not yet accepted at a venue)**
 
-> *Attribute-Decomposed Attention decomposes each token into k typed attribute slots and computes attention via slot-to-slot join pairs, directly implementing the neural analogue of a relational foreign-key join. The cyclic pairing assignment is provably unique under balanced, path-complete, minimum-edge constraints. From-scratch training on Spider achieves 78.6% EX (350M), COGS 98.2%, SCAN 99.8%, GSM8K 32.4% — consistent +10–63 pp gains over size-matched standard transformers.*
+> *Attribute-Decomposed Attention decomposes each token into k typed attribute slots and computes attention via slot-to-slot join pairs, motivated by (but not a formal proof of) the neural analogue of a relational foreign-key join. Balance, path-completeness, and minimum-edge constraints characterize head-assignment strategies as the family of directed Hamiltonian cycles on the k slots; the cyclic pairing used throughout is the canonical instance, not a uniquely optimal one. **Our central empirical finding is mechanistic**: probing a GSM8K-trained model shows attribute slots spontaneously specializing to distinct relational roles (Fisher discriminability 18.4–21.7 vs. ~6 for standard attention). On GSM8K, this corresponds to a modest, consistent behavioral edge (3.1%±0.9 vs. 2.6%±0.6 for a size-matched standard transformer, 3 seeds, not significant at n=3). From-scratch Spider EX is 0% for both architectures (schema-linking dominates); COGS gen-split and SCAN add\_jump are near-zero for both. We report these null results honestly rather than omit them.*
 
 ---
 
@@ -35,7 +34,7 @@ Standard Attention (1 head shown)               RelAttn (k=8 slots, 1 head shown
                                                   head 7: a^(7)_i · a^(0)_j / √(d/k)
 ```
 
-The cyclic pairing `(j, j+1 mod k)` is **provably unique** among all balanced assignments satisfying path-completeness and minimum-edge constraints (Theorem: Unique Cyclic Optimality). Each head gradient flows only through its own slot pair (gradient isolation), causing emergent slot specialization aligned with database relational roles.
+Balance, path-completeness, and minimum-edge constraints characterize valid head-assignment strategies as the family of directed Hamiltonian cycles on the k slots (Theorem: Characterization of Head-Assignment Strategies) — the cyclic pairing `(j, j+1 mod k)` used throughout is the canonical instance of this family, not a uniquely optimal one; other step sizes coprime to k satisfy the same conditions equally well. Each head gradient flows only through its own slot pair (gradient isolation), causing emergent slot specialization aligned with database relational roles.
 
 ---
 
@@ -96,28 +95,18 @@ Input Tokens
 
 ## Results
 
-### From-Scratch Comparison (fair — no pretraining)
+**These are the honestly-reported, measured numbers from the paper — no inflated or unmeasured figures.** From-scratch training only (no pretraining), 3 seeds (42/43/44) where noted.
 
-| Task | Standard Transformer | RelTransformer 125M | RelTransformer 350M | Δ (125M vs Std) |
-|------|:-------------------:|:-------------------:|:-------------------:|:---------------:|
-| Spider EX | 62.3% | **75.3%** | **78.6%** | +13.0 pp |
-| COGS | 35.0% | **98.2%** | — | +63.2 pp |
-| SCAN (add_jump) | 18.1% | **99.8%** | — | +81.7 pp |
-| CFQ mcd1 | 37.4% | **71.3%** | — | +33.9 pp |
-| GSM8K | 18.2% | **32.4%** | — | +14.2 pp |
+### From-Scratch Comparison
 
-All results: from-scratch training, 3 seeds (42/43/44), averaged. Schema-aware PE and constrained decoding applied uniformly across all from-scratch baselines.
+| Task | Standard Transformer | RelTransformer (464M) | Note |
+|------|:-------------------:|:----------------------:|------|
+| GSM8K (answer acc.) | 2.6%$\pm$0.6 | **3.1%$\pm$0.9** | $+$19% relative, $+$0.5pp; Welch $t{=}0.80$, $p{\approx}0.24$ (not significant at $n{=}3$); consistent sign across all 3 seeds |
+| Spider EX | 0.0% | 0.0% | Both architectures; schema-linking dominates over attention architecture from scratch |
+| COGS (gen-split EM) | 0.00% | 0.03%$\pm$0.02% | Both near-zero; from-scratch compositional generalization is a shared difficulty |
+| SCAN (add_jump, peak) | 0.5% | 2.5% | Both show early-peak instability, collapsing back toward 0% with further training |
 
-### Spider by SQL Complexity
-
-| Complexity | Standard 125M | RelTrans 125M | RelTrans 350M | Δ (125M) |
-|------------|:-------------:|:-------------:|:-------------:|:--------:|
-| Easy | 83.4% | 89.3% | 92.1% | +5.9 pp |
-| Medium | 71.2% | 78.8% | 81.7% | +7.6 pp |
-| Hard | 59.7% | 69.2% | 71.8% | +9.5 pp |
-| Extra Hard | 47.1% | 58.3% | 58.3% | +11.2 pp |
-
-Gains are monotonically larger for harder queries (more joins), confirming the relational inductive bias targets structural complexity.
+CFQ evaluation is deferred (compute-bound, see paper). We do **not** report a 350M variant's Spider/COGS/SCAN/CFQ numbers here — no such measured results exist; treat any figure not in this table as unverified.
 
 ### Pretrained Systems (not directly comparable — listed for context only)
 
@@ -133,31 +122,31 @@ Gains are monotonically larger for harder queries (more joins), confirming the r
 
 ---
 
-## Ablation Study
+## Ablation Study (GSM8K, answer accuracy, 3 seeds)
 
-| Model Variant | Spider EX | COGS | GSM8K |
-|---------------|:---------:|:----:|:-----:|
-| Full RelTransformer | **75.3** | **98.2** | **32.4** |
-| − Attribute Gating | 73.1 | 95.4 | 30.1 |
-| − Attribute Mixing | 72.4 | 94.8 | 29.8 |
-| − Join Attention (→ std attn) | 62.3 | 35.0 | 18.2 |
-| − Schema-aware PE | 68.0 | 98.0 | 32.2 |
-| k=4 attributes | 74.1 | 97.2 | 31.5 |
-| k=16 attributes | 73.8 | 96.9 | 31.2 |
-| **Standard Transformer** | **62.3** | **35.0** | **18.2** |
+| Model Variant | GSM8K | Status |
+|---------------|:-----:|--------|
+| Full RelTransformer ($k{=}8$) | **3.1%$\pm$0.9** | Measured |
+| $-$ Join Attention ($\equiv$ Standard Transformer) | 2.6%$\pm$0.6 | Measured |
+| $k{=}4$ | 2.6%$\pm$0.5 | Measured |
+| $k{=}16$ | 2.3%$\pm$0.5 | Measured |
+| $-$ Attribute Gating | pending | Re-running after fixing a real bug where this flag was silently ignored by the training pipeline |
+| $-$ Attribute Mixing | pending | Same fix as above |
+| Cyclic vs. random-fixed vs. learned pairing | pending | New ablation requested by reviewers; isolates the key-side attribute assignment |
 
-Key finding: removing Join Attention collapses to standard attention performance — it is the primary driver of the relational inductive bias. Schema-aware PE helps Spider (SQL-specific) but is negligible on COGS/GSM8K.
+We previously reported `no_gating`/`no_mixing` numbers here that turned out to be invalid: `train.py`'s `build_model()` never forwarded `use_gating`/`use_mixing` into the model config, and the decoder block had no such parameters at all, so those ablations silently trained with defaults regardless of the YAML setting. This is now fixed and the ablations are re-running; we will not restate a number here until it is re-measured under the corrected pipeline.
 
 ---
 
 ## Theoretical Highlights
 
-| Theorem | Statement | Significance |
+| Result | Statement | Significance |
 |---------|-----------|--------------|
-| **Unique Cyclic Optimality** | Cyclic pairing `(r, r+1 mod k)` is the unique assignment satisfying balance + path-completeness + minimum-edge | Justifies the head assignment design from first principles |
+| **Structural Restriction** | Standard attention aggregates all k diagonal attribute-pair terms into one undifferentiated score with no access to off-diagonal pairs; Join Attention isolates a single named pair as an independently parameterized unit | The real structural argument for RelAttn — not an "interference elimination" count, which was a math error in an earlier draft |
+| **Characterization of Head-Assignment Strategies** | Balance + path-completeness + minimum-edge hold *iff* the assignment is a directed Hamiltonian cycle on the k slots; cyclic `(r, r+1 mod k)` is the canonical instance, not a unique one | A substantive restriction from the k² design space, not a uniqueness proof |
 | **Gradient Isolation** | ∂L/∂a^(j) depends only on head pairs containing slot j | Explains emergent slot specialization without explicit supervision |
-| **Structural Depth** | ΔEX(T) ∝ D(T) where D(T) = min relational comparisons for task T | Predicts gain ordering: COGS (D≈4.3) > Spider XH (D≈3.5) > GSM8K (D≈2.1) |
-| **BCNF Alignment** | Slot Fisher discriminability is maximized for BCNF-normalized schemas | Connects attention head specialization to database normal form theory |
+
+We removed a "BCNF Alignment" row that previously appeared here: the underlying 6-database pilot is a small, hand-picked exploratory observation (see Limitations), not a validated theorem-backed diagnostic, and we don't want it read as one.
 
 ---
 
@@ -360,8 +349,8 @@ relational-attention/
 
 ## Limitations
 
-- **From-scratch only**: Replacing pretrained T5's attention with RelAttn heads hurts Spider EM (4.06% vs 6.19% baseline). On compositional tasks (COGS +15.4 pp, CFQ +13.2 pp), T5+RelAttn outperforms T5-Base. The Spider failure may reflect insufficient fine-tuning budget (25 vs 100 epochs); full pretraining *with* RelAttn is future work.
-- **NeuralNormCheck** (schema normalization detection algorithm in supplemental): theoretical proposal only; no real denormalized schema experiments. Threshold calibration (τ_F, λ) is an open problem.
+- **From-scratch only**: Replacing pretrained T5's attention with RelAttn heads hurts Spider EM in a minimal mechanism-isolation ablation (4.06% vs 6.19% baseline, 25 fine-tuning epochs, db-name-only input). Whether T5+RelAttn helps on compositional tasks (COGS, CFQ) is an **open, unmeasured question** — we do not have numbers for this and any figure claiming otherwise should not be trusted. Full pretraining *with* RelAttn from initialization is future work.
+- **Schema-normalization exploratory note**: a small, hand-picked 6-database observation (3 BCNF vs. 3 non-BCNF Spider databases) suggests trained slot statistics differ by normalization status, but with n=3 per group this supports no statistical claim and is not a validated diagnostic algorithm.
 - **Spider execution accuracy**: Without the Spider SQLite database files (large, not redistributable), evaluation falls back to exact-match (near 0 for from-scratch seq2seq). Execution accuracy requires the official Spider DB download.
 - **COGS evaluation**: Uses max_tgt_len=256; some very deep recursive structures (depth >4) may still be truncated.
 
@@ -369,14 +358,14 @@ relational-attention/
 
 ## Citation
 
+This work is not yet accepted or published at any venue; a preprint/citation entry will be added once available.
+
 ```bibtex
-@inproceedings{toshpulatov2027relattn,
-  title     = {Attribute-Decomposed Attention: A Relational Inductive Bias for Structured Reasoning},
-  author    = {Toshpulatov, Mukhiddin and Lee, Wookey and Seo, Youn-Kyoung},
-  booktitle = {Proceedings of the 43rd IEEE International Conference on Data Engineering (ICDE)},
-  year      = {2027},
-  address   = {Copenhagen, Denmark},
-  note      = {To appear}
+@unpublished{toshpulatov2027relattn,
+  title  = {Attribute-Decomposed Attention: A Relational Inductive Bias for Structured Reasoning},
+  author = {Toshpulatov, Mukhiddin and Lee, Wookey and Seo, Youn-Kyoung},
+  note   = {Manuscript in preparation},
+  year   = {2027}
 }
 ```
 
