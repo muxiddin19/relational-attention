@@ -1,0 +1,5 @@
+2026-09-12 12:36:59 | INFO | Evaluating 1319 examples from gsm8k/dev
+2026-09-12 12:37:06 | INFO | === Results (gsm8k/dev) ===
+2026-09-12 12:37:06 | INFO |   answer_accuracy: 0.0243
+2026-09-12 12:37:06 | INFO |   n: 1319
+2026-09-12 12:37:06 | INFO | Saved to /home/muhiddin/icde2027_revision/evals/eval_learned_s44.json

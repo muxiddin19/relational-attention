@@ -1,0 +1,119 @@
+{
+  "source": "computed_gsm8k_fixed",
+  "checkpoint": "/nas/Dataset/experiments/relational-attention/muhiddin_outputs/standard_125m_gsm8k_s42_verified/best_model",
+  "config": {
+    "dataset": "gsm8k",
+    "model_type": "standard",
+    "fp16": false,
+    "num_attributes": 1,
+    "hidden_dim": 512,
+    "num_encoder_layers": 12,
+    "num_heads": 8
+  },
+  "n_examples": 1319,
+  "token_role_counts": {
+    "Identity": 8168,
+    "FD": 4472,
+    "Schema": 60645
+  },
+  "fisher_f": [
+    [
+      0.0021,
+      0.0024,
+      0.0027
+    ]
+  ],
+  "fisher_f_null_mean": [
+    [
+      1.457918393539131e-05,
+      1.3871306307150086e-05,
+      1.4874818188125304e-05
+    ]
+  ],
+  "fisher_f_null_std": [
+    [
+      5.636122147805399e-06,
+      4.4942855286327e-06,
+      5.291341592937478e-06
+    ]
+  ],
+  "roles": [
+    "Identity",
+    "FD",
+    "Schema"
+  ],
+  "k": 1,
+  "fd_word_list": [
+    "add",
+    "added",
+    "additional",
+    "altogether",
+    "average",
+    "bought",
+    "buy",
+    "buys",
+    "combined",
+    "cost",
+    "costs",
+    "decrease",
+    "decreased",
+    "difference",
+    "discount",
+    "divide",
+    "divided",
+    "double",
+    "each",
+    "equal",
+    "equally",
+    "every",
+    "extra",
+    "fewer",
+    "gave",
+    "give",
+    "given",
+    "gives",
+    "greater",
+    "half",
+    "increase",
+    "increased",
+    "left",
+    "less",
+    "loss",
+    "minus",
+    "more",
+    "multiplied",
+    "multiply",
+    "per",
+    "percent",
+    "percentage",
+    "plus",
+    "price",
+    "profit",
+    "rate",
+    "ratio",
+    "receive",
+    "received",
+    "receives",
+    "remain",
+    "remaining",
+    "remains",
+    "sell",
+    "sells",
+    "share",
+    "shared",
+    "smaller",
+    "sold",
+    "spend",
+    "spends",
+    "spent",
+    "split",
+    "subtract",
+    "subtracted",
+    "sum",
+    "than",
+    "times",
+    "total",
+    "triple",
+    "twice"
+  ]
+}

@@ -1,0 +1,5 @@
+2026-09-19 14:02:17 | INFO | Evaluating 21000 examples from cogs/gen
+2026-09-19 22:19:38 | INFO | === Results (cogs/gen) ===
+2026-09-19 22:19:38 | INFO |   exact_match: 0.0450
+2026-09-19 22:19:38 | INFO |   n: 21000
+2026-09-19 22:19:38 | INFO | Saved to /home/muhiddin/icde2027_revision/evals/eval_rel_composed_s42_gen.json

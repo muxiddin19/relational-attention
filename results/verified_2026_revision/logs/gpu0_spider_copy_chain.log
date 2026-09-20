@@ -1,0 +1,28 @@
+[GPU0 SPIDER COPY CHAIN START arch=rel] 2026. 09. 14. (월) 15:30:38 KST
+[TRAIN START rel_spider_copy s42 bs=4] 2026. 09. 14. (월) 15:30:38 KST
+[TRAIN DONE rel_spider_copy s42 rc=0] 2026. 09. 14. (월) 20:48:57 KST
+[EVAL START rel_spider_copy s42] 2026. 09. 14. (월) 20:48:57 KST
+[EVAL DONE rel_spider_copy s42 rc=0] 2026. 09. 14. (월) 20:58:05 KST
+[TRAIN START rel_spider_copy s43 bs=4] 2026. 09. 14. (월) 20:58:05 KST
+[TRAIN DONE rel_spider_copy s43 rc=0] 2026. 09. 15. (화) 08:03:21 KST
+[EVAL START rel_spider_copy s43] 2026. 09. 15. (화) 08:03:21 KST
+[EVAL DONE rel_spider_copy s43 rc=0] 2026. 09. 15. (화) 08:12:11 KST
+[TRAIN START rel_spider_copy s44 bs=4] 2026. 09. 15. (화) 08:12:11 KST
+[TRAIN DONE rel_spider_copy s44 rc=0] 2026. 09. 15. (화) 12:56:37 KST
+[EVAL START rel_spider_copy s44] 2026. 09. 15. (화) 12:56:37 KST
+[EVAL DONE rel_spider_copy s44 rc=0] 2026. 09. 15. (화) 13:03:03 KST
+[GPU0 SPIDER COPY CHAIN DONE arch=rel] 2026. 09. 15. (화) 13:03:04 KST
+[GPU0 SPIDER COPY CHAIN START arch=std] 2026. 09. 15. (화) 18:46:36 KST
+[TRAIN START std_spider_copy s42 bs=4] 2026. 09. 15. (화) 18:46:36 KST
+[TRAIN DONE std_spider_copy s42 rc=0] 2026. 09. 16. (수) 00:18:35 KST
+[EVAL START std_spider_copy s42] 2026. 09. 16. (수) 00:18:35 KST
+[EVAL DONE std_spider_copy s42 rc=0] 2026. 09. 16. (수) 00:30:44 KST
+[TRAIN START std_spider_copy s43 bs=4] 2026. 09. 16. (수) 00:30:44 KST
+[TRAIN DONE std_spider_copy s43 rc=0] 2026. 09. 16. (수) 05:40:49 KST
+[EVAL START std_spider_copy s43] 2026. 09. 16. (수) 05:40:49 KST
+[EVAL DONE std_spider_copy s43 rc=0] 2026. 09. 16. (수) 05:51:19 KST
+[TRAIN START std_spider_copy s44 bs=4] 2026. 09. 16. (수) 05:51:19 KST
+[TRAIN DONE std_spider_copy s44 rc=0] 2026. 09. 16. (수) 15:28:15 KST
+[EVAL START std_spider_copy s44] 2026. 09. 16. (수) 15:28:15 KST
+[EVAL DONE std_spider_copy s44 rc=0] 2026. 09. 16. (수) 15:39:36 KST
+[GPU0 SPIDER COPY CHAIN DONE arch=std] 2026. 09. 16. (수) 15:39:36 KST

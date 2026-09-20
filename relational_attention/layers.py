@@ -273,7 +273,12 @@ class RelationalTransformerBlock(nn.Module):
         num_attributes: int = 8,
         ffn_dim: Optional[int] = None,
         dropout: float = 0.1,
-        activation: str = 'gelu'
+        activation: str = 'gelu',
+        use_gating: bool = True,
+        use_mixing: bool = True,
+        pairing_strategy: str = "cyclic",
+        pairing_seed: int = 1234,
+        use_composed_join: bool = False
     ):
         super().__init__()
 
@@ -282,7 +287,12 @@ class RelationalTransformerBlock(nn.Module):
             hidden_dim=hidden_dim,
             num_heads=num_heads,
             num_attributes=num_attributes,
-            dropout=dropout
+            dropout=dropout,
+            use_gating=use_gating,
+            use_mixing=use_mixing,
+            pairing_strategy=pairing_strategy,
+            pairing_seed=pairing_seed,
+            use_composed_join=use_composed_join
         )
 
         # Feed-Forward Network
@@ -352,7 +362,12 @@ class RelationalTransformerEncoderBlock(nn.Module):
         num_heads: int,
         num_attributes: int = 8,
         ffn_dim: Optional[int] = None,
-        dropout: float = 0.1
+        dropout: float = 0.1,
+        use_gating: bool = True,
+        use_mixing: bool = True,
+        pairing_strategy: str = "cyclic",
+        pairing_seed: int = 1234,
+        use_composed_join: bool = False
     ):
         super().__init__()
 
@@ -361,7 +376,12 @@ class RelationalTransformerEncoderBlock(nn.Module):
             hidden_dim=hidden_dim,
             num_heads=num_heads,
             num_attributes=num_attributes,
-            dropout=dropout
+            dropout=dropout,
+            use_gating=use_gating,
+            use_mixing=use_mixing,
+            pairing_strategy=pairing_strategy,
+            pairing_seed=pairing_seed,
+            use_composed_join=use_composed_join
         )
 
         # Cross-attention
@@ -369,7 +389,12 @@ class RelationalTransformerEncoderBlock(nn.Module):
             hidden_dim=hidden_dim,
             num_heads=num_heads,
             num_attributes=num_attributes,
-            dropout=dropout
+            dropout=dropout,
+            use_gating=use_gating,
+            use_mixing=use_mixing,
+            pairing_strategy=pairing_strategy,
+            pairing_seed=pairing_seed,
+            use_composed_join=use_composed_join
         )
 
         # Feed-Forward Network

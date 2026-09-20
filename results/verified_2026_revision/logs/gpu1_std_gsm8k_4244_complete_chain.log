@@ -1,0 +1,14 @@
+[GPU1 STD GSM8K 42-44 COMPLETE CHAIN START] 2026. 09. 13. (일) 15:21:06 KST
+[TRAIN START std_verified s42 bs=16] 2026. 09. 13. (일) 15:21:06 KST
+[TRAIN DONE std_verified s42 rc=0] 2026. 09. 13. (일) 18:20:44 KST
+[EVAL START std_verified s42] 2026. 09. 13. (일) 18:20:44 KST
+[EVAL DONE std_verified s42 rc=0] 2026. 09. 13. (일) 18:20:59 KST
+[TRAIN START std_verified s43 bs=16] 2026. 09. 13. (일) 18:20:59 KST
+[TRAIN DONE std_verified s43 rc=0] 2026. 09. 13. (일) 21:20:16 KST
+[EVAL START std_verified s43] 2026. 09. 13. (일) 21:20:16 KST
+[EVAL DONE std_verified s43 rc=0] 2026. 09. 13. (일) 21:20:31 KST
+[TRAIN START std_verified s44 bs=16] 2026. 09. 13. (일) 21:20:31 KST
+[TRAIN DONE std_verified s44 rc=0] 2026. 09. 14. (월) 00:20:04 KST
+[EVAL START std_verified s44] 2026. 09. 14. (월) 00:20:04 KST
+[EVAL DONE std_verified s44 rc=0] 2026. 09. 14. (월) 00:20:19 KST
+[GPU1 STD GSM8K 42-44 COMPLETE CHAIN DONE] 2026. 09. 14. (월) 00:20:19 KST

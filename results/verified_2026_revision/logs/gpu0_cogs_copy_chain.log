@@ -1,0 +1,28 @@
+[GPU0 COGS COPY CHAIN START arch=rel] 2026. 09. 12. (토) 19:57:26 KST
+[TRAIN START rel_copy s42 bs=32] 2026. 09. 12. (토) 19:57:26 KST
+[TRAIN DONE rel_copy s42 rc=1] 2026. 09. 12. (토) 19:57:34 KST
+[TRAIN START rel_copy s43 bs=32] 2026. 09. 12. (토) 19:57:34 KST
+[TRAIN DONE rel_copy s43 rc=1] 2026. 09. 12. (토) 19:57:40 KST
+[TRAIN START rel_copy s44 bs=32] 2026. 09. 12. (토) 19:57:40 KST
+[TRAIN DONE rel_copy s44 rc=1] 2026. 09. 12. (토) 19:57:47 KST
+[GPU0 COGS COPY CHAIN DONE arch=rel] 2026. 09. 12. (토) 19:57:47 KST
+[GPU0 COGS COPY CHAIN START arch=rel] 2026. 09. 12. (토) 19:59:36 KST
+[TRAIN START rel_copy s42 bs=8] 2026. 09. 12. (토) 19:59:36 KST
+[TRAIN DONE rel_copy s42 rc=0] 2026. 09. 13. (일) 01:36:27 KST
+[EVAL START rel_copy s42 dev] 2026. 09. 13. (일) 01:36:27 KST
+[EVAL DONE rel_copy s42 dev rc=0] 2026. 09. 13. (일) 02:22:06 KST
+[EVAL START rel_copy s42 gen] 2026. 09. 13. (일) 02:22:06 KST
+[EVAL DONE rel_copy s42 gen rc=0] 2026. 09. 13. (일) 09:00:21 KST
+[TRAIN START rel_copy s43 bs=8] 2026. 09. 13. (일) 09:00:21 KST
+[TRAIN DONE rel_copy s43 rc=0] 2026. 09. 13. (일) 15:09:59 KST
+[EVAL START rel_copy s43 dev] 2026. 09. 13. (일) 15:09:59 KST
+[EVAL DONE rel_copy s43 dev rc=0] 2026. 09. 13. (일) 15:54:35 KST
+[EVAL START rel_copy s43 gen] 2026. 09. 13. (일) 15:54:35 KST
+[EVAL DONE rel_copy s43 gen rc=0] 2026. 09. 13. (일) 22:48:27 KST
+[TRAIN START rel_copy s44 bs=8] 2026. 09. 13. (일) 22:48:27 KST
+[TRAIN DONE rel_copy s44 rc=0] 2026. 09. 14. (월) 04:26:51 KST
+[EVAL START rel_copy s44 dev] 2026. 09. 14. (월) 04:26:51 KST
+[EVAL DONE rel_copy s44 dev rc=0] 2026. 09. 14. (월) 05:11:30 KST
+[EVAL START rel_copy s44 gen] 2026. 09. 14. (월) 05:11:30 KST
+[EVAL DONE rel_copy s44 gen rc=0] 2026. 09. 14. (월) 12:30:28 KST
+[GPU0 COGS COPY CHAIN DONE arch=rel] 2026. 09. 14. (월) 12:30:28 KST

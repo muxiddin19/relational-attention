@@ -62,6 +62,11 @@ def load_model(checkpoint_dir: str, device: torch.device) -> tuple:
         num_decoder_layers=cfg_dict["num_decoder_layers"],
         num_heads=cfg_dict["num_heads"],
         num_attributes=k,
+        use_gating=cfg_dict.get("use_gating", True),
+        use_mixing=cfg_dict.get("use_mixing", True),
+        pairing_strategy=cfg_dict.get("pairing_strategy", "cyclic"),
+        pairing_seed=cfg_dict.get("pairing_seed", 1234),
+        use_composed_join=cfg_dict.get("use_composed_join", False),
         ffn_dim=cfg_dict.get("ffn_dim", cfg_dict["hidden_dim"] * 4),
         max_seq_len=cfg_dict.get("max_seq_len", 512),
         copy_mechanism=cfg_dict.get("copy_mechanism", False),
@@ -240,9 +245,13 @@ def eval_gsm8k(predictions: List[str], examples: List[Dict]) -> Dict:
 
     correct = 0
     for pred, ex in zip(predictions, examples):
-        # Handle both "#### N" (CoT format) and "N" (direct answer format)
-        gold_ans = extract_answer(ex["target"]) or ex["target"].strip().split()[-1]
-        pred_ans = extract_answer(pred) or pred.strip().split()[-1]
+        # Handle both "#### N" (CoT format) and "N" (direct answer format).
+        # Fall back to "" (not IndexError) when the string is empty --
+        # an empty generation is scored as wrong, not a crash.
+        gold_toks = ex["target"].strip().split()
+        pred_toks = pred.strip().split()
+        gold_ans = extract_answer(ex["target"]) or (gold_toks[-1] if gold_toks else "")
+        pred_ans = extract_answer(pred) or (pred_toks[-1] if pred_toks else "")
         if gold_ans and pred_ans:
             try:
                 correct += abs(float(pred_ans) - float(gold_ans)) < 1e-3

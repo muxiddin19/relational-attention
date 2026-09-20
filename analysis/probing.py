@@ -1,5 +1,24 @@
 #!/usr/bin/env python3
 """
+RETRACTED / SUPERSEDED -- kept for transparency, do not use for real results.
+
+This script's --use-paper-values flag returns hard-coded numbers without
+computing anything, and its real computation path probes Spider data using a
+naive "split the sequence into thirds" role-labeling heuristic that does not
+correspond to any real linguistic or semantic property of the input -- despite
+the docstring below describing it as reproducing a GSM8K-based table. Both
+issues were found during a pre-submission audit; see the paper's Mechanistic
+Analysis section and analysis/probing_gsm8k_fixed.py for the corrected
+implementation (real GSM8K data, content-based role labels aligned to
+subword tokens, an untrained random-init control, and a permutation-null
+control), which is the one actually used to produce the paper's numbers.
+
+We keep this file in the repository, unmodified apart from this notice and an
+unrelated config-forwarding fix below, specifically so a reader auditing our
+work can see exactly what the bug looked like, rather than only our word that
+it existed.
+"""
+"""
 Fisher Discriminability Probing Analysis.
 
 Extracts attribute-slot representations from the last encoder layer of a
@@ -149,6 +168,10 @@ def main():
         num_decoder_layers=cfg["num_decoder_layers"],
         num_heads=cfg["num_heads"],
         num_attributes=k,
+        use_gating=cfg.get("use_gating", True),
+        use_mixing=cfg.get("use_mixing", True),
+        pairing_strategy=cfg.get("pairing_strategy", "cyclic"),
+        pairing_seed=cfg.get("pairing_seed", 1234),
         ffn_dim=cfg.get("ffn_dim", cfg["hidden_dim"] * 4),
         max_seq_len=cfg.get("max_seq_len", 512),
     )

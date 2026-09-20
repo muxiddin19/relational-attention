@@ -1,0 +1,5 @@
+2026-09-13 02:03:02 | INFO | Evaluating 1319 examples from gsm8k/dev
+2026-09-13 02:03:10 | INFO | === Results (gsm8k/dev) ===
+2026-09-13 02:03:10 | INFO |   answer_accuracy: 0.0303
+2026-09-13 02:03:10 | INFO |   n: 1319
+2026-09-13 02:03:10 | INFO | Saved to /home/muhiddin/icde2027_revision/evals/eval_std_s48.json

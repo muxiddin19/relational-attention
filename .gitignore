@@ -24,3 +24,10 @@ credentials.json
 CLAUDE.md
 memory/
 .claude/
+
+# Build artifacts
+*.egg-info/
+
+# Exception: curated logs for the 2026 revision ARE tracked despite *.log above
+!results/verified_2026_revision/logs/
+!results/verified_2026_revision/logs/*.log
