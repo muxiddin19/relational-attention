@@ -65,6 +65,7 @@ class TrainingConfig:
     pairing_strategy: str = "cyclic"    # ablation: {"cyclic", "random_fixed", "learned"}
     pairing_seed: int = 1234
     use_composed_join: bool = False     # scoped 2-hop relational composition
+    use_true_standard: bool = False     # genuine standard multi-head attention baseline
     ffn_dim: int = 2048
     max_seq_len: int = 512
     dropout: float = 0.1
@@ -383,6 +384,7 @@ def build_model(cfg: TrainingConfig) -> nn.Module:
         pairing_strategy=cfg.pairing_strategy,
         pairing_seed=cfg.pairing_seed,
         use_composed_join=cfg.use_composed_join,
+        use_true_standard=cfg.use_true_standard,
         ffn_dim=cfg.ffn_dim,
         max_seq_len=cfg.max_seq_len,
         dropout=cfg.dropout,

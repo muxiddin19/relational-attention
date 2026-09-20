@@ -630,3 +630,74 @@ class RelationalAttention(nn.Module):
         )
 
         return output, attn_weights
+
+
+class StandardMultiHeadAttention(nn.Module):
+    """
+    Genuine standard multi-head scaled dot-product attention (Vaswani et al.,
+    2017), used as the true architectural baseline. A single (hidden_dim,
+    hidden_dim) projection each for Q, K, V is split across num_heads heads
+    of hidden_dim/num_heads dimensions (the standard convention), followed by
+    a single (hidden_dim, hidden_dim) output projection. No attribute
+    decomposition, no per-slot gating, no attribute mixing -- this is
+    deliberately the plain baseline Eq. (1) describes, not a degenerate case
+    of MultiRelationAttention (see the paper's corrected Remark on why k=1 in
+    MultiRelationAttention does not reduce to this).
+
+    Matches MultiRelationAttention's forward signature exactly so it is a
+    drop-in replacement at the block level.
+    """
+
+    def __init__(
+        self,
+        hidden_dim: int,
+        num_heads: int,
+        dropout: float = 0.1,
+        **_ignored_kwargs,
+    ):
+        super().__init__()
+        assert hidden_dim % num_heads == 0, \
+            f"hidden_dim ({hidden_dim}) must be divisible by num_heads ({num_heads})"
+        self.hidden_dim = hidden_dim
+        self.num_heads = num_heads
+        self.head_dim = hidden_dim // num_heads
+
+        self.q_proj = nn.Linear(hidden_dim, hidden_dim)
+        self.k_proj = nn.Linear(hidden_dim, hidden_dim)
+        self.v_proj = nn.Linear(hidden_dim, hidden_dim)
+        self.out_proj = nn.Linear(hidden_dim, hidden_dim)
+        self.dropout = nn.Dropout(dropout)
+        self.attn_dropout = nn.Dropout(dropout)
+
+    def _split_heads(self, x: torch.Tensor) -> torch.Tensor:
+        batch, seq_len, _ = x.shape
+        x = x.view(batch, seq_len, self.num_heads, self.head_dim)
+        return x.permute(0, 2, 1, 3)
+
+    def forward(
+        self,
+        query: torch.Tensor,
+        key: torch.Tensor,
+        value: torch.Tensor,
+        mask: Optional[torch.Tensor] = None,
+        return_attention: bool = False
+    ) -> Tuple[torch.Tensor, Optional[torch.Tensor]]:
+        batch, seq_q, _ = query.shape
+
+        Q = self._split_heads(self.q_proj(query))
+        K = self._split_heads(self.k_proj(key))
+        V = self._split_heads(self.v_proj(value))
+
+        scores = torch.matmul(Q, K.transpose(-2, -1)) / math.sqrt(self.head_dim)
+        if mask is not None:
+            scores = scores.masked_fill(mask == 0, float('-inf'))
+        attn = F.softmax(scores, dim=-1)
+        attn = self.attn_dropout(attn)
+
+        out = torch.matmul(attn, V)
+        out = out.permute(0, 2, 1, 3).contiguous().view(batch, seq_q, self.hidden_dim)
+        output = self.dropout(self.out_proj(out))
+
+        if return_attention:
+            return output, attn
+        return output, None

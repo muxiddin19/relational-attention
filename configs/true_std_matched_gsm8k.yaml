@@ -1,0 +1,32 @@
+# Genuine standard multi-head attention, FFN widened to 15979 to hit
+# 464,504,584 params -- matches RelTransformer's 464,508,736 to within 0.001%
+# (same hidden_dim=512, num_heads=8 as RelTransformer; only ffn_dim differs).
+model_type: standard
+use_true_standard: true
+hidden_dim: 512
+num_encoder_layers: 12
+num_decoder_layers: 12
+num_heads: 8
+num_attributes: 1
+use_gating: false
+use_mixing: false
+ffn_dim: 15979
+max_seq_len: 512
+dropout: 0.1
+vocab_size: 32000
+learning_rate: 2.0e-4
+weight_decay: 0.01
+warmup_steps: 4000
+max_steps: 80000
+batch_size: 16
+gradient_accumulation: 1
+max_grad_norm: 1.0
+label_smoothing: 0.1
+eval_every: 1000
+save_every: 10000
+patience: 20
+max_src_len: 256
+max_tgt_len: 64
+fp16: false
+num_workers: 4
+log_every: 100

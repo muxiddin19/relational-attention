@@ -47,6 +47,7 @@ class RelationalTransformerConfig:
     pairing_strategy: str = "cyclic"  # {"cyclic", "random_fixed", "learned"}
     pairing_seed: int = 1234
     use_composed_join: bool = False  # scoped 2-hop relational composition
+    use_true_standard: bool = False  # genuine standard multi-head attention baseline
     ffn_dim: Optional[int] = None  # Defaults to 4 * hidden_dim
     max_seq_len: int = 2048
     dropout: float = 0.1
@@ -122,7 +123,8 @@ class RelationalTransformerEncoder(nn.Module):
                 use_mixing=config.use_mixing,
                 pairing_strategy=config.pairing_strategy,
                 pairing_seed=config.pairing_seed,
-                use_composed_join=config.use_composed_join
+                use_composed_join=config.use_composed_join,
+                use_true_standard=config.use_true_standard
             )
             for _ in range(config.num_encoder_layers)
         ])
@@ -233,7 +235,8 @@ class RelationalTransformerDecoder(nn.Module):
                 use_mixing=config.use_mixing,
                 pairing_strategy=config.pairing_strategy,
                 pairing_seed=config.pairing_seed,
-                use_composed_join=config.use_composed_join
+                use_composed_join=config.use_composed_join,
+                use_true_standard=config.use_true_standard
             )
             for _ in range(config.num_decoder_layers)
         ])

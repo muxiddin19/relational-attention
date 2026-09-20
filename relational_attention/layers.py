@@ -14,7 +14,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from typing import Optional, Tuple, List
 
-from .attention import RelationalAttention, MultiRelationAttention
+from .attention import RelationalAttention, MultiRelationAttention, StandardMultiHeadAttention
 
 
 class TupleEmbedding(nn.Module):
@@ -278,22 +278,30 @@ class RelationalTransformerBlock(nn.Module):
         use_mixing: bool = True,
         pairing_strategy: str = "cyclic",
         pairing_seed: int = 1234,
-        use_composed_join: bool = False
+        use_composed_join: bool = False,
+        use_true_standard: bool = False
     ):
         super().__init__()
 
-        # Multi-Relation Self-Attention
-        self.self_attention = MultiRelationAttention(
-            hidden_dim=hidden_dim,
-            num_heads=num_heads,
-            num_attributes=num_attributes,
-            dropout=dropout,
-            use_gating=use_gating,
-            use_mixing=use_mixing,
-            pairing_strategy=pairing_strategy,
-            pairing_seed=pairing_seed,
-            use_composed_join=use_composed_join
-        )
+        # Multi-Relation Self-Attention, or genuine standard MHA baseline
+        if use_true_standard:
+            self.self_attention = StandardMultiHeadAttention(
+                hidden_dim=hidden_dim,
+                num_heads=num_heads,
+                dropout=dropout,
+            )
+        else:
+            self.self_attention = MultiRelationAttention(
+                hidden_dim=hidden_dim,
+                num_heads=num_heads,
+                num_attributes=num_attributes,
+                dropout=dropout,
+                use_gating=use_gating,
+                use_mixing=use_mixing,
+                pairing_strategy=pairing_strategy,
+                pairing_seed=pairing_seed,
+                use_composed_join=use_composed_join
+            )
 
         # Feed-Forward Network
         self.ffn = FeedForward(
@@ -367,35 +375,50 @@ class RelationalTransformerEncoderBlock(nn.Module):
         use_mixing: bool = True,
         pairing_strategy: str = "cyclic",
         pairing_seed: int = 1234,
-        use_composed_join: bool = False
+        use_composed_join: bool = False,
+        use_true_standard: bool = False
     ):
         super().__init__()
 
-        # Self-attention
-        self.self_attention = MultiRelationAttention(
-            hidden_dim=hidden_dim,
-            num_heads=num_heads,
-            num_attributes=num_attributes,
-            dropout=dropout,
-            use_gating=use_gating,
-            use_mixing=use_mixing,
-            pairing_strategy=pairing_strategy,
-            pairing_seed=pairing_seed,
-            use_composed_join=use_composed_join
-        )
+        if use_true_standard:
+            # Self-attention
+            self.self_attention = StandardMultiHeadAttention(
+                hidden_dim=hidden_dim,
+                num_heads=num_heads,
+                dropout=dropout,
+            )
+            # Cross-attention
+            self.cross_attention = StandardMultiHeadAttention(
+                hidden_dim=hidden_dim,
+                num_heads=num_heads,
+                dropout=dropout,
+            )
+        else:
+            # Self-attention
+            self.self_attention = MultiRelationAttention(
+                hidden_dim=hidden_dim,
+                num_heads=num_heads,
+                num_attributes=num_attributes,
+                dropout=dropout,
+                use_gating=use_gating,
+                use_mixing=use_mixing,
+                pairing_strategy=pairing_strategy,
+                pairing_seed=pairing_seed,
+                use_composed_join=use_composed_join
+            )
 
-        # Cross-attention
-        self.cross_attention = MultiRelationAttention(
-            hidden_dim=hidden_dim,
-            num_heads=num_heads,
-            num_attributes=num_attributes,
-            dropout=dropout,
-            use_gating=use_gating,
-            use_mixing=use_mixing,
-            pairing_strategy=pairing_strategy,
-            pairing_seed=pairing_seed,
-            use_composed_join=use_composed_join
-        )
+            # Cross-attention
+            self.cross_attention = MultiRelationAttention(
+                hidden_dim=hidden_dim,
+                num_heads=num_heads,
+                num_attributes=num_attributes,
+                dropout=dropout,
+                use_gating=use_gating,
+                use_mixing=use_mixing,
+                pairing_strategy=pairing_strategy,
+                pairing_seed=pairing_seed,
+                use_composed_join=use_composed_join
+            )
 
         # Feed-Forward Network
         self.ffn = FeedForward(
