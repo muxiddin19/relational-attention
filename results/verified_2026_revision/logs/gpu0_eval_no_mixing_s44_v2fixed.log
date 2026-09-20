@@ -1,0 +1,5 @@
+2026-09-12 11:24:31 | INFO | Evaluating 1319 examples from gsm8k/dev
+2026-09-12 11:24:37 | INFO | === Results (gsm8k/dev) ===
+2026-09-12 11:24:37 | INFO |   answer_accuracy: 0.0303
+2026-09-12 11:24:37 | INFO |   n: 1319
+2026-09-12 11:24:37 | INFO | Saved to /home/muhiddin/icde2027_revision/evals/eval_no_mixing_s44_v2fixed.json

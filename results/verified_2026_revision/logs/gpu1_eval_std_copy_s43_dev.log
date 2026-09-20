@@ -1,0 +1,5 @@
+2026-09-15 02:18:50 | INFO | Evaluating 3000 examples from cogs/dev
+2026-09-15 03:03:56 | INFO | === Results (cogs/dev) ===
+2026-09-15 03:03:56 | INFO |   exact_match: 0.0370
+2026-09-15 03:03:56 | INFO |   n: 3000
+2026-09-15 03:03:56 | INFO | Saved to /home/muhiddin/icde2027_revision/evals/eval_std_copy_s43_dev.json

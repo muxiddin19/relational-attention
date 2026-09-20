@@ -1,0 +1,690 @@
+2026-09-15 08:12:12 | INFO | Device: cuda
+2026-09-15 08:12:15 | INFO | Model: relational, k=8, params=465.0M
+2026-09-15 08:12:15 | INFO | Training on 7000 examples, eval on 1034
+2026-09-15 08:12:15 | INFO | Config: TrainingConfig(model_type='relational', hidden_dim=512, num_encoder_layers=12, num_decoder_layers=12, num_heads=8, num_attributes=8, use_gating=True, use_mixing=True, pairing_strategy='cyclic', pairing_seed=1234, ffn_dim=2048, max_seq_len=512, dropout=0.1, vocab_size=32000, learning_rate=8e-05, weight_decay=0.01, warmup_steps=4000, max_steps=300000, batch_size=4, gradient_accumulation=16, max_grad_norm=1.0, label_smoothing=0.05, eval_every=2000, save_every=20000, patience=30, eval_by_em=True, dataset='spider', nas_dir='/nas/Dataset/nlp', max_src_len=384, max_tgt_len=200, seed=44, num_workers=4, fp16=False, output_dir='/nas/Dataset/experiments/relational-attention/muhiddin_outputs/relational_125m_spider_copy_s44', log_every=100, copy_mechanism=True, num_copy_heads=1)
+2026-09-15 08:12:16 | INFO | step=0 loss=9.1647 lr=0.00e+00 elapsed=1s
+2026-09-15 08:12:40 | INFO | step=100 loss=9.0041 lr=2.00e-06 elapsed=24s
+2026-09-15 08:13:03 | INFO | step=200 loss=8.6038 lr=4.00e-06 elapsed=48s
+2026-09-15 08:13:27 | INFO | step=300 loss=8.5062 lr=6.00e-06 elapsed=72s
+2026-09-15 08:13:51 | INFO | step=400 loss=8.0172 lr=8.00e-06 elapsed=96s
+2026-09-15 08:14:15 | INFO | step=500 loss=7.8007 lr=1.00e-05 elapsed=120s
+2026-09-15 08:14:39 | INFO | step=600 loss=8.2855 lr=1.20e-05 elapsed=143s
+2026-09-15 08:15:03 | INFO | step=700 loss=8.1800 lr=1.40e-05 elapsed=167s
+2026-09-15 08:15:26 | INFO | step=800 loss=8.6515 lr=1.60e-05 elapsed=191s
+2026-09-15 08:15:50 | INFO | step=900 loss=7.0909 lr=1.80e-05 elapsed=215s
+2026-09-15 08:16:14 | INFO | step=1000 loss=8.3867 lr=2.00e-05 elapsed=239s
+2026-09-15 08:16:38 | INFO | step=1100 loss=7.2978 lr=2.20e-05 elapsed=263s
+2026-09-15 08:17:02 | INFO | step=1200 loss=7.1143 lr=2.40e-05 elapsed=287s
+2026-09-15 08:17:26 | INFO | step=1300 loss=7.3927 lr=2.60e-05 elapsed=311s
+2026-09-15 08:17:50 | INFO | step=1400 loss=6.9012 lr=2.80e-05 elapsed=335s
+2026-09-15 08:18:14 | INFO | step=1500 loss=7.0873 lr=3.00e-05 elapsed=358s
+2026-09-15 08:18:38 | INFO | step=1600 loss=6.5403 lr=3.20e-05 elapsed=383s
+2026-09-15 08:19:02 | INFO | step=1700 loss=7.0013 lr=3.40e-05 elapsed=406s
+2026-09-15 08:19:26 | INFO | step=1800 loss=6.3145 lr=3.60e-05 elapsed=431s
+2026-09-15 08:19:50 | INFO | step=1900 loss=6.3937 lr=3.80e-05 elapsed=454s
+2026-09-15 08:20:14 | INFO | step=2000 loss=5.9420 lr=4.00e-05 elapsed=479s
+2026-09-15 08:20:21 | INFO | [eval] step=2000 dev_loss=6.7116
+2026-09-15 08:21:01 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-15 08:21:18 | INFO |   -> New best model saved (dev_loss=6.7116)
+2026-09-15 08:21:42 | INFO | step=2100 loss=5.7213 lr=4.20e-05 elapsed=567s
+2026-09-15 08:22:06 | INFO | step=2200 loss=5.5387 lr=4.40e-05 elapsed=591s
+2026-09-15 08:22:30 | INFO | step=2300 loss=5.8170 lr=4.60e-05 elapsed=615s
+2026-09-15 08:22:55 | INFO | step=2400 loss=4.9746 lr=4.80e-05 elapsed=639s
+2026-09-15 08:23:18 | INFO | step=2500 loss=4.5445 lr=5.00e-05 elapsed=663s
+2026-09-15 08:23:42 | INFO | step=2600 loss=4.5605 lr=5.20e-05 elapsed=687s
+2026-09-15 08:24:06 | INFO | step=2700 loss=4.5533 lr=5.40e-05 elapsed=711s
+2026-09-15 08:24:30 | INFO | step=2800 loss=4.4600 lr=5.60e-05 elapsed=735s
+2026-09-15 08:24:54 | INFO | step=2900 loss=4.9849 lr=5.80e-05 elapsed=759s
+2026-09-15 08:25:18 | INFO | step=3000 loss=3.7121 lr=6.00e-05 elapsed=782s
+2026-09-15 08:25:42 | INFO | step=3100 loss=3.7790 lr=6.20e-05 elapsed=806s
+2026-09-15 08:26:06 | INFO | step=3200 loss=3.7970 lr=6.40e-05 elapsed=830s
+2026-09-15 08:26:30 | INFO | step=3300 loss=3.5690 lr=6.60e-05 elapsed=854s
+2026-09-15 08:26:54 | INFO | step=3400 loss=3.6262 lr=6.80e-05 elapsed=878s
+2026-09-15 08:27:18 | INFO | step=3500 loss=3.4753 lr=7.00e-05 elapsed=903s
+2026-09-15 08:27:42 | INFO | step=3600 loss=3.4373 lr=7.20e-05 elapsed=927s
+2026-09-15 08:28:06 | INFO | step=3700 loss=2.9296 lr=7.40e-05 elapsed=951s
+2026-09-15 08:28:30 | INFO | step=3800 loss=3.0396 lr=7.60e-05 elapsed=975s
+2026-09-15 08:28:54 | INFO | step=3900 loss=3.0083 lr=7.80e-05 elapsed=999s
+2026-09-15 08:29:18 | INFO | step=4000 loss=2.3247 lr=8.00e-05 elapsed=1023s
+2026-09-15 08:29:26 | INFO | [eval] step=4000 dev_loss=4.5155
+2026-09-15 08:32:58 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-15 08:33:22 | INFO | step=4100 loss=2.2625 lr=8.00e-05 elapsed=1267s
+2026-09-15 08:33:47 | INFO | step=4200 loss=2.8492 lr=8.00e-05 elapsed=1291s
+2026-09-15 08:34:11 | INFO | step=4300 loss=2.0324 lr=8.00e-05 elapsed=1315s
+2026-09-15 08:34:35 | INFO | step=4400 loss=2.4892 lr=8.00e-05 elapsed=1340s
+2026-09-15 08:34:59 | INFO | step=4500 loss=1.7630 lr=8.00e-05 elapsed=1364s
+2026-09-15 08:35:23 | INFO | step=4600 loss=2.1364 lr=8.00e-05 elapsed=1388s
+2026-09-15 08:35:47 | INFO | step=4700 loss=2.3909 lr=8.00e-05 elapsed=1412s
+2026-09-15 08:36:12 | INFO | step=4800 loss=2.0838 lr=8.00e-05 elapsed=1436s
+2026-09-15 08:36:35 | INFO | step=4900 loss=2.1163 lr=8.00e-05 elapsed=1460s
+2026-09-15 08:36:59 | INFO | step=5000 loss=1.9932 lr=8.00e-05 elapsed=1484s
+2026-09-15 08:37:23 | INFO | step=5100 loss=1.9990 lr=8.00e-05 elapsed=1508s
+2026-09-15 08:37:47 | INFO | step=5200 loss=1.5202 lr=8.00e-05 elapsed=1532s
+2026-09-15 08:38:11 | INFO | step=5300 loss=2.3270 lr=8.00e-05 elapsed=1556s
+2026-09-15 08:38:35 | INFO | step=5400 loss=1.1307 lr=8.00e-05 elapsed=1580s
+2026-09-15 08:38:59 | INFO | step=5500 loss=1.8232 lr=8.00e-05 elapsed=1604s
+2026-09-15 08:39:23 | INFO | step=5600 loss=1.9578 lr=8.00e-05 elapsed=1628s
+2026-09-15 08:39:47 | INFO | step=5700 loss=1.9940 lr=8.00e-05 elapsed=1652s
+2026-09-15 08:40:11 | INFO | step=5800 loss=1.5404 lr=8.00e-05 elapsed=1676s
+2026-09-15 08:40:35 | INFO | step=5900 loss=2.1399 lr=8.00e-05 elapsed=1700s
+2026-09-15 08:40:59 | INFO | step=6000 loss=1.5608 lr=8.00e-05 elapsed=1724s
+2026-09-15 08:41:06 | INFO | [eval] step=6000 dev_loss=4.0494
+2026-09-15 08:41:41 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-15 08:42:05 | INFO | step=6100 loss=1.7742 lr=8.00e-05 elapsed=1790s
+2026-09-15 08:42:29 | INFO | step=6200 loss=1.1921 lr=8.00e-05 elapsed=1814s
+2026-09-15 08:42:53 | INFO | step=6300 loss=1.4025 lr=8.00e-05 elapsed=1838s
+2026-09-15 08:43:18 | INFO | step=6400 loss=1.1525 lr=8.00e-05 elapsed=1862s
+2026-09-15 08:43:42 | INFO | step=6500 loss=1.4131 lr=8.00e-05 elapsed=1886s
+2026-09-15 08:44:05 | INFO | step=6600 loss=1.6196 lr=8.00e-05 elapsed=1910s
+2026-09-15 08:44:29 | INFO | step=6700 loss=1.6710 lr=8.00e-05 elapsed=1934s
+2026-09-15 08:44:53 | INFO | step=6800 loss=1.6300 lr=8.00e-05 elapsed=1958s
+2026-09-15 08:45:17 | INFO | step=6900 loss=1.7377 lr=8.00e-05 elapsed=1982s
+2026-09-15 08:45:41 | INFO | step=7000 loss=1.8229 lr=8.00e-05 elapsed=2006s
+2026-09-15 08:46:05 | INFO | step=7100 loss=2.1376 lr=8.00e-05 elapsed=2030s
+2026-09-15 08:46:29 | INFO | step=7200 loss=0.8728 lr=8.00e-05 elapsed=2054s
+2026-09-15 08:46:53 | INFO | step=7300 loss=1.3759 lr=8.00e-05 elapsed=2078s
+2026-09-15 08:47:17 | INFO | step=7400 loss=1.3758 lr=8.00e-05 elapsed=2102s
+2026-09-15 08:47:41 | INFO | step=7500 loss=1.8876 lr=8.00e-05 elapsed=2126s
+2026-09-15 08:48:05 | INFO | step=7600 loss=1.5860 lr=8.00e-05 elapsed=2150s
+2026-09-15 08:48:29 | INFO | step=7700 loss=1.5638 lr=8.00e-05 elapsed=2174s
+2026-09-15 08:48:53 | INFO | step=7800 loss=1.3590 lr=8.00e-05 elapsed=2198s
+2026-09-15 08:49:17 | INFO | step=7900 loss=1.0636 lr=8.00e-05 elapsed=2221s
+2026-09-15 08:49:41 | INFO | step=8000 loss=1.4726 lr=8.00e-05 elapsed=2245s
+2026-09-15 08:49:48 | INFO | [eval] step=8000 dev_loss=4.1449
+2026-09-15 08:50:40 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-15 08:51:04 | INFO | step=8100 loss=1.5501 lr=8.00e-05 elapsed=2329s
+2026-09-15 08:51:28 | INFO | step=8200 loss=1.6638 lr=8.00e-05 elapsed=2353s
+2026-09-15 08:51:52 | INFO | step=8300 loss=1.3119 lr=8.00e-05 elapsed=2377s
+2026-09-15 08:52:16 | INFO | step=8400 loss=1.2462 lr=8.00e-05 elapsed=2401s
+2026-09-15 08:52:40 | INFO | step=8500 loss=1.4772 lr=8.00e-05 elapsed=2425s
+2026-09-15 08:53:04 | INFO | step=8600 loss=1.3882 lr=8.00e-05 elapsed=2448s
+2026-09-15 08:53:28 | INFO | step=8700 loss=0.9748 lr=8.00e-05 elapsed=2472s
+2026-09-15 08:53:52 | INFO | step=8800 loss=1.1224 lr=7.99e-05 elapsed=2497s
+2026-09-15 08:54:16 | INFO | step=8900 loss=1.2953 lr=7.99e-05 elapsed=2520s
+2026-09-15 08:54:40 | INFO | step=9000 loss=0.8244 lr=7.99e-05 elapsed=2544s
+2026-09-15 08:55:03 | INFO | step=9100 loss=0.8315 lr=7.99e-05 elapsed=2568s
+2026-09-15 08:55:27 | INFO | step=9200 loss=1.0728 lr=7.99e-05 elapsed=2592s
+2026-09-15 08:55:51 | INFO | step=9300 loss=1.3423 lr=7.99e-05 elapsed=2616s
+2026-09-15 08:56:15 | INFO | step=9400 loss=1.0421 lr=7.99e-05 elapsed=2640s
+2026-09-15 08:56:39 | INFO | step=9500 loss=1.0378 lr=7.99e-05 elapsed=2664s
+2026-09-15 08:57:04 | INFO | step=9600 loss=1.1763 lr=7.99e-05 elapsed=2688s
+2026-09-15 08:57:28 | INFO | step=9700 loss=1.0289 lr=7.99e-05 elapsed=2712s
+2026-09-15 08:57:52 | INFO | step=9800 loss=1.4668 lr=7.99e-05 elapsed=2736s
+2026-09-15 08:58:15 | INFO | step=9900 loss=1.0397 lr=7.99e-05 elapsed=2760s
+2026-09-15 08:58:39 | INFO | step=10000 loss=1.3954 lr=7.99e-05 elapsed=2784s
+2026-09-15 08:58:47 | INFO | [eval] step=10000 dev_loss=4.2714
+2026-09-15 08:59:27 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-15 08:59:51 | INFO | step=10100 loss=0.9924 lr=7.99e-05 elapsed=2855s
+2026-09-15 09:00:15 | INFO | step=10200 loss=1.2625 lr=7.99e-05 elapsed=2879s
+2026-09-15 09:00:39 | INFO | step=10300 loss=1.6340 lr=7.99e-05 elapsed=2904s
+2026-09-15 09:01:03 | INFO | step=10400 loss=1.6325 lr=7.99e-05 elapsed=2928s
+2026-09-15 09:01:27 | INFO | step=10500 loss=0.9062 lr=7.99e-05 elapsed=2952s
+2026-09-15 09:01:51 | INFO | step=10600 loss=1.5285 lr=7.99e-05 elapsed=2976s
+2026-09-15 09:02:15 | INFO | step=10700 loss=1.0903 lr=7.99e-05 elapsed=3000s
+2026-09-15 09:02:39 | INFO | step=10800 loss=1.0265 lr=7.99e-05 elapsed=3024s
+2026-09-15 09:03:03 | INFO | step=10900 loss=1.0696 lr=7.99e-05 elapsed=3047s
+2026-09-15 09:03:27 | INFO | step=11000 loss=0.7026 lr=7.99e-05 elapsed=3071s
+2026-09-15 09:03:51 | INFO | step=11100 loss=0.7082 lr=7.99e-05 elapsed=3095s
+2026-09-15 09:04:15 | INFO | step=11200 loss=0.6850 lr=7.99e-05 elapsed=3119s
+2026-09-15 09:04:39 | INFO | step=11300 loss=0.9157 lr=7.99e-05 elapsed=3143s
+2026-09-15 09:05:03 | INFO | step=11400 loss=0.8611 lr=7.99e-05 elapsed=3167s
+2026-09-15 09:05:26 | INFO | step=11500 loss=0.9205 lr=7.99e-05 elapsed=3191s
+2026-09-15 09:05:51 | INFO | step=11600 loss=1.1227 lr=7.99e-05 elapsed=3215s
+2026-09-15 09:06:15 | INFO | step=11700 loss=1.0108 lr=7.99e-05 elapsed=3239s
+2026-09-15 09:06:38 | INFO | step=11800 loss=0.7094 lr=7.99e-05 elapsed=3263s
+2026-09-15 09:07:02 | INFO | step=11900 loss=1.3246 lr=7.99e-05 elapsed=3287s
+2026-09-15 09:07:26 | INFO | step=12000 loss=1.3597 lr=7.99e-05 elapsed=3311s
+2026-09-15 09:07:34 | INFO | [eval] step=12000 dev_loss=4.4014
+2026-09-15 09:08:15 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-15 09:08:39 | INFO | step=12100 loss=0.8529 lr=7.99e-05 elapsed=3383s
+2026-09-15 09:09:03 | INFO | step=12200 loss=0.9658 lr=7.98e-05 elapsed=3407s
+2026-09-15 09:09:27 | INFO | step=12300 loss=1.1599 lr=7.98e-05 elapsed=3431s
+2026-09-15 09:09:51 | INFO | step=12400 loss=0.9163 lr=7.98e-05 elapsed=3456s
+2026-09-15 09:10:15 | INFO | step=12500 loss=0.8350 lr=7.98e-05 elapsed=3480s
+2026-09-15 09:10:39 | INFO | step=12600 loss=0.7407 lr=7.98e-05 elapsed=3503s
+2026-09-15 09:11:03 | INFO | step=12700 loss=1.3323 lr=7.98e-05 elapsed=3527s
+2026-09-15 09:11:27 | INFO | step=12800 loss=0.7174 lr=7.98e-05 elapsed=3551s
+2026-09-15 09:11:51 | INFO | step=12900 loss=0.7347 lr=7.98e-05 elapsed=3575s
+2026-09-15 09:12:14 | INFO | step=13000 loss=0.7977 lr=7.98e-05 elapsed=3599s
+2026-09-15 09:12:38 | INFO | step=13100 loss=0.6419 lr=7.98e-05 elapsed=3623s
+2026-09-15 09:13:03 | INFO | step=13200 loss=0.8425 lr=7.98e-05 elapsed=3647s
+2026-09-15 09:13:27 | INFO | step=13300 loss=0.9194 lr=7.98e-05 elapsed=3671s
+2026-09-15 09:13:50 | INFO | step=13400 loss=1.0645 lr=7.98e-05 elapsed=3695s
+2026-09-15 09:14:15 | INFO | step=13500 loss=0.8920 lr=7.98e-05 elapsed=3719s
+2026-09-15 09:14:39 | INFO | step=13600 loss=0.6034 lr=7.98e-05 elapsed=3744s
+2026-09-15 09:15:03 | INFO | step=13700 loss=0.8484 lr=7.98e-05 elapsed=3767s
+2026-09-15 09:15:26 | INFO | step=13800 loss=0.7216 lr=7.98e-05 elapsed=3791s
+2026-09-15 09:15:50 | INFO | step=13900 loss=0.6809 lr=7.98e-05 elapsed=3815s
+2026-09-15 09:16:15 | INFO | step=14000 loss=0.7155 lr=7.98e-05 elapsed=3839s
+2026-09-15 09:16:22 | INFO | [eval] step=14000 dev_loss=4.5457
+2026-09-15 09:17:05 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-15 09:17:29 | INFO | step=14100 loss=0.4528 lr=7.98e-05 elapsed=3914s
+2026-09-15 09:17:53 | INFO | step=14200 loss=0.7579 lr=7.98e-05 elapsed=3938s
+2026-09-15 09:18:17 | INFO | step=14300 loss=0.9660 lr=7.98e-05 elapsed=3962s
+2026-09-15 09:18:41 | INFO | step=14400 loss=0.8390 lr=7.98e-05 elapsed=3986s
+2026-09-15 09:19:05 | INFO | step=14500 loss=0.5854 lr=7.98e-05 elapsed=4010s
+2026-09-15 09:19:29 | INFO | step=14600 loss=0.8862 lr=7.97e-05 elapsed=4034s
+2026-09-15 09:19:53 | INFO | step=14700 loss=0.7461 lr=7.97e-05 elapsed=4058s
+2026-09-15 09:20:17 | INFO | step=14800 loss=0.7090 lr=7.97e-05 elapsed=4082s
+2026-09-15 09:20:41 | INFO | step=14900 loss=0.5275 lr=7.97e-05 elapsed=4106s
+2026-09-15 09:21:05 | INFO | step=15000 loss=1.0203 lr=7.97e-05 elapsed=4130s
+2026-09-15 09:21:29 | INFO | step=15100 loss=1.0068 lr=7.97e-05 elapsed=4154s
+2026-09-15 09:21:53 | INFO | step=15200 loss=0.8285 lr=7.97e-05 elapsed=4178s
+2026-09-15 09:22:17 | INFO | step=15300 loss=0.7696 lr=7.97e-05 elapsed=4202s
+2026-09-15 09:22:41 | INFO | step=15400 loss=0.5694 lr=7.97e-05 elapsed=4226s
+2026-09-15 09:23:05 | INFO | step=15500 loss=0.6371 lr=7.97e-05 elapsed=4250s
+2026-09-15 09:23:29 | INFO | step=15600 loss=1.2984 lr=7.97e-05 elapsed=4274s
+2026-09-15 09:23:53 | INFO | step=15700 loss=1.0442 lr=7.97e-05 elapsed=4298s
+2026-09-15 09:24:17 | INFO | step=15800 loss=0.3913 lr=7.97e-05 elapsed=4322s
+2026-09-15 09:24:41 | INFO | step=15900 loss=0.5895 lr=7.97e-05 elapsed=4346s
+2026-09-15 09:25:05 | INFO | step=16000 loss=1.1261 lr=7.97e-05 elapsed=4370s
+2026-09-15 09:25:12 | INFO | [eval] step=16000 dev_loss=4.7185
+2026-09-15 09:26:06 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-15 09:26:30 | INFO | step=16100 loss=0.6278 lr=7.97e-05 elapsed=4455s
+2026-09-15 09:26:54 | INFO | step=16200 loss=0.7832 lr=7.97e-05 elapsed=4479s
+2026-09-15 09:27:18 | INFO | step=16300 loss=0.9740 lr=7.97e-05 elapsed=4503s
+2026-09-15 09:27:43 | INFO | step=16400 loss=0.8214 lr=7.97e-05 elapsed=4527s
+2026-09-15 09:28:07 | INFO | step=16500 loss=0.7525 lr=7.96e-05 elapsed=4551s
+2026-09-15 09:28:31 | INFO | step=16600 loss=0.7219 lr=7.96e-05 elapsed=4575s
+2026-09-15 09:28:55 | INFO | step=16700 loss=0.7980 lr=7.96e-05 elapsed=4599s
+2026-09-15 09:29:19 | INFO | step=16800 loss=0.8054 lr=7.96e-05 elapsed=4623s
+2026-09-15 09:29:43 | INFO | step=16900 loss=0.7620 lr=7.96e-05 elapsed=4647s
+2026-09-15 09:30:07 | INFO | step=17000 loss=0.7084 lr=7.96e-05 elapsed=4671s
+2026-09-15 09:30:31 | INFO | step=17100 loss=0.8054 lr=7.96e-05 elapsed=4695s
+2026-09-15 09:30:55 | INFO | step=17200 loss=0.7292 lr=7.96e-05 elapsed=4720s
+2026-09-15 09:31:19 | INFO | step=17300 loss=1.4446 lr=7.96e-05 elapsed=4744s
+2026-09-15 09:31:43 | INFO | step=17400 loss=0.4259 lr=7.96e-05 elapsed=4767s
+2026-09-15 09:32:07 | INFO | step=17500 loss=0.5336 lr=7.96e-05 elapsed=4792s
+2026-09-15 09:32:31 | INFO | step=17600 loss=0.6143 lr=7.96e-05 elapsed=4816s
+2026-09-15 09:32:55 | INFO | step=17700 loss=0.4404 lr=7.96e-05 elapsed=4840s
+2026-09-15 09:33:19 | INFO | step=17800 loss=0.6342 lr=7.96e-05 elapsed=4864s
+2026-09-15 09:33:43 | INFO | step=17900 loss=0.7597 lr=7.96e-05 elapsed=4888s
+2026-09-15 09:34:07 | INFO | step=18000 loss=0.4813 lr=7.96e-05 elapsed=4912s
+2026-09-15 09:34:14 | INFO | [eval] step=18000 dev_loss=4.7074
+2026-09-15 09:35:08 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-15 09:35:33 | INFO | step=18100 loss=0.5128 lr=7.96e-05 elapsed=4997s
+2026-09-15 09:35:57 | INFO | step=18200 loss=0.8513 lr=7.95e-05 elapsed=5022s
+2026-09-15 09:36:21 | INFO | step=18300 loss=0.2431 lr=7.95e-05 elapsed=5045s
+2026-09-15 09:36:45 | INFO | step=18400 loss=0.5326 lr=7.95e-05 elapsed=5070s
+2026-09-15 09:37:09 | INFO | step=18500 loss=0.5234 lr=7.95e-05 elapsed=5094s
+2026-09-15 09:37:33 | INFO | step=18600 loss=1.0153 lr=7.95e-05 elapsed=5117s
+2026-09-15 09:37:57 | INFO | step=18700 loss=0.6301 lr=7.95e-05 elapsed=5141s
+2026-09-15 09:38:21 | INFO | step=18800 loss=0.7091 lr=7.95e-05 elapsed=5166s
+2026-09-15 09:38:45 | INFO | step=18900 loss=0.5663 lr=7.95e-05 elapsed=5189s
+2026-09-15 09:39:09 | INFO | step=19000 loss=0.5690 lr=7.95e-05 elapsed=5213s
+2026-09-15 09:39:32 | INFO | step=19100 loss=0.5070 lr=7.95e-05 elapsed=5237s
+2026-09-15 09:39:57 | INFO | step=19200 loss=0.6469 lr=7.95e-05 elapsed=5261s
+2026-09-15 09:40:21 | INFO | step=19300 loss=0.3904 lr=7.95e-05 elapsed=5285s
+2026-09-15 09:40:44 | INFO | step=19400 loss=0.7716 lr=7.95e-05 elapsed=5309s
+2026-09-15 09:41:08 | INFO | step=19500 loss=0.5707 lr=7.95e-05 elapsed=5333s
+2026-09-15 09:41:32 | INFO | step=19600 loss=0.5361 lr=7.95e-05 elapsed=5357s
+2026-09-15 09:41:56 | INFO | step=19700 loss=0.5004 lr=7.94e-05 elapsed=5381s
+2026-09-15 09:42:20 | INFO | step=19800 loss=0.6715 lr=7.94e-05 elapsed=5405s
+2026-09-15 09:42:44 | INFO | step=19900 loss=0.5644 lr=7.94e-05 elapsed=5429s
+2026-09-15 09:43:08 | INFO | step=20000 loss=0.6368 lr=7.94e-05 elapsed=5453s
+2026-09-15 09:43:15 | INFO | [eval] step=20000 dev_loss=4.7830
+2026-09-15 09:44:13 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-15 09:44:55 | INFO | step=20100 loss=0.4268 lr=7.94e-05 elapsed=5559s
+2026-09-15 09:45:19 | INFO | step=20200 loss=0.4500 lr=7.94e-05 elapsed=5584s
+2026-09-15 09:45:44 | INFO | step=20300 loss=0.5409 lr=7.94e-05 elapsed=5608s
+2026-09-15 09:46:08 | INFO | step=20400 loss=0.7022 lr=7.94e-05 elapsed=5633s
+2026-09-15 09:46:33 | INFO | step=20500 loss=0.6440 lr=7.94e-05 elapsed=5658s
+2026-09-15 09:46:57 | INFO | step=20600 loss=0.4656 lr=7.94e-05 elapsed=5682s
+2026-09-15 09:47:22 | INFO | step=20700 loss=0.5192 lr=7.94e-05 elapsed=5706s
+2026-09-15 09:47:46 | INFO | step=20800 loss=0.6930 lr=7.94e-05 elapsed=5731s
+2026-09-15 09:48:11 | INFO | step=20900 loss=0.5357 lr=7.94e-05 elapsed=5756s
+2026-09-15 09:48:36 | INFO | step=21000 loss=0.5064 lr=7.94e-05 elapsed=5780s
+2026-09-15 09:49:00 | INFO | step=21100 loss=0.3319 lr=7.93e-05 elapsed=5805s
+2026-09-15 09:49:24 | INFO | step=21200 loss=0.4317 lr=7.93e-05 elapsed=5829s
+2026-09-15 09:49:48 | INFO | step=21300 loss=0.4498 lr=7.93e-05 elapsed=5853s
+2026-09-15 09:50:12 | INFO | step=21400 loss=0.5761 lr=7.93e-05 elapsed=5877s
+2026-09-15 09:50:36 | INFO | step=21500 loss=0.5504 lr=7.93e-05 elapsed=5901s
+2026-09-15 09:51:01 | INFO | step=21600 loss=0.3413 lr=7.93e-05 elapsed=5926s
+2026-09-15 09:51:26 | INFO | step=21700 loss=0.6430 lr=7.93e-05 elapsed=5950s
+2026-09-15 09:51:50 | INFO | step=21800 loss=0.3072 lr=7.93e-05 elapsed=5975s
+2026-09-15 09:52:14 | INFO | step=21900 loss=0.3237 lr=7.93e-05 elapsed=5999s
+2026-09-15 09:52:39 | INFO | step=22000 loss=0.5947 lr=7.93e-05 elapsed=6024s
+2026-09-15 09:52:46 | INFO | [eval] step=22000 dev_loss=4.9391
+2026-09-15 09:53:34 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-15 09:53:59 | INFO | step=22100 loss=0.5650 lr=7.93e-05 elapsed=6103s
+2026-09-15 09:54:23 | INFO | step=22200 loss=0.3340 lr=7.93e-05 elapsed=6128s
+2026-09-15 09:54:48 | INFO | step=22300 loss=0.3896 lr=7.92e-05 elapsed=6152s
+2026-09-15 09:55:12 | INFO | step=22400 loss=0.5084 lr=7.92e-05 elapsed=6177s
+2026-09-15 09:55:37 | INFO | step=22500 loss=0.5180 lr=7.92e-05 elapsed=6201s
+2026-09-15 09:56:01 | INFO | step=22600 loss=0.5925 lr=7.92e-05 elapsed=6225s
+2026-09-15 09:56:24 | INFO | step=22700 loss=0.5344 lr=7.92e-05 elapsed=6249s
+2026-09-15 09:56:49 | INFO | step=22800 loss=0.5333 lr=7.92e-05 elapsed=6273s
+2026-09-15 09:57:13 | INFO | step=22900 loss=0.2957 lr=7.92e-05 elapsed=6298s
+2026-09-15 09:57:37 | INFO | step=23000 loss=0.2944 lr=7.92e-05 elapsed=6321s
+2026-09-15 09:58:01 | INFO | step=23100 loss=0.2507 lr=7.92e-05 elapsed=6346s
+2026-09-15 09:58:26 | INFO | step=23200 loss=0.4559 lr=7.92e-05 elapsed=6370s
+2026-09-15 09:58:50 | INFO | step=23300 loss=0.4997 lr=7.92e-05 elapsed=6395s
+2026-09-15 09:59:15 | INFO | step=23400 loss=0.4134 lr=7.92e-05 elapsed=6419s
+2026-09-15 09:59:39 | INFO | step=23500 loss=0.2587 lr=7.91e-05 elapsed=6444s
+2026-09-15 10:00:04 | INFO | step=23600 loss=0.3883 lr=7.91e-05 elapsed=6468s
+2026-09-15 10:00:28 | INFO | step=23700 loss=0.3489 lr=7.91e-05 elapsed=6493s
+2026-09-15 10:00:53 | INFO | step=23800 loss=0.3289 lr=7.91e-05 elapsed=6517s
+2026-09-15 10:01:17 | INFO | step=23900 loss=0.5671 lr=7.91e-05 elapsed=6542s
+2026-09-15 10:01:42 | INFO | step=24000 loss=0.3888 lr=7.91e-05 elapsed=6567s
+2026-09-15 10:01:49 | INFO | [eval] step=24000 dev_loss=5.0284
+2026-09-15 10:02:45 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-15 10:03:09 | INFO | step=24100 loss=0.7120 lr=7.91e-05 elapsed=6653s
+2026-09-15 10:03:33 | INFO | step=24200 loss=0.6171 lr=7.91e-05 elapsed=6677s
+2026-09-15 10:03:57 | INFO | step=24300 loss=0.4014 lr=7.91e-05 elapsed=6701s
+2026-09-15 10:04:21 | INFO | step=24400 loss=0.3182 lr=7.91e-05 elapsed=6725s
+2026-09-15 10:04:45 | INFO | step=24500 loss=0.2751 lr=7.91e-05 elapsed=6749s
+2026-09-15 10:05:10 | INFO | step=24600 loss=0.2600 lr=7.90e-05 elapsed=6774s
+2026-09-15 10:05:34 | INFO | step=24700 loss=0.3250 lr=7.90e-05 elapsed=6799s
+2026-09-15 10:05:59 | INFO | step=24800 loss=0.4474 lr=7.90e-05 elapsed=6824s
+2026-09-15 10:06:24 | INFO | step=24900 loss=0.4316 lr=7.90e-05 elapsed=6848s
+2026-09-15 10:06:48 | INFO | step=25000 loss=0.5391 lr=7.90e-05 elapsed=6873s
+2026-09-15 10:07:13 | INFO | step=25100 loss=0.2377 lr=7.90e-05 elapsed=6898s
+2026-09-15 10:07:38 | INFO | step=25200 loss=0.6739 lr=7.90e-05 elapsed=6923s
+2026-09-15 10:08:02 | INFO | step=25300 loss=0.2018 lr=7.90e-05 elapsed=6947s
+2026-09-15 10:08:27 | INFO | step=25400 loss=0.2480 lr=7.90e-05 elapsed=6972s
+2026-09-15 10:08:51 | INFO | step=25500 loss=0.4093 lr=7.90e-05 elapsed=6996s
+2026-09-15 10:09:16 | INFO | step=25600 loss=0.4090 lr=7.90e-05 elapsed=7021s
+2026-09-15 10:09:40 | INFO | step=25700 loss=0.2782 lr=7.89e-05 elapsed=7045s
+2026-09-15 10:10:04 | INFO | step=25800 loss=0.2878 lr=7.89e-05 elapsed=7069s
+2026-09-15 10:10:28 | INFO | step=25900 loss=0.2376 lr=7.89e-05 elapsed=7093s
+2026-09-15 10:10:53 | INFO | step=26000 loss=0.4007 lr=7.89e-05 elapsed=7117s
+2026-09-15 10:11:00 | INFO | [eval] step=26000 dev_loss=5.0777
+2026-09-15 10:11:47 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-15 10:12:12 | INFO | step=26100 loss=0.3599 lr=7.89e-05 elapsed=7197s
+2026-09-15 10:12:37 | INFO | step=26200 loss=0.3190 lr=7.89e-05 elapsed=7221s
+2026-09-15 10:13:01 | INFO | step=26300 loss=0.3373 lr=7.89e-05 elapsed=7246s
+2026-09-15 10:13:26 | INFO | step=26400 loss=0.1940 lr=7.89e-05 elapsed=7271s
+2026-09-15 10:13:51 | INFO | step=26500 loss=0.5424 lr=7.89e-05 elapsed=7295s
+2026-09-15 10:14:15 | INFO | step=26600 loss=0.2630 lr=7.89e-05 elapsed=7320s
+2026-09-15 10:14:40 | INFO | step=26700 loss=0.4160 lr=7.88e-05 elapsed=7344s
+2026-09-15 10:15:04 | INFO | step=26800 loss=0.2244 lr=7.88e-05 elapsed=7369s
+2026-09-15 10:15:29 | INFO | step=26900 loss=0.3358 lr=7.88e-05 elapsed=7393s
+2026-09-15 10:15:53 | INFO | step=27000 loss=0.3051 lr=7.88e-05 elapsed=7418s
+2026-09-15 10:16:17 | INFO | step=27100 loss=0.3225 lr=7.88e-05 elapsed=7442s
+2026-09-15 10:16:42 | INFO | step=27200 loss=0.2318 lr=7.88e-05 elapsed=7466s
+2026-09-15 10:17:06 | INFO | step=27300 loss=0.2118 lr=7.88e-05 elapsed=7490s
+2026-09-15 10:17:29 | INFO | step=27400 loss=0.4033 lr=7.88e-05 elapsed=7514s
+2026-09-15 10:17:53 | INFO | step=27500 loss=0.3656 lr=7.88e-05 elapsed=7538s
+2026-09-15 10:18:17 | INFO | step=27600 loss=0.5588 lr=7.88e-05 elapsed=7562s
+2026-09-15 10:18:42 | INFO | step=27700 loss=0.2747 lr=7.87e-05 elapsed=7586s
+2026-09-15 10:19:06 | INFO | step=27800 loss=0.4481 lr=7.87e-05 elapsed=7611s
+2026-09-15 10:19:30 | INFO | step=27900 loss=0.2015 lr=7.87e-05 elapsed=7635s
+2026-09-15 10:19:55 | INFO | step=28000 loss=0.2659 lr=7.87e-05 elapsed=7660s
+2026-09-15 10:20:03 | INFO | [eval] step=28000 dev_loss=5.1918
+2026-09-15 10:20:52 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-15 10:21:17 | INFO | step=28100 loss=0.2596 lr=7.87e-05 elapsed=7741s
+2026-09-15 10:21:41 | INFO | step=28200 loss=0.3279 lr=7.87e-05 elapsed=7766s
+2026-09-15 10:22:06 | INFO | step=28300 loss=0.1764 lr=7.87e-05 elapsed=7790s
+2026-09-15 10:22:30 | INFO | step=28400 loss=0.2773 lr=7.87e-05 elapsed=7815s
+2026-09-15 10:22:55 | INFO | step=28500 loss=0.2199 lr=7.87e-05 elapsed=7839s
+2026-09-15 10:23:19 | INFO | step=28600 loss=0.6270 lr=7.86e-05 elapsed=7864s
+2026-09-15 10:23:43 | INFO | step=28700 loss=0.5933 lr=7.86e-05 elapsed=7887s
+2026-09-15 10:24:07 | INFO | step=28800 loss=0.4115 lr=7.86e-05 elapsed=7911s
+2026-09-15 10:24:30 | INFO | step=28900 loss=0.4689 lr=7.86e-05 elapsed=7935s
+2026-09-15 10:24:54 | INFO | step=29000 loss=0.3861 lr=7.86e-05 elapsed=7959s
+2026-09-15 10:25:18 | INFO | step=29100 loss=0.3830 lr=7.86e-05 elapsed=7983s
+2026-09-15 10:25:43 | INFO | step=29200 loss=0.2476 lr=7.86e-05 elapsed=8007s
+2026-09-15 10:26:07 | INFO | step=29300 loss=0.6363 lr=7.86e-05 elapsed=8032s
+2026-09-15 10:26:32 | INFO | step=29400 loss=0.4417 lr=7.86e-05 elapsed=8056s
+2026-09-15 10:26:56 | INFO | step=29500 loss=0.6415 lr=7.85e-05 elapsed=8081s
+2026-09-15 10:27:21 | INFO | step=29600 loss=0.3973 lr=7.85e-05 elapsed=8106s
+2026-09-15 10:27:45 | INFO | step=29700 loss=0.3887 lr=7.85e-05 elapsed=8130s
+2026-09-15 10:28:10 | INFO | step=29800 loss=0.5794 lr=7.85e-05 elapsed=8155s
+2026-09-15 10:28:35 | INFO | step=29900 loss=0.1516 lr=7.85e-05 elapsed=8179s
+2026-09-15 10:28:59 | INFO | step=30000 loss=0.2157 lr=7.85e-05 elapsed=8204s
+2026-09-15 10:29:07 | INFO | [eval] step=30000 dev_loss=5.1880
+2026-09-15 10:30:06 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-15 10:30:30 | INFO | step=30100 loss=0.1901 lr=7.85e-05 elapsed=8295s
+2026-09-15 10:30:54 | INFO | step=30200 loss=0.4311 lr=7.85e-05 elapsed=8319s
+2026-09-15 10:31:18 | INFO | step=30300 loss=0.4014 lr=7.85e-05 elapsed=8343s
+2026-09-15 10:31:42 | INFO | step=30400 loss=0.6720 lr=7.84e-05 elapsed=8367s
+2026-09-15 10:32:07 | INFO | step=30500 loss=0.3739 lr=7.84e-05 elapsed=8391s
+2026-09-15 10:32:31 | INFO | step=30600 loss=0.2299 lr=7.84e-05 elapsed=8416s
+2026-09-15 10:32:56 | INFO | step=30700 loss=0.3140 lr=7.84e-05 elapsed=8440s
+2026-09-15 10:33:20 | INFO | step=30800 loss=0.1531 lr=7.84e-05 elapsed=8465s
+2026-09-15 10:33:44 | INFO | step=30900 loss=0.2483 lr=7.84e-05 elapsed=8489s
+2026-09-15 10:34:09 | INFO | step=31000 loss=0.2416 lr=7.84e-05 elapsed=8514s
+2026-09-15 10:34:33 | INFO | step=31100 loss=0.2825 lr=7.84e-05 elapsed=8538s
+2026-09-15 10:34:58 | INFO | step=31200 loss=0.5605 lr=7.83e-05 elapsed=8563s
+2026-09-15 10:35:22 | INFO | step=31300 loss=0.4179 lr=7.83e-05 elapsed=8587s
+2026-09-15 10:35:47 | INFO | step=31400 loss=0.2012 lr=7.83e-05 elapsed=8611s
+2026-09-15 10:36:11 | INFO | step=31500 loss=0.3136 lr=7.83e-05 elapsed=8636s
+2026-09-15 10:36:36 | INFO | step=31600 loss=0.0625 lr=7.83e-05 elapsed=8661s
+2026-09-15 10:37:00 | INFO | step=31700 loss=0.3930 lr=7.83e-05 elapsed=8685s
+2026-09-15 10:37:24 | INFO | step=31800 loss=0.1775 lr=7.83e-05 elapsed=8709s
+2026-09-15 10:37:48 | INFO | step=31900 loss=0.1696 lr=7.83e-05 elapsed=8733s
+2026-09-15 10:38:12 | INFO | step=32000 loss=0.3224 lr=7.82e-05 elapsed=8757s
+2026-09-15 10:38:19 | INFO | [eval] step=32000 dev_loss=5.2460
+2026-09-15 10:39:16 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-15 10:39:41 | INFO | step=32100 loss=0.2203 lr=7.82e-05 elapsed=8845s
+2026-09-15 10:40:05 | INFO | step=32200 loss=0.3973 lr=7.82e-05 elapsed=8870s
+2026-09-15 10:40:30 | INFO | step=32300 loss=0.1395 lr=7.82e-05 elapsed=8894s
+2026-09-15 10:40:54 | INFO | step=32400 loss=0.1863 lr=7.82e-05 elapsed=8919s
+2026-09-15 10:41:19 | INFO | step=32500 loss=0.2408 lr=7.82e-05 elapsed=8943s
+2026-09-15 10:41:43 | INFO | step=32600 loss=0.1632 lr=7.82e-05 elapsed=8968s
+2026-09-15 10:42:07 | INFO | step=32700 loss=0.3665 lr=7.82e-05 elapsed=8992s
+2026-09-15 10:42:32 | INFO | step=32800 loss=0.3677 lr=7.81e-05 elapsed=9017s
+2026-09-15 10:42:56 | INFO | step=32900 loss=0.1408 lr=7.81e-05 elapsed=9041s
+2026-09-15 10:43:21 | INFO | step=33000 loss=0.1176 lr=7.81e-05 elapsed=9066s
+2026-09-15 10:43:45 | INFO | step=33100 loss=0.3216 lr=7.81e-05 elapsed=9090s
+2026-09-15 10:44:09 | INFO | step=33200 loss=0.3466 lr=7.81e-05 elapsed=9114s
+2026-09-15 10:44:34 | INFO | step=33300 loss=0.1487 lr=7.81e-05 elapsed=9138s
+2026-09-15 10:44:57 | INFO | step=33400 loss=0.1255 lr=7.81e-05 elapsed=9162s
+2026-09-15 10:45:21 | INFO | step=33500 loss=0.5409 lr=7.81e-05 elapsed=9186s
+2026-09-15 10:45:46 | INFO | step=33600 loss=0.2471 lr=7.80e-05 elapsed=9211s
+2026-09-15 10:46:10 | INFO | step=33700 loss=0.2331 lr=7.80e-05 elapsed=9235s
+2026-09-15 10:46:35 | INFO | step=33800 loss=0.6460 lr=7.80e-05 elapsed=9260s
+2026-09-15 10:46:59 | INFO | step=33900 loss=0.2698 lr=7.80e-05 elapsed=9284s
+2026-09-15 10:47:24 | INFO | step=34000 loss=0.3681 lr=7.80e-05 elapsed=9309s
+2026-09-15 10:47:31 | INFO | [eval] step=34000 dev_loss=5.3051
+2026-09-15 10:48:28 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-15 10:48:53 | INFO | step=34100 loss=0.4208 lr=7.80e-05 elapsed=9398s
+2026-09-15 10:49:18 | INFO | step=34200 loss=0.1387 lr=7.80e-05 elapsed=9422s
+2026-09-15 10:49:42 | INFO | step=34300 loss=0.4569 lr=7.79e-05 elapsed=9447s
+2026-09-15 10:50:07 | INFO | step=34400 loss=0.1013 lr=7.79e-05 elapsed=9471s
+2026-09-15 10:50:31 | INFO | step=34500 loss=0.2228 lr=7.79e-05 elapsed=9496s
+2026-09-15 10:50:55 | INFO | step=34600 loss=0.3544 lr=7.79e-05 elapsed=9520s
+2026-09-15 10:51:19 | INFO | step=34700 loss=0.1962 lr=7.79e-05 elapsed=9543s
+2026-09-15 10:51:43 | INFO | step=34800 loss=0.1552 lr=7.79e-05 elapsed=9568s
+2026-09-15 10:52:07 | INFO | step=34900 loss=0.2077 lr=7.79e-05 elapsed=9591s
+2026-09-15 10:52:31 | INFO | step=35000 loss=0.2116 lr=7.79e-05 elapsed=9615s
+2026-09-15 10:52:55 | INFO | step=35100 loss=0.2204 lr=7.78e-05 elapsed=9639s
+2026-09-15 10:53:19 | INFO | step=35200 loss=0.0956 lr=7.78e-05 elapsed=9664s
+2026-09-15 10:53:44 | INFO | step=35300 loss=0.1713 lr=7.78e-05 elapsed=9688s
+2026-09-15 10:54:08 | INFO | step=35400 loss=0.1278 lr=7.78e-05 elapsed=9713s
+2026-09-15 10:54:33 | INFO | step=35500 loss=0.1207 lr=7.78e-05 elapsed=9737s
+2026-09-15 10:54:57 | INFO | step=35600 loss=0.1648 lr=7.78e-05 elapsed=9762s
+2026-09-15 10:55:22 | INFO | step=35700 loss=0.2072 lr=7.78e-05 elapsed=9786s
+2026-09-15 10:55:46 | INFO | step=35800 loss=0.0864 lr=7.77e-05 elapsed=9811s
+2026-09-15 10:56:11 | INFO | step=35900 loss=0.1237 lr=7.77e-05 elapsed=9835s
+2026-09-15 10:56:35 | INFO | step=36000 loss=0.2653 lr=7.77e-05 elapsed=9860s
+2026-09-15 10:56:43 | INFO | [eval] step=36000 dev_loss=5.3297
+2026-09-15 10:57:40 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-15 10:58:05 | INFO | step=36100 loss=0.1139 lr=7.77e-05 elapsed=9949s
+2026-09-15 10:58:29 | INFO | step=36200 loss=0.2046 lr=7.77e-05 elapsed=9973s
+2026-09-15 10:58:52 | INFO | step=36300 loss=0.2378 lr=7.77e-05 elapsed=9997s
+2026-09-15 10:59:17 | INFO | step=36400 loss=0.1666 lr=7.77e-05 elapsed=10021s
+2026-09-15 10:59:41 | INFO | step=36500 loss=0.0820 lr=7.76e-05 elapsed=10045s
+2026-09-15 11:00:05 | INFO | step=36600 loss=0.0956 lr=7.76e-05 elapsed=10070s
+2026-09-15 11:00:30 | INFO | step=36700 loss=0.1039 lr=7.76e-05 elapsed=10094s
+2026-09-15 11:00:54 | INFO | step=36800 loss=0.1838 lr=7.76e-05 elapsed=10119s
+2026-09-15 11:01:19 | INFO | step=36900 loss=0.2031 lr=7.76e-05 elapsed=10144s
+2026-09-15 11:01:43 | INFO | step=37000 loss=0.1436 lr=7.76e-05 elapsed=10168s
+2026-09-15 11:02:08 | INFO | step=37100 loss=0.0733 lr=7.76e-05 elapsed=10193s
+2026-09-15 11:02:32 | INFO | step=37200 loss=0.0986 lr=7.75e-05 elapsed=10217s
+2026-09-15 11:02:57 | INFO | step=37300 loss=0.1135 lr=7.75e-05 elapsed=10242s
+2026-09-15 11:03:21 | INFO | step=37400 loss=0.2630 lr=7.75e-05 elapsed=10266s
+2026-09-15 11:03:46 | INFO | step=37500 loss=0.1950 lr=7.75e-05 elapsed=10290s
+2026-09-15 11:04:10 | INFO | step=37600 loss=0.2901 lr=7.75e-05 elapsed=10315s
+2026-09-15 11:04:35 | INFO | step=37700 loss=0.3215 lr=7.75e-05 elapsed=10340s
+2026-09-15 11:04:59 | INFO | step=37800 loss=0.2364 lr=7.75e-05 elapsed=10364s
+2026-09-15 11:05:23 | INFO | step=37900 loss=0.1919 lr=7.74e-05 elapsed=10388s
+2026-09-15 11:05:47 | INFO | step=38000 loss=0.2881 lr=7.74e-05 elapsed=10412s
+2026-09-15 11:05:54 | INFO | [eval] step=38000 dev_loss=5.3501
+2026-09-15 11:06:45 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-15 11:07:10 | INFO | step=38100 loss=0.2131 lr=7.74e-05 elapsed=10494s
+2026-09-15 11:07:34 | INFO | step=38200 loss=0.3017 lr=7.74e-05 elapsed=10519s
+2026-09-15 11:07:59 | INFO | step=38300 loss=0.3046 lr=7.74e-05 elapsed=10543s
+2026-09-15 11:08:24 | INFO | step=38400 loss=0.2848 lr=7.74e-05 elapsed=10568s
+2026-09-15 11:08:48 | INFO | step=38500 loss=0.3969 lr=7.73e-05 elapsed=10593s
+2026-09-15 11:09:13 | INFO | step=38600 loss=0.1895 lr=7.73e-05 elapsed=10617s
+2026-09-15 11:09:37 | INFO | step=38700 loss=0.1007 lr=7.73e-05 elapsed=10642s
+2026-09-15 11:10:02 | INFO | step=38800 loss=0.1900 lr=7.73e-05 elapsed=10667s
+2026-09-15 11:10:26 | INFO | step=38900 loss=0.1548 lr=7.73e-05 elapsed=10691s
+2026-09-15 11:10:51 | INFO | step=39000 loss=0.1038 lr=7.73e-05 elapsed=10716s
+2026-09-15 11:11:15 | INFO | step=39100 loss=0.2412 lr=7.73e-05 elapsed=10740s
+2026-09-15 11:11:39 | INFO | step=39200 loss=0.2665 lr=7.72e-05 elapsed=10763s
+2026-09-15 11:12:03 | INFO | step=39300 loss=0.3374 lr=7.72e-05 elapsed=10787s
+2026-09-15 11:12:27 | INFO | step=39400 loss=0.2163 lr=7.72e-05 elapsed=10811s
+2026-09-15 11:12:50 | INFO | step=39500 loss=0.1662 lr=7.72e-05 elapsed=10835s
+2026-09-15 11:13:14 | INFO | step=39600 loss=0.1486 lr=7.72e-05 elapsed=10859s
+2026-09-15 11:13:38 | INFO | step=39700 loss=0.1991 lr=7.72e-05 elapsed=10883s
+2026-09-15 11:14:03 | INFO | step=39800 loss=0.4397 lr=7.71e-05 elapsed=10908s
+2026-09-15 11:14:27 | INFO | step=39900 loss=0.1265 lr=7.71e-05 elapsed=10932s
+2026-09-15 11:14:52 | INFO | step=40000 loss=0.1368 lr=7.71e-05 elapsed=10957s
+2026-09-15 11:14:59 | INFO | [eval] step=40000 dev_loss=5.4764
+2026-09-15 11:16:00 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-15 11:16:42 | INFO | step=40100 loss=0.0922 lr=7.71e-05 elapsed=11066s
+2026-09-15 11:17:06 | INFO | step=40200 loss=0.2180 lr=7.71e-05 elapsed=11091s
+2026-09-15 11:17:31 | INFO | step=40300 loss=0.0383 lr=7.71e-05 elapsed=11116s
+2026-09-15 11:17:56 | INFO | step=40400 loss=0.1849 lr=7.71e-05 elapsed=11141s
+2026-09-15 11:18:20 | INFO | step=40500 loss=0.1124 lr=7.70e-05 elapsed=11165s
+2026-09-15 11:18:44 | INFO | step=40600 loss=0.2069 lr=7.70e-05 elapsed=11189s
+2026-09-15 11:19:08 | INFO | step=40700 loss=0.1576 lr=7.70e-05 elapsed=11213s
+2026-09-15 11:19:32 | INFO | step=40800 loss=0.1415 lr=7.70e-05 elapsed=11237s
+2026-09-15 11:19:56 | INFO | step=40900 loss=0.0904 lr=7.70e-05 elapsed=11261s
+2026-09-15 11:20:20 | INFO | step=41000 loss=0.1413 lr=7.70e-05 elapsed=11285s
+2026-09-15 11:20:44 | INFO | step=41100 loss=0.0521 lr=7.69e-05 elapsed=11309s
+2026-09-15 11:21:09 | INFO | step=41200 loss=0.0320 lr=7.69e-05 elapsed=11334s
+2026-09-15 11:21:33 | INFO | step=41300 loss=0.1629 lr=7.69e-05 elapsed=11358s
+2026-09-15 11:21:58 | INFO | step=41400 loss=0.1528 lr=7.69e-05 elapsed=11382s
+2026-09-15 11:22:22 | INFO | step=41500 loss=0.0756 lr=7.69e-05 elapsed=11407s
+2026-09-15 11:22:47 | INFO | step=41600 loss=0.1914 lr=7.69e-05 elapsed=11432s
+2026-09-15 11:23:11 | INFO | step=41700 loss=0.1150 lr=7.68e-05 elapsed=11456s
+2026-09-15 11:23:36 | INFO | step=41800 loss=0.1092 lr=7.68e-05 elapsed=11480s
+2026-09-15 11:24:00 | INFO | step=41900 loss=0.1279 lr=7.68e-05 elapsed=11505s
+2026-09-15 11:24:25 | INFO | step=42000 loss=0.1069 lr=7.68e-05 elapsed=11530s
+2026-09-15 11:24:33 | INFO | [eval] step=42000 dev_loss=5.4952
+2026-09-15 11:25:27 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-15 11:25:51 | INFO | step=42100 loss=0.1674 lr=7.68e-05 elapsed=11616s
+2026-09-15 11:26:15 | INFO | step=42200 loss=0.1204 lr=7.68e-05 elapsed=11640s
+2026-09-15 11:26:39 | INFO | step=42300 loss=0.1172 lr=7.67e-05 elapsed=11664s
+2026-09-15 11:27:03 | INFO | step=42400 loss=0.1499 lr=7.67e-05 elapsed=11688s
+2026-09-15 11:27:27 | INFO | step=42500 loss=0.1936 lr=7.67e-05 elapsed=11712s
+2026-09-15 11:27:52 | INFO | step=42600 loss=0.2374 lr=7.67e-05 elapsed=11736s
+2026-09-15 11:28:16 | INFO | step=42700 loss=0.1848 lr=7.67e-05 elapsed=11761s
+2026-09-15 11:28:41 | INFO | step=42800 loss=0.1762 lr=7.67e-05 elapsed=11786s
+2026-09-15 11:29:05 | INFO | step=42900 loss=0.1507 lr=7.66e-05 elapsed=11810s
+2026-09-15 11:29:30 | INFO | step=43000 loss=0.2459 lr=7.66e-05 elapsed=11835s
+2026-09-15 11:29:54 | INFO | step=43100 loss=0.0834 lr=7.66e-05 elapsed=11859s
+2026-09-15 11:30:19 | INFO | step=43200 loss=0.1254 lr=7.66e-05 elapsed=11884s
+2026-09-15 11:30:44 | INFO | step=43300 loss=0.1744 lr=7.66e-05 elapsed=11908s
+2026-09-15 11:31:08 | INFO | step=43400 loss=0.3249 lr=7.66e-05 elapsed=11933s
+2026-09-15 11:31:32 | INFO | step=43500 loss=0.1464 lr=7.65e-05 elapsed=11957s
+2026-09-15 11:31:57 | INFO | step=43600 loss=0.1194 lr=7.65e-05 elapsed=11982s
+2026-09-15 11:32:21 | INFO | step=43700 loss=0.0807 lr=7.65e-05 elapsed=12006s
+2026-09-15 11:32:46 | INFO | step=43800 loss=0.1772 lr=7.65e-05 elapsed=12030s
+2026-09-15 11:33:09 | INFO | step=43900 loss=0.0932 lr=7.65e-05 elapsed=12054s
+2026-09-15 11:33:33 | INFO | step=44000 loss=0.0423 lr=7.64e-05 elapsed=12078s
+2026-09-15 11:33:41 | INFO | [eval] step=44000 dev_loss=5.5045
+2026-09-15 11:34:33 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-15 11:34:57 | INFO | step=44100 loss=0.0840 lr=7.64e-05 elapsed=12162s
+2026-09-15 11:35:21 | INFO | step=44200 loss=0.3762 lr=7.64e-05 elapsed=12186s
+2026-09-15 11:35:46 | INFO | step=44300 loss=0.1633 lr=7.64e-05 elapsed=12210s
+2026-09-15 11:36:10 | INFO | step=44400 loss=0.0961 lr=7.64e-05 elapsed=12235s
+2026-09-15 11:36:34 | INFO | step=44500 loss=0.1026 lr=7.64e-05 elapsed=12259s
+2026-09-15 11:36:59 | INFO | step=44600 loss=0.0970 lr=7.63e-05 elapsed=12283s
+2026-09-15 11:37:23 | INFO | step=44700 loss=0.2080 lr=7.63e-05 elapsed=12308s
+2026-09-15 11:37:48 | INFO | step=44800 loss=0.0701 lr=7.63e-05 elapsed=12333s
+2026-09-15 11:38:12 | INFO | step=44900 loss=0.0613 lr=7.63e-05 elapsed=12357s
+2026-09-15 11:38:37 | INFO | step=45000 loss=0.0552 lr=7.63e-05 elapsed=12382s
+2026-09-15 11:39:01 | INFO | step=45100 loss=0.1142 lr=7.63e-05 elapsed=12406s
+2026-09-15 11:39:26 | INFO | step=45200 loss=0.0404 lr=7.62e-05 elapsed=12431s
+2026-09-15 11:39:51 | INFO | step=45300 loss=0.0514 lr=7.62e-05 elapsed=12455s
+2026-09-15 11:40:15 | INFO | step=45400 loss=0.1365 lr=7.62e-05 elapsed=12480s
+2026-09-15 11:40:40 | INFO | step=45500 loss=0.0915 lr=7.62e-05 elapsed=12504s
+2026-09-15 11:41:04 | INFO | step=45600 loss=0.1555 lr=7.62e-05 elapsed=12529s
+2026-09-15 11:41:29 | INFO | step=45700 loss=0.1203 lr=7.61e-05 elapsed=12553s
+2026-09-15 11:41:52 | INFO | step=45800 loss=0.0649 lr=7.61e-05 elapsed=12577s
+2026-09-15 11:42:16 | INFO | step=45900 loss=0.1260 lr=7.61e-05 elapsed=12601s
+2026-09-15 11:42:40 | INFO | step=46000 loss=0.0160 lr=7.61e-05 elapsed=12625s
+2026-09-15 11:42:47 | INFO | [eval] step=46000 dev_loss=5.5989
+2026-09-15 11:43:34 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-15 11:43:58 | INFO | step=46100 loss=0.1090 lr=7.61e-05 elapsed=12703s
+2026-09-15 11:44:23 | INFO | step=46200 loss=0.0369 lr=7.61e-05 elapsed=12728s
+2026-09-15 11:44:48 | INFO | step=46300 loss=0.0333 lr=7.60e-05 elapsed=12752s
+2026-09-15 11:45:12 | INFO | step=46400 loss=0.2087 lr=7.60e-05 elapsed=12777s
+2026-09-15 11:45:37 | INFO | step=46500 loss=0.1811 lr=7.60e-05 elapsed=12801s
+2026-09-15 11:46:01 | INFO | step=46600 loss=0.1098 lr=7.60e-05 elapsed=12826s
+2026-09-15 11:46:26 | INFO | step=46700 loss=0.0977 lr=7.60e-05 elapsed=12851s
+2026-09-15 11:46:51 | INFO | step=46800 loss=0.1201 lr=7.59e-05 elapsed=12875s
+2026-09-15 11:47:15 | INFO | step=46900 loss=0.1001 lr=7.59e-05 elapsed=12900s
+2026-09-15 11:47:39 | INFO | step=47000 loss=0.1681 lr=7.59e-05 elapsed=12924s
+2026-09-15 11:48:04 | INFO | step=47100 loss=0.1357 lr=7.59e-05 elapsed=12949s
+2026-09-15 11:48:29 | INFO | step=47200 loss=0.1067 lr=7.59e-05 elapsed=12973s
+2026-09-15 11:48:53 | INFO | step=47300 loss=0.1317 lr=7.58e-05 elapsed=12998s
+2026-09-15 11:49:17 | INFO | step=47400 loss=0.2426 lr=7.58e-05 elapsed=13022s
+2026-09-15 11:49:41 | INFO | step=47500 loss=0.1649 lr=7.58e-05 elapsed=13046s
+2026-09-15 11:50:05 | INFO | step=47600 loss=0.0590 lr=7.58e-05 elapsed=13070s
+2026-09-15 11:50:29 | INFO | step=47700 loss=0.0593 lr=7.58e-05 elapsed=13094s
+2026-09-15 11:50:53 | INFO | step=47800 loss=0.0653 lr=7.58e-05 elapsed=13118s
+2026-09-15 11:51:18 | INFO | step=47900 loss=0.1453 lr=7.57e-05 elapsed=13142s
+2026-09-15 11:51:43 | INFO | step=48000 loss=0.0927 lr=7.57e-05 elapsed=13167s
+2026-09-15 11:51:50 | INFO | [eval] step=48000 dev_loss=5.5987
+2026-09-15 11:52:41 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-15 11:53:06 | INFO | step=48100 loss=0.0502 lr=7.57e-05 elapsed=13251s
+2026-09-15 11:53:31 | INFO | step=48200 loss=0.0530 lr=7.57e-05 elapsed=13275s
+2026-09-15 11:53:55 | INFO | step=48300 loss=0.0313 lr=7.57e-05 elapsed=13300s
+2026-09-15 11:54:20 | INFO | step=48400 loss=0.1181 lr=7.56e-05 elapsed=13325s
+2026-09-15 11:54:44 | INFO | step=48500 loss=0.0547 lr=7.56e-05 elapsed=13349s
+2026-09-15 11:55:09 | INFO | step=48600 loss=0.0783 lr=7.56e-05 elapsed=13373s
+2026-09-15 11:55:33 | INFO | step=48700 loss=0.0928 lr=7.56e-05 elapsed=13397s
+2026-09-15 11:55:57 | INFO | step=48800 loss=0.0658 lr=7.56e-05 elapsed=13421s
+2026-09-15 11:56:20 | INFO | step=48900 loss=0.0690 lr=7.55e-05 elapsed=13445s
+2026-09-15 11:56:45 | INFO | step=49000 loss=0.1079 lr=7.55e-05 elapsed=13470s
+2026-09-15 11:57:09 | INFO | step=49100 loss=0.0977 lr=7.55e-05 elapsed=13494s
+2026-09-15 11:57:34 | INFO | step=49200 loss=0.0835 lr=7.55e-05 elapsed=13519s
+2026-09-15 11:57:58 | INFO | step=49300 loss=0.0707 lr=7.55e-05 elapsed=13543s
+2026-09-15 11:58:23 | INFO | step=49400 loss=0.1814 lr=7.54e-05 elapsed=13567s
+2026-09-15 11:58:47 | INFO | step=49500 loss=0.1205 lr=7.54e-05 elapsed=13592s
+2026-09-15 11:59:12 | INFO | step=49600 loss=0.1822 lr=7.54e-05 elapsed=13617s
+2026-09-15 11:59:37 | INFO | step=49700 loss=0.1118 lr=7.54e-05 elapsed=13641s
+2026-09-15 12:00:01 | INFO | step=49800 loss=0.1289 lr=7.54e-05 elapsed=13666s
+2026-09-15 12:00:26 | INFO | step=49900 loss=0.0790 lr=7.53e-05 elapsed=13690s
+2026-09-15 12:00:50 | INFO | step=50000 loss=0.0165 lr=7.53e-05 elapsed=13715s
+2026-09-15 12:00:58 | INFO | [eval] step=50000 dev_loss=5.6233
+2026-09-15 12:01:44 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-15 12:02:08 | INFO | step=50100 loss=0.0861 lr=7.53e-05 elapsed=13793s
+2026-09-15 12:02:32 | INFO | step=50200 loss=0.0730 lr=7.53e-05 elapsed=13817s
+2026-09-15 12:02:56 | INFO | step=50300 loss=0.1406 lr=7.53e-05 elapsed=13841s
+2026-09-15 12:03:20 | INFO | step=50400 loss=0.0341 lr=7.52e-05 elapsed=13865s
+2026-09-15 12:03:44 | INFO | step=50500 loss=0.2846 lr=7.52e-05 elapsed=13889s
+2026-09-15 12:04:08 | INFO | step=50600 loss=0.0170 lr=7.52e-05 elapsed=13913s
+2026-09-15 12:04:33 | INFO | step=50700 loss=0.1006 lr=7.52e-05 elapsed=13938s
+2026-09-15 12:04:58 | INFO | step=50800 loss=0.0782 lr=7.52e-05 elapsed=13962s
+2026-09-15 12:05:22 | INFO | step=50900 loss=0.0808 lr=7.51e-05 elapsed=13987s
+2026-09-15 12:05:47 | INFO | step=51000 loss=0.1244 lr=7.51e-05 elapsed=14011s
+2026-09-15 12:06:11 | INFO | step=51100 loss=0.0919 lr=7.51e-05 elapsed=14036s
+2026-09-15 12:06:36 | INFO | step=51200 loss=0.0666 lr=7.51e-05 elapsed=14061s
+2026-09-15 12:07:00 | INFO | step=51300 loss=0.0686 lr=7.51e-05 elapsed=14085s
+2026-09-15 12:07:25 | INFO | step=51400 loss=0.0654 lr=7.50e-05 elapsed=14110s
+2026-09-15 12:07:49 | INFO | step=51500 loss=0.0761 lr=7.50e-05 elapsed=14134s
+2026-09-15 12:08:14 | INFO | step=51600 loss=0.0186 lr=7.50e-05 elapsed=14159s
+2026-09-15 12:08:39 | INFO | step=51700 loss=0.0508 lr=7.50e-05 elapsed=14183s
+2026-09-15 12:09:03 | INFO | step=51800 loss=0.0178 lr=7.50e-05 elapsed=14208s
+2026-09-15 12:09:27 | INFO | step=51900 loss=0.0346 lr=7.49e-05 elapsed=14232s
+2026-09-15 12:09:51 | INFO | step=52000 loss=0.0593 lr=7.49e-05 elapsed=14256s
+2026-09-15 12:09:58 | INFO | [eval] step=52000 dev_loss=5.7283
+2026-09-15 12:10:49 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-15 12:11:12 | INFO | step=52100 loss=0.0688 lr=7.49e-05 elapsed=14337s
+2026-09-15 12:11:37 | INFO | step=52200 loss=0.0466 lr=7.49e-05 elapsed=14362s
+2026-09-15 12:12:01 | INFO | step=52300 loss=0.1641 lr=7.49e-05 elapsed=14386s
+2026-09-15 12:12:26 | INFO | step=52400 loss=0.0877 lr=7.48e-05 elapsed=14411s
+2026-09-15 12:12:51 | INFO | step=52500 loss=0.0753 lr=7.48e-05 elapsed=14435s
+2026-09-15 12:13:15 | INFO | step=52600 loss=0.0377 lr=7.48e-05 elapsed=14460s
+2026-09-15 12:13:39 | INFO | step=52700 loss=0.0599 lr=7.48e-05 elapsed=14484s
+2026-09-15 12:14:04 | INFO | step=52800 loss=0.0435 lr=7.48e-05 elapsed=14509s
+2026-09-15 12:14:29 | INFO | step=52900 loss=0.0977 lr=7.47e-05 elapsed=14533s
+2026-09-15 12:14:53 | INFO | step=53000 loss=0.0497 lr=7.47e-05 elapsed=14558s
+2026-09-15 12:15:18 | INFO | step=53100 loss=0.0468 lr=7.47e-05 elapsed=14582s
+2026-09-15 12:15:42 | INFO | step=53200 loss=0.1378 lr=7.47e-05 elapsed=14607s
+2026-09-15 12:16:07 | INFO | step=53300 loss=0.0599 lr=7.46e-05 elapsed=14631s
+2026-09-15 12:16:31 | INFO | step=53400 loss=0.0649 lr=7.46e-05 elapsed=14655s
+2026-09-15 12:16:55 | INFO | step=53500 loss=0.0304 lr=7.46e-05 elapsed=14679s
+2026-09-15 12:17:19 | INFO | step=53600 loss=0.1095 lr=7.46e-05 elapsed=14703s
+2026-09-15 12:17:43 | INFO | step=53700 loss=0.0701 lr=7.46e-05 elapsed=14727s
+2026-09-15 12:18:06 | INFO | step=53800 loss=0.0651 lr=7.45e-05 elapsed=14751s
+2026-09-15 12:18:30 | INFO | step=53900 loss=0.0218 lr=7.45e-05 elapsed=14775s
+2026-09-15 12:18:54 | INFO | step=54000 loss=0.0484 lr=7.45e-05 elapsed=14799s
+2026-09-15 12:19:02 | INFO | [eval] step=54000 dev_loss=5.6857
+2026-09-15 12:19:51 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-15 12:20:16 | INFO | step=54100 loss=0.0905 lr=7.45e-05 elapsed=14880s
+2026-09-15 12:20:40 | INFO | step=54200 loss=0.0627 lr=7.45e-05 elapsed=14905s
+2026-09-15 12:21:05 | INFO | step=54300 loss=0.0721 lr=7.44e-05 elapsed=14930s
+2026-09-15 12:21:30 | INFO | step=54400 loss=0.0687 lr=7.44e-05 elapsed=14954s
+2026-09-15 12:21:54 | INFO | step=54500 loss=0.0240 lr=7.44e-05 elapsed=14979s
+2026-09-15 12:22:19 | INFO | step=54600 loss=0.0449 lr=7.44e-05 elapsed=15003s
+2026-09-15 12:22:43 | INFO | step=54700 loss=0.1152 lr=7.43e-05 elapsed=15028s
+2026-09-15 12:23:08 | INFO | step=54800 loss=0.1057 lr=7.43e-05 elapsed=15053s
+2026-09-15 12:23:33 | INFO | step=54900 loss=0.1088 lr=7.43e-05 elapsed=15077s
+2026-09-15 12:23:57 | INFO | step=55000 loss=0.1296 lr=7.43e-05 elapsed=15102s
+2026-09-15 12:24:21 | INFO | step=55100 loss=0.0442 lr=7.43e-05 elapsed=15125s
+2026-09-15 12:24:45 | INFO | step=55200 loss=0.1237 lr=7.42e-05 elapsed=15150s
+2026-09-15 12:25:09 | INFO | step=55300 loss=0.2279 lr=7.42e-05 elapsed=15174s
+2026-09-15 12:25:33 | INFO | step=55400 loss=0.1359 lr=7.42e-05 elapsed=15197s
+2026-09-15 12:25:56 | INFO | step=55500 loss=0.0679 lr=7.42e-05 elapsed=15221s
+2026-09-15 12:26:21 | INFO | step=55600 loss=0.0590 lr=7.41e-05 elapsed=15245s
+2026-09-15 12:26:45 | INFO | step=55700 loss=0.0948 lr=7.41e-05 elapsed=15270s
+2026-09-15 12:27:10 | INFO | step=55800 loss=0.2905 lr=7.41e-05 elapsed=15294s
+2026-09-15 12:27:34 | INFO | step=55900 loss=0.0695 lr=7.41e-05 elapsed=15319s
+2026-09-15 12:27:59 | INFO | step=56000 loss=0.1105 lr=7.41e-05 elapsed=15344s
+2026-09-15 12:28:06 | INFO | [eval] step=56000 dev_loss=5.7654
+2026-09-15 12:28:56 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-15 12:29:21 | INFO | step=56100 loss=0.0302 lr=7.40e-05 elapsed=15426s
+2026-09-15 12:29:46 | INFO | step=56200 loss=0.0722 lr=7.40e-05 elapsed=15450s
+2026-09-15 12:30:10 | INFO | step=56300 loss=0.0422 lr=7.40e-05 elapsed=15475s
+2026-09-15 12:30:35 | INFO | step=56400 loss=0.0753 lr=7.40e-05 elapsed=15500s
+2026-09-15 12:30:59 | INFO | step=56500 loss=0.0612 lr=7.39e-05 elapsed=15524s
+2026-09-15 12:31:23 | INFO | step=56600 loss=0.0430 lr=7.39e-05 elapsed=15548s
+2026-09-15 12:31:47 | INFO | step=56700 loss=0.0515 lr=7.39e-05 elapsed=15572s
+2026-09-15 12:32:11 | INFO | step=56800 loss=0.0378 lr=7.39e-05 elapsed=15596s
+2026-09-15 12:32:35 | INFO | step=56900 loss=0.0376 lr=7.39e-05 elapsed=15619s
+2026-09-15 12:32:59 | INFO | step=57000 loss=0.0339 lr=7.38e-05 elapsed=15644s
+2026-09-15 12:33:24 | INFO | step=57100 loss=0.0769 lr=7.38e-05 elapsed=15668s
+2026-09-15 12:33:48 | INFO | step=57200 loss=0.0549 lr=7.38e-05 elapsed=15693s
+2026-09-15 12:34:13 | INFO | step=57300 loss=0.0596 lr=7.38e-05 elapsed=15717s
+2026-09-15 12:34:38 | INFO | step=57400 loss=0.0197 lr=7.37e-05 elapsed=15742s
+2026-09-15 12:35:02 | INFO | step=57500 loss=0.1045 lr=7.37e-05 elapsed=15767s
+2026-09-15 12:35:27 | INFO | step=57600 loss=0.0668 lr=7.37e-05 elapsed=15791s
+2026-09-15 12:35:51 | INFO | step=57700 loss=0.0471 lr=7.37e-05 elapsed=15816s
+2026-09-15 12:36:16 | INFO | step=57800 loss=0.0503 lr=7.37e-05 elapsed=15841s
+2026-09-15 12:36:40 | INFO | step=57900 loss=0.0371 lr=7.36e-05 elapsed=15865s
+2026-09-15 12:37:05 | INFO | step=58000 loss=0.0526 lr=7.36e-05 elapsed=15890s
+2026-09-15 12:37:12 | INFO | [eval] step=58000 dev_loss=5.7575
+2026-09-15 12:38:16 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-15 12:38:40 | INFO | step=58100 loss=0.0192 lr=7.36e-05 elapsed=15985s
+2026-09-15 12:39:04 | INFO | step=58200 loss=0.1144 lr=7.36e-05 elapsed=16009s
+2026-09-15 12:39:28 | INFO | step=58300 loss=0.0612 lr=7.35e-05 elapsed=16032s
+2026-09-15 12:39:52 | INFO | step=58400 loss=0.0361 lr=7.35e-05 elapsed=16057s
+2026-09-15 12:40:16 | INFO | step=58500 loss=0.0274 lr=7.35e-05 elapsed=16081s
+2026-09-15 12:40:41 | INFO | step=58600 loss=0.0778 lr=7.35e-05 elapsed=16105s
+2026-09-15 12:41:05 | INFO | step=58700 loss=0.1598 lr=7.34e-05 elapsed=16130s
+2026-09-15 12:41:30 | INFO | step=58800 loss=0.0348 lr=7.34e-05 elapsed=16154s
+2026-09-15 12:41:54 | INFO | step=58900 loss=0.0268 lr=7.34e-05 elapsed=16179s
+2026-09-15 12:42:19 | INFO | step=59000 loss=0.0237 lr=7.34e-05 elapsed=16203s
+2026-09-15 12:42:43 | INFO | step=59100 loss=0.0208 lr=7.34e-05 elapsed=16228s
+2026-09-15 12:43:08 | INFO | step=59200 loss=0.0493 lr=7.33e-05 elapsed=16252s
+2026-09-15 12:43:32 | INFO | step=59300 loss=0.0527 lr=7.33e-05 elapsed=16277s
+2026-09-15 12:43:57 | INFO | step=59400 loss=0.1109 lr=7.33e-05 elapsed=16301s
+2026-09-15 12:44:21 | INFO | step=59500 loss=0.0178 lr=7.33e-05 elapsed=16326s
+2026-09-15 12:44:46 | INFO | step=59600 loss=0.0909 lr=7.32e-05 elapsed=16350s
+2026-09-15 12:45:10 | INFO | step=59700 loss=0.0343 lr=7.32e-05 elapsed=16374s
+2026-09-15 12:45:34 | INFO | step=59800 loss=0.0276 lr=7.32e-05 elapsed=16398s
+2026-09-15 12:45:57 | INFO | step=59900 loss=0.0150 lr=7.32e-05 elapsed=16422s
+2026-09-15 12:46:21 | INFO | step=60000 loss=0.0424 lr=7.31e-05 elapsed=16446s
+2026-09-15 12:46:29 | INFO | [eval] step=60000 dev_loss=5.7627
+2026-09-15 12:47:11 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-15 12:47:53 | INFO | step=60100 loss=0.0110 lr=7.31e-05 elapsed=16537s
+2026-09-15 12:48:17 | INFO | step=60200 loss=0.1322 lr=7.31e-05 elapsed=16562s
+2026-09-15 12:48:42 | INFO | step=60300 loss=0.0167 lr=7.31e-05 elapsed=16586s
+2026-09-15 12:49:06 | INFO | step=60400 loss=0.0355 lr=7.30e-05 elapsed=16611s
+2026-09-15 12:49:31 | INFO | step=60500 loss=0.1229 lr=7.30e-05 elapsed=16635s
+2026-09-15 12:49:55 | INFO | step=60600 loss=0.0730 lr=7.30e-05 elapsed=16660s
+2026-09-15 12:50:20 | INFO | step=60700 loss=0.1418 lr=7.30e-05 elapsed=16684s
+2026-09-15 12:50:44 | INFO | step=60800 loss=0.0868 lr=7.29e-05 elapsed=16709s
+2026-09-15 12:51:09 | INFO | step=60900 loss=0.0287 lr=7.29e-05 elapsed=16734s
+2026-09-15 12:51:33 | INFO | step=61000 loss=0.0149 lr=7.29e-05 elapsed=16758s
+2026-09-15 12:51:57 | INFO | step=61100 loss=0.0394 lr=7.29e-05 elapsed=16782s
+2026-09-15 12:52:21 | INFO | step=61200 loss=0.0482 lr=7.29e-05 elapsed=16806s
+2026-09-15 12:52:45 | INFO | step=61300 loss=0.0342 lr=7.28e-05 elapsed=16830s
+2026-09-15 12:53:09 | INFO | step=61400 loss=0.0198 lr=7.28e-05 elapsed=16854s
+2026-09-15 12:53:33 | INFO | step=61500 loss=0.0505 lr=7.28e-05 elapsed=16878s
+2026-09-15 12:53:58 | INFO | step=61600 loss=0.0548 lr=7.28e-05 elapsed=16902s
+2026-09-15 12:54:22 | INFO | step=61700 loss=0.0162 lr=7.27e-05 elapsed=16927s
+2026-09-15 12:54:47 | INFO | step=61800 loss=0.0685 lr=7.27e-05 elapsed=16951s
+2026-09-15 12:55:11 | INFO | step=61900 loss=0.0325 lr=7.27e-05 elapsed=16976s
+2026-09-15 12:55:36 | INFO | step=62000 loss=0.0134 lr=7.27e-05 elapsed=17000s
+2026-09-15 12:55:43 | INFO | [eval] step=62000 dev_loss=5.8476
+2026-09-15 12:56:36 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-15 12:56:36 | INFO | Early stopping triggered.
+2026-09-15 12:56:36 | INFO | Training complete. Best dev loss: 6.7116

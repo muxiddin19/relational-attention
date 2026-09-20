@@ -1,0 +1,5 @@
+2026-09-12 10:03:16 | INFO | Evaluating 1319 examples from gsm8k/dev
+2026-09-12 10:03:22 | INFO | === Results (gsm8k/dev) ===
+2026-09-12 10:03:22 | INFO |   answer_accuracy: 0.0296
+2026-09-12 10:03:22 | INFO |   n: 1319
+2026-09-12 10:03:22 | INFO | Saved to /home/muhiddin/icde2027_revision/evals/eval_random_fixed_s43.json

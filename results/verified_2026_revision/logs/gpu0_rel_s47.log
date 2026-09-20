@@ -1,0 +1,10 @@
+2026-09-12 19:52:11 | INFO | Device: cuda
+2026-09-12 19:52:14 | INFO | Model: relational, k=8, params=464.5M
+2026-09-12 19:52:15 | INFO | Training on 7473 examples, eval on 1319
+2026-09-12 19:52:15 | INFO | Config: TrainingConfig(model_type='relational', hidden_dim=512, num_encoder_layers=12, num_decoder_layers=12, num_heads=8, num_attributes=8, use_gating=True, use_mixing=True, pairing_strategy='cyclic', pairing_seed=1234, ffn_dim=2048, max_seq_len=512, dropout=0.1, vocab_size=32000, learning_rate=0.0002, weight_decay=0.01, warmup_steps=4000, max_steps=80000, batch_size=32, gradient_accumulation=1, max_grad_norm=1.0, label_smoothing=0.1, eval_every=1000, save_every=10000, patience=20, eval_by_em=False, dataset='gsm8k', nas_dir='/nas/Dataset/nlp', max_src_len=256, max_tgt_len=64, seed=47, num_workers=4, fp16=False, output_dir='/nas/Dataset/experiments/relational-attention/muhiddin_outputs/relational_125m_gsm8k_s47', log_every=100, copy_mechanism=False, num_copy_heads=1)
+2026-09-12 19:52:16 | INFO | step=0 loss=10.3624 lr=0.00e+00 elapsed=1s
+2026-09-12 19:53:06 | INFO | step=100 loss=8.3670 lr=5.00e-06 elapsed=51s
+2026-09-12 19:53:56 | INFO | step=200 loss=7.8513 lr=1.00e-05 elapsed=102s
+2026-09-12 19:54:46 | INFO | step=300 loss=6.6956 lr=1.50e-05 elapsed=152s
+2026-09-12 19:55:36 | INFO | step=400 loss=5.2924 lr=2.00e-05 elapsed=202s
+2026-09-12 19:56:26 | INFO | step=500 loss=3.9069 lr=2.50e-05 elapsed=251s

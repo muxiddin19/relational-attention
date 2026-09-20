@@ -1,0 +1,10 @@
+2026-09-16 00:18:45 | INFO | Evaluating 1034 examples from spider/dev
+2026-09-16 00:30:43 | INFO | Spider eval output:
+                     easy                 medium               hard                 extra                all                 
+count                248                  446                  174                  166                  1034                
+=====================   EXECUTION ACCURACY     =====================
+execution            0.024                0.002                0.000                0.000                0.007               
+
+2026-09-16 00:30:43 | INFO | === Results (spider/dev) ===
+2026-09-16 00:30:43 | INFO |   execution_accuracy: 0.0070
+2026-09-16 00:30:43 | INFO | Saved to /home/muhiddin/icde2027_revision/evals/eval_std_spider_copy_s42.json

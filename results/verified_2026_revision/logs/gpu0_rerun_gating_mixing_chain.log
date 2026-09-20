@@ -1,0 +1,26 @@
+[GPU0 RERUN GATING/MIXING CHAIN START] 2026. 09. 12. (토) 08:49:03 KST
+[TRAIN START no_gating s42 bs=16] 2026. 09. 12. (토) 08:49:03 KST
+[TRAIN DONE no_gating s42 rc=0] 2026. 09. 12. (토) 09:12:06 KST
+[EVAL START no_gating s42] 2026. 09. 12. (토) 09:12:06 KST
+[EVAL DONE no_gating s42 rc=1] 2026. 09. 12. (토) 09:12:11 KST
+[TRAIN START no_gating s43 bs=16] 2026. 09. 12. (토) 09:12:11 KST
+[TRAIN DONE no_gating s43 rc=0] 2026. 09. 12. (토) 09:35:29 KST
+[EVAL START no_gating s43] 2026. 09. 12. (토) 09:35:29 KST
+[EVAL DONE no_gating s43 rc=0] 2026. 09. 12. (토) 09:35:41 KST
+[TRAIN START no_gating s44 bs=16] 2026. 09. 12. (토) 09:35:41 KST
+[TRAIN DONE no_gating s44 rc=0] 2026. 09. 12. (토) 09:58:48 KST
+[EVAL START no_gating s44] 2026. 09. 12. (토) 09:58:48 KST
+[EVAL DONE no_gating s44 rc=0] 2026. 09. 12. (토) 09:58:59 KST
+[TRAIN START no_mixing s42 bs=16] 2026. 09. 12. (토) 09:58:59 KST
+[TRAIN DONE no_mixing s42 rc=0] 2026. 09. 12. (토) 10:27:20 KST
+[EVAL START no_mixing s42] 2026. 09. 12. (토) 10:27:20 KST
+[EVAL DONE no_mixing s42 rc=0] 2026. 09. 12. (토) 10:27:31 KST
+[TRAIN START no_mixing s43 bs=16] 2026. 09. 12. (토) 10:27:31 KST
+[TRAIN DONE no_mixing s43 rc=0] 2026. 09. 12. (토) 10:56:00 KST
+[EVAL START no_mixing s43] 2026. 09. 12. (토) 10:56:00 KST
+[EVAL DONE no_mixing s43 rc=0] 2026. 09. 12. (토) 10:56:10 KST
+[TRAIN START no_mixing s44 bs=16] 2026. 09. 12. (토) 10:56:10 KST
+[TRAIN DONE no_mixing s44 rc=0] 2026. 09. 12. (토) 11:24:27 KST
+[EVAL START no_mixing s44] 2026. 09. 12. (토) 11:24:27 KST
+[EVAL DONE no_mixing s44 rc=0] 2026. 09. 12. (토) 11:24:37 KST
+[GPU0 RERUN GATING/MIXING CHAIN DONE] 2026. 09. 12. (토) 11:24:37 KST

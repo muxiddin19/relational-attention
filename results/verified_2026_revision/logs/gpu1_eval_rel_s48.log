@@ -1,0 +1,9 @@
+2026-09-13 11:45:01 | INFO | Evaluating 1319 examples from gsm8k/dev
+Traceback (most recent call last):
+  File "/home/muhiddin/relational-attention/scripts/evaluate.py", line 351, in <module>
+    main()
+  File "/home/muhiddin/relational-attention/scripts/evaluate.py", line 328, in main
+    metrics = eval_gsm8k(predictions, examples)
+  File "/home/muhiddin/relational-attention/scripts/evaluate.py", line 249, in eval_gsm8k
+    pred_ans = extract_answer(pred) or pred.strip().split()[-1]
+IndexError: list index out of range

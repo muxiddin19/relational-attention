@@ -1,0 +1,333 @@
+2026-09-12 13:53:46 | INFO | Device: cuda
+2026-09-12 13:53:50 | INFO | Model: standard, k=1, params=613.7M
+2026-09-12 13:53:50 | INFO | Training on 7473 examples, eval on 1319
+2026-09-12 13:53:50 | INFO | Config: TrainingConfig(model_type='standard', hidden_dim=512, num_encoder_layers=12, num_decoder_layers=12, num_heads=8, num_attributes=1, use_gating=True, use_mixing=True, pairing_strategy='cyclic', pairing_seed=1234, ffn_dim=2048, max_seq_len=512, dropout=0.1, vocab_size=32000, learning_rate=0.0002, weight_decay=0.01, warmup_steps=4000, max_steps=80000, batch_size=32, gradient_accumulation=1, max_grad_norm=1.0, label_smoothing=0.1, eval_every=1000, save_every=10000, patience=20, eval_by_em=False, dataset='gsm8k', nas_dir='/nas/Dataset/nlp', max_src_len=256, max_tgt_len=64, seed=45, num_workers=4, fp16=False, output_dir='/nas/Dataset/experiments/relational-attention/muhiddin_outputs/standard_125m_gsm8k_s45', log_every=100, copy_mechanism=False, num_copy_heads=1)
+2026-09-12 13:53:52 | INFO | step=0 loss=10.3499 lr=0.00e+00 elapsed=1s
+Traceback (most recent call last):
+  File "/home/muhiddin/relational-attention/scripts/train.py", line 682, in <module>
+    train(cfg)
+  File "/home/muhiddin/relational-attention/scripts/train.py", line 522, in train
+    out = model(
+  File "/home/muhiddin/miniconda3/envs/har/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/muhiddin/miniconda3/envs/har/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/muhiddin/relational-attention/relational_attention/model.py", line 496, in forward
+    decoder_output = self.decoder(
+  File "/home/muhiddin/miniconda3/envs/har/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/muhiddin/miniconda3/envs/har/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/muhiddin/relational-attention/relational_attention/model.py", line 272, in forward
+    x = layer(x, encoder_output, self_attention_mask, cross_attention_mask)
+  File "/home/muhiddin/miniconda3/envs/har/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/muhiddin/miniconda3/envs/har/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/muhiddin/relational-attention/relational_attention/layers.py", line 435, in forward
+    cross_out, _ = self.cross_attention(normed, encoder_output, encoder_output, cross_mask)
+  File "/home/muhiddin/miniconda3/envs/har/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/muhiddin/miniconda3/envs/har/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/muhiddin/relational-attention/relational_attention/attention.py", line 499, in forward
+    out, attn = head(query, key, value, mask)
+  File "/home/muhiddin/miniconda3/envs/har/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/muhiddin/miniconda3/envs/har/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/muhiddin/relational-attention/relational_attention/attention.py", line 359, in forward
+    K = self.k_proj(key)
+  File "/home/muhiddin/miniconda3/envs/har/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/muhiddin/miniconda3/envs/har/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/muhiddin/miniconda3/envs/har/lib/python3.10/site-packages/torch/nn/modules/linear.py", line 114, in forward
+    return F.linear(input, self.weight, self.bias)
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 12.00 MiB. GPU 0 has a total capacty of 23.65 GiB of which 11.62 MiB is free. Including non-PyTorch memory, this process has 23.62 GiB memory in use. Of the allocated memory 22.22 GiB is allocated by PyTorch, and 969.04 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+2026-09-12 13:57:38 | INFO | Device: cuda
+2026-09-12 13:57:42 | INFO | Model: standard, k=1, params=613.7M
+2026-09-12 13:57:43 | INFO | Training on 7473 examples, eval on 1319
+2026-09-12 13:57:43 | INFO | Config: TrainingConfig(model_type='standard', hidden_dim=512, num_encoder_layers=12, num_decoder_layers=12, num_heads=8, num_attributes=1, use_gating=True, use_mixing=True, pairing_strategy='cyclic', pairing_seed=1234, ffn_dim=2048, max_seq_len=512, dropout=0.1, vocab_size=32000, learning_rate=0.0002, weight_decay=0.01, warmup_steps=4000, max_steps=80000, batch_size=32, gradient_accumulation=1, max_grad_norm=1.0, label_smoothing=0.1, eval_every=1000, save_every=10000, patience=20, eval_by_em=False, dataset='gsm8k', nas_dir='/nas/Dataset/nlp', max_src_len=256, max_tgt_len=64, seed=45, num_workers=4, fp16=False, output_dir='/nas/Dataset/experiments/relational-attention/muhiddin_outputs/standard_125m_gsm8k_s45', log_every=100, copy_mechanism=False, num_copy_heads=1)
+2026-09-12 13:57:44 | INFO | step=0 loss=10.3499 lr=0.00e+00 elapsed=1s
+Traceback (most recent call last):
+  File "/home/muhiddin/relational-attention/scripts/train.py", line 682, in <module>
+    train(cfg)
+  File "/home/muhiddin/relational-attention/scripts/train.py", line 522, in train
+    out = model(
+  File "/home/muhiddin/miniconda3/envs/har/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/muhiddin/miniconda3/envs/har/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/muhiddin/relational-attention/relational_attention/model.py", line 496, in forward
+    decoder_output = self.decoder(
+  File "/home/muhiddin/miniconda3/envs/har/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/muhiddin/miniconda3/envs/har/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/muhiddin/relational-attention/relational_attention/model.py", line 272, in forward
+    x = layer(x, encoder_output, self_attention_mask, cross_attention_mask)
+  File "/home/muhiddin/miniconda3/envs/har/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/muhiddin/miniconda3/envs/har/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/muhiddin/relational-attention/relational_attention/layers.py", line 435, in forward
+    cross_out, _ = self.cross_attention(normed, encoder_output, encoder_output, cross_mask)
+  File "/home/muhiddin/miniconda3/envs/har/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/muhiddin/miniconda3/envs/har/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/muhiddin/relational-attention/relational_attention/attention.py", line 499, in forward
+    out, attn = head(query, key, value, mask)
+  File "/home/muhiddin/miniconda3/envs/har/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/muhiddin/miniconda3/envs/har/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/muhiddin/relational-attention/relational_attention/attention.py", line 359, in forward
+    K = self.k_proj(key)
+  File "/home/muhiddin/miniconda3/envs/har/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/muhiddin/miniconda3/envs/har/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/muhiddin/miniconda3/envs/har/lib/python3.10/site-packages/torch/nn/modules/linear.py", line 114, in forward
+    return F.linear(input, self.weight, self.bias)
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 12.00 MiB. GPU 0 has a total capacty of 23.65 GiB of which 11.62 MiB is free. Including non-PyTorch memory, this process has 23.62 GiB memory in use. Of the allocated memory 22.22 GiB is allocated by PyTorch, and 969.04 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+2026-09-12 14:01:41 | INFO | Device: cuda
+2026-09-12 14:01:44 | INFO | Model: standard, k=1, params=613.7M
+2026-09-12 14:01:45 | INFO | Training on 7473 examples, eval on 1319
+2026-09-12 14:01:45 | INFO | Config: TrainingConfig(model_type='standard', hidden_dim=512, num_encoder_layers=12, num_decoder_layers=12, num_heads=8, num_attributes=1, use_gating=True, use_mixing=True, pairing_strategy='cyclic', pairing_seed=1234, ffn_dim=2048, max_seq_len=512, dropout=0.1, vocab_size=32000, learning_rate=0.0002, weight_decay=0.01, warmup_steps=4000, max_steps=80000, batch_size=16, gradient_accumulation=1, max_grad_norm=1.0, label_smoothing=0.1, eval_every=1000, save_every=10000, patience=20, eval_by_em=False, dataset='gsm8k', nas_dir='/nas/Dataset/nlp', max_src_len=256, max_tgt_len=64, seed=45, num_workers=4, fp16=False, output_dir='/nas/Dataset/experiments/relational-attention/muhiddin_outputs/standard_125m_gsm8k_s45', log_every=100, copy_mechanism=False, num_copy_heads=1)
+2026-09-12 14:01:46 | INFO | step=0 loss=10.3729 lr=0.00e+00 elapsed=1s
+2026-09-12 14:02:36 | INFO | step=100 loss=8.3168 lr=5.00e-06 elapsed=51s
+2026-09-12 14:03:26 | INFO | step=200 loss=7.7898 lr=1.00e-05 elapsed=101s
+2026-09-12 14:04:16 | INFO | step=300 loss=6.7095 lr=1.50e-05 elapsed=151s
+2026-09-12 14:05:06 | INFO | step=400 loss=5.4086 lr=2.00e-05 elapsed=201s
+2026-09-12 14:05:56 | INFO | step=500 loss=3.9562 lr=2.50e-05 elapsed=250s
+2026-09-12 14:06:45 | INFO | step=600 loss=3.4112 lr=3.00e-05 elapsed=300s
+2026-09-12 14:07:35 | INFO | step=700 loss=2.8022 lr=3.50e-05 elapsed=350s
+2026-09-12 14:08:25 | INFO | step=800 loss=2.9118 lr=4.00e-05 elapsed=400s
+2026-09-12 14:09:15 | INFO | step=900 loss=3.1621 lr=4.50e-05 elapsed=450s
+2026-09-12 14:10:05 | INFO | step=1000 loss=2.8076 lr=5.00e-05 elapsed=500s
+2026-09-12 14:10:09 | INFO | [eval] step=1000 dev_loss=4.1116
+2026-09-12 14:10:32 | INFO |   -> New best model saved (dev_loss=4.1116)
+2026-09-12 14:11:22 | INFO | step=1100 loss=2.3268 lr=5.50e-05 elapsed=576s
+2026-09-12 14:12:11 | INFO | step=1200 loss=3.1416 lr=6.00e-05 elapsed=626s
+2026-09-12 14:13:01 | INFO | step=1300 loss=2.8351 lr=6.50e-05 elapsed=676s
+2026-09-12 14:13:51 | INFO | step=1400 loss=2.9921 lr=7.00e-05 elapsed=726s
+2026-09-12 14:14:41 | INFO | step=1500 loss=2.9046 lr=7.50e-05 elapsed=776s
+2026-09-12 14:15:31 | INFO | step=1600 loss=2.7993 lr=8.00e-05 elapsed=826s
+2026-09-12 14:16:21 | INFO | step=1700 loss=2.4047 lr=8.50e-05 elapsed=876s
+2026-09-12 14:17:11 | INFO | step=1800 loss=2.4617 lr=9.00e-05 elapsed=925s
+2026-09-12 14:18:00 | INFO | step=1900 loss=2.5642 lr=9.50e-05 elapsed=975s
+2026-09-12 14:18:50 | INFO | step=2000 loss=2.5282 lr=1.00e-04 elapsed=1025s
+2026-09-12 14:18:55 | INFO | [eval] step=2000 dev_loss=4.5025
+2026-09-12 14:19:45 | INFO | step=2100 loss=2.5426 lr=1.05e-04 elapsed=1080s
+2026-09-12 14:20:35 | INFO | step=2200 loss=3.0998 lr=1.10e-04 elapsed=1130s
+2026-09-12 14:21:25 | INFO | step=2300 loss=2.2773 lr=1.15e-04 elapsed=1180s
+2026-09-12 14:22:16 | INFO | step=2400 loss=2.7167 lr=1.20e-04 elapsed=1231s
+2026-09-12 14:23:06 | INFO | step=2500 loss=2.6567 lr=1.25e-04 elapsed=1281s
+2026-09-12 14:23:56 | INFO | step=2600 loss=2.4777 lr=1.30e-04 elapsed=1331s
+2026-09-12 14:24:46 | INFO | step=2700 loss=2.7310 lr=1.35e-04 elapsed=1381s
+2026-09-12 14:25:37 | INFO | step=2800 loss=2.9906 lr=1.40e-04 elapsed=1432s
+2026-09-12 14:26:27 | INFO | step=2900 loss=2.9625 lr=1.45e-04 elapsed=1482s
+2026-09-12 14:27:18 | INFO | step=3000 loss=2.4008 lr=1.50e-04 elapsed=1532s
+2026-09-12 14:27:22 | INFO | [eval] step=3000 dev_loss=4.4090
+2026-09-12 14:28:12 | INFO | step=3100 loss=3.0813 lr=1.55e-04 elapsed=1587s
+2026-09-12 14:29:03 | INFO | step=3200 loss=2.2523 lr=1.60e-04 elapsed=1638s
+2026-09-12 14:29:53 | INFO | step=3300 loss=2.5644 lr=1.65e-04 elapsed=1688s
+2026-09-12 14:30:44 | INFO | step=3400 loss=2.4825 lr=1.70e-04 elapsed=1739s
+2026-09-12 14:31:34 | INFO | step=3500 loss=2.0999 lr=1.75e-04 elapsed=1789s
+2026-09-12 14:32:25 | INFO | step=3600 loss=2.6870 lr=1.80e-04 elapsed=1840s
+2026-09-12 14:33:15 | INFO | step=3700 loss=2.8854 lr=1.85e-04 elapsed=1890s
+2026-09-12 14:34:06 | INFO | step=3800 loss=2.8073 lr=1.90e-04 elapsed=1941s
+2026-09-12 14:34:56 | INFO | step=3900 loss=2.5334 lr=1.95e-04 elapsed=1991s
+2026-09-12 14:35:47 | INFO | step=4000 loss=2.1194 lr=2.00e-04 elapsed=2042s
+2026-09-12 14:35:51 | INFO | [eval] step=4000 dev_loss=4.7217
+2026-09-12 14:36:42 | INFO | step=4100 loss=2.6120 lr=2.00e-04 elapsed=2097s
+2026-09-12 14:37:33 | INFO | step=4200 loss=2.6413 lr=2.00e-04 elapsed=2147s
+2026-09-12 14:38:23 | INFO | step=4300 loss=2.0507 lr=2.00e-04 elapsed=2198s
+2026-09-12 14:39:13 | INFO | step=4400 loss=2.5895 lr=2.00e-04 elapsed=2248s
+2026-09-12 14:40:04 | INFO | step=4500 loss=2.5309 lr=2.00e-04 elapsed=2299s
+2026-09-12 14:40:54 | INFO | step=4600 loss=2.4593 lr=2.00e-04 elapsed=2349s
+2026-09-12 14:41:45 | INFO | step=4700 loss=2.3288 lr=2.00e-04 elapsed=2400s
+2026-09-12 14:42:35 | INFO | step=4800 loss=2.5567 lr=2.00e-04 elapsed=2450s
+2026-09-12 14:43:26 | INFO | step=4900 loss=2.2345 lr=2.00e-04 elapsed=2501s
+2026-09-12 14:44:16 | INFO | step=5000 loss=3.0800 lr=2.00e-04 elapsed=2551s
+2026-09-12 14:44:21 | INFO | [eval] step=5000 dev_loss=4.4646
+2026-09-12 14:45:12 | INFO | step=5100 loss=2.4071 lr=2.00e-04 elapsed=2607s
+2026-09-12 14:46:02 | INFO | step=5200 loss=2.8830 lr=2.00e-04 elapsed=2657s
+2026-09-12 14:46:53 | INFO | step=5300 loss=2.3250 lr=2.00e-04 elapsed=2708s
+2026-09-12 14:47:43 | INFO | step=5400 loss=2.5317 lr=2.00e-04 elapsed=2758s
+2026-09-12 14:48:34 | INFO | step=5500 loss=2.1802 lr=2.00e-04 elapsed=2809s
+2026-09-12 14:49:24 | INFO | step=5600 loss=2.9580 lr=2.00e-04 elapsed=2859s
+2026-09-12 14:50:15 | INFO | step=5700 loss=2.1263 lr=2.00e-04 elapsed=2910s
+2026-09-12 14:51:05 | INFO | step=5800 loss=3.1028 lr=2.00e-04 elapsed=2960s
+2026-09-12 14:51:55 | INFO | step=5900 loss=2.9453 lr=2.00e-04 elapsed=3010s
+2026-09-12 14:52:46 | INFO | step=6000 loss=2.4454 lr=2.00e-04 elapsed=3061s
+2026-09-12 14:52:50 | INFO | [eval] step=6000 dev_loss=4.3317
+2026-09-12 14:53:41 | INFO | step=6100 loss=2.4261 lr=2.00e-04 elapsed=3116s
+2026-09-12 14:54:32 | INFO | step=6200 loss=2.8382 lr=2.00e-04 elapsed=3167s
+2026-09-12 14:55:22 | INFO | step=6300 loss=2.3745 lr=2.00e-04 elapsed=3217s
+2026-09-12 14:56:12 | INFO | step=6400 loss=2.5653 lr=2.00e-04 elapsed=3267s
+2026-09-12 14:57:03 | INFO | step=6500 loss=2.6560 lr=1.99e-04 elapsed=3318s
+2026-09-12 14:57:54 | INFO | step=6600 loss=2.7653 lr=1.99e-04 elapsed=3368s
+2026-09-12 14:58:44 | INFO | step=6700 loss=2.3899 lr=1.99e-04 elapsed=3419s
+2026-09-12 14:59:35 | INFO | step=6800 loss=2.9266 lr=1.99e-04 elapsed=3470s
+2026-09-12 15:00:25 | INFO | step=6900 loss=2.4222 lr=1.99e-04 elapsed=3520s
+2026-09-12 15:01:16 | INFO | step=7000 loss=2.8378 lr=1.99e-04 elapsed=3571s
+2026-09-12 15:01:20 | INFO | [eval] step=7000 dev_loss=4.4334
+2026-09-12 15:02:11 | INFO | step=7100 loss=2.8670 lr=1.99e-04 elapsed=3626s
+2026-09-12 15:03:02 | INFO | step=7200 loss=2.6341 lr=1.99e-04 elapsed=3677s
+2026-09-12 15:03:52 | INFO | step=7300 loss=2.8154 lr=1.99e-04 elapsed=3727s
+2026-09-12 15:04:43 | INFO | step=7400 loss=2.1871 lr=1.99e-04 elapsed=3778s
+2026-09-12 15:05:33 | INFO | step=7500 loss=2.6598 lr=1.99e-04 elapsed=3828s
+2026-09-12 15:06:23 | INFO | step=7600 loss=2.6657 lr=1.99e-04 elapsed=3878s
+2026-09-12 15:07:14 | INFO | step=7700 loss=2.8844 lr=1.99e-04 elapsed=3929s
+2026-09-12 15:08:05 | INFO | step=7800 loss=2.7320 lr=1.99e-04 elapsed=3980s
+2026-09-12 15:08:55 | INFO | step=7900 loss=2.7153 lr=1.99e-04 elapsed=4030s
+2026-09-12 15:09:46 | INFO | step=8000 loss=3.0606 lr=1.99e-04 elapsed=4081s
+2026-09-12 15:09:50 | INFO | [eval] step=8000 dev_loss=4.3658
+2026-09-12 15:10:41 | INFO | step=8100 loss=2.4694 lr=1.99e-04 elapsed=4136s
+2026-09-12 15:11:31 | INFO | step=8200 loss=2.6040 lr=1.98e-04 elapsed=4186s
+2026-09-12 15:12:22 | INFO | step=8300 loss=3.0242 lr=1.98e-04 elapsed=4237s
+2026-09-12 15:13:13 | INFO | step=8400 loss=2.6143 lr=1.98e-04 elapsed=4287s
+2026-09-12 15:14:03 | INFO | step=8500 loss=2.5682 lr=1.98e-04 elapsed=4338s
+2026-09-12 15:14:54 | INFO | step=8600 loss=2.6804 lr=1.98e-04 elapsed=4389s
+2026-09-12 15:15:45 | INFO | step=8700 loss=2.5994 lr=1.98e-04 elapsed=4439s
+2026-09-12 15:16:35 | INFO | step=8800 loss=2.3961 lr=1.98e-04 elapsed=4490s
+2026-09-12 15:17:26 | INFO | step=8900 loss=3.0594 lr=1.98e-04 elapsed=4541s
+2026-09-12 15:18:16 | INFO | step=9000 loss=2.9876 lr=1.98e-04 elapsed=4591s
+2026-09-12 15:18:21 | INFO | [eval] step=9000 dev_loss=4.4504
+2026-09-12 15:19:11 | INFO | step=9100 loss=2.9141 lr=1.98e-04 elapsed=4646s
+2026-09-12 15:20:02 | INFO | step=9200 loss=2.1602 lr=1.98e-04 elapsed=4697s
+2026-09-12 15:20:52 | INFO | step=9300 loss=2.4941 lr=1.98e-04 elapsed=4747s
+2026-09-12 15:21:43 | INFO | step=9400 loss=2.6508 lr=1.98e-04 elapsed=4798s
+2026-09-12 15:22:34 | INFO | step=9500 loss=2.6574 lr=1.97e-04 elapsed=4849s
+2026-09-12 15:23:24 | INFO | step=9600 loss=2.7539 lr=1.97e-04 elapsed=4899s
+2026-09-12 15:24:14 | INFO | step=9700 loss=2.6787 lr=1.97e-04 elapsed=4949s
+2026-09-12 15:25:05 | INFO | step=9800 loss=3.0561 lr=1.97e-04 elapsed=5000s
+2026-09-12 15:25:56 | INFO | step=9900 loss=2.7018 lr=1.97e-04 elapsed=5051s
+2026-09-12 15:26:47 | INFO | step=10000 loss=2.5487 lr=1.97e-04 elapsed=5102s
+2026-09-12 15:26:52 | INFO | [eval] step=10000 dev_loss=4.5252
+2026-09-12 15:28:04 | INFO | step=10100 loss=2.4071 lr=1.97e-04 elapsed=5179s
+2026-09-12 15:28:54 | INFO | step=10200 loss=3.0275 lr=1.97e-04 elapsed=5229s
+2026-09-12 15:29:45 | INFO | step=10300 loss=3.0667 lr=1.97e-04 elapsed=5280s
+2026-09-12 15:30:36 | INFO | step=10400 loss=2.6910 lr=1.97e-04 elapsed=5331s
+2026-09-12 15:31:27 | INFO | step=10500 loss=3.2047 lr=1.96e-04 elapsed=5382s
+2026-09-12 15:32:18 | INFO | step=10600 loss=2.8355 lr=1.96e-04 elapsed=5433s
+2026-09-12 15:33:09 | INFO | step=10700 loss=2.3387 lr=1.96e-04 elapsed=5484s
+2026-09-12 15:34:00 | INFO | step=10800 loss=2.6093 lr=1.96e-04 elapsed=5535s
+2026-09-12 15:34:51 | INFO | step=10900 loss=2.6252 lr=1.96e-04 elapsed=5586s
+2026-09-12 15:35:42 | INFO | step=11000 loss=2.5984 lr=1.96e-04 elapsed=5637s
+2026-09-12 15:35:46 | INFO | [eval] step=11000 dev_loss=4.3304
+2026-09-12 15:36:37 | INFO | step=11100 loss=2.9091 lr=1.96e-04 elapsed=5692s
+2026-09-12 15:37:28 | INFO | step=11200 loss=2.4175 lr=1.96e-04 elapsed=5742s
+2026-09-12 15:38:18 | INFO | step=11300 loss=3.0464 lr=1.95e-04 elapsed=5793s
+2026-09-12 15:39:09 | INFO | step=11400 loss=2.5103 lr=1.95e-04 elapsed=5844s
+2026-09-12 15:40:00 | INFO | step=11500 loss=2.6603 lr=1.95e-04 elapsed=5895s
+2026-09-12 15:40:50 | INFO | step=11600 loss=2.6023 lr=1.95e-04 elapsed=5945s
+2026-09-12 15:41:41 | INFO | step=11700 loss=2.7495 lr=1.95e-04 elapsed=5996s
+2026-09-12 15:42:32 | INFO | step=11800 loss=3.3246 lr=1.95e-04 elapsed=6047s
+2026-09-12 15:43:23 | INFO | step=11900 loss=2.6743 lr=1.95e-04 elapsed=6098s
+2026-09-12 15:44:14 | INFO | step=12000 loss=2.5316 lr=1.95e-04 elapsed=6149s
+2026-09-12 15:44:18 | INFO | [eval] step=12000 dev_loss=4.3972
+2026-09-12 15:45:09 | INFO | step=12100 loss=2.5265 lr=1.94e-04 elapsed=6204s
+2026-09-12 15:46:00 | INFO | step=12200 loss=2.4402 lr=1.94e-04 elapsed=6255s
+2026-09-12 15:46:52 | INFO | step=12300 loss=2.8238 lr=1.94e-04 elapsed=6306s
+2026-09-12 15:47:42 | INFO | step=12400 loss=3.0386 lr=1.94e-04 elapsed=6357s
+2026-09-12 15:48:33 | INFO | step=12500 loss=2.8855 lr=1.94e-04 elapsed=6408s
+2026-09-12 15:49:24 | INFO | step=12600 loss=2.7443 lr=1.94e-04 elapsed=6459s
+2026-09-12 15:50:14 | INFO | step=12700 loss=2.7290 lr=1.94e-04 elapsed=6509s
+2026-09-12 15:51:05 | INFO | step=12800 loss=2.8579 lr=1.93e-04 elapsed=6560s
+2026-09-12 15:51:56 | INFO | step=12900 loss=3.2957 lr=1.93e-04 elapsed=6611s
+2026-09-12 15:52:47 | INFO | step=13000 loss=2.1439 lr=1.93e-04 elapsed=6662s
+2026-09-12 15:52:51 | INFO | [eval] step=13000 dev_loss=4.2659
+2026-09-12 15:53:42 | INFO | step=13100 loss=2.6140 lr=1.93e-04 elapsed=6717s
+2026-09-12 15:54:33 | INFO | step=13200 loss=2.3714 lr=1.93e-04 elapsed=6768s
+2026-09-12 15:55:24 | INFO | step=13300 loss=2.5632 lr=1.93e-04 elapsed=6819s
+2026-09-12 15:56:14 | INFO | step=13400 loss=2.5355 lr=1.93e-04 elapsed=6869s
+2026-09-12 15:57:05 | INFO | step=13500 loss=3.2214 lr=1.92e-04 elapsed=6920s
+2026-09-12 15:57:56 | INFO | step=13600 loss=2.9537 lr=1.92e-04 elapsed=6971s
+2026-09-12 15:58:47 | INFO | step=13700 loss=2.5526 lr=1.92e-04 elapsed=7022s
+2026-09-12 15:59:38 | INFO | step=13800 loss=2.6443 lr=1.92e-04 elapsed=7073s
+2026-09-12 16:00:29 | INFO | step=13900 loss=2.5902 lr=1.92e-04 elapsed=7124s
+2026-09-12 16:01:20 | INFO | step=14000 loss=2.4412 lr=1.92e-04 elapsed=7175s
+2026-09-12 16:01:24 | INFO | [eval] step=14000 dev_loss=4.3963
+2026-09-12 16:02:16 | INFO | step=14100 loss=2.3485 lr=1.91e-04 elapsed=7230s
+2026-09-12 16:03:06 | INFO | step=14200 loss=2.7202 lr=1.91e-04 elapsed=7281s
+2026-09-12 16:03:57 | INFO | step=14300 loss=2.8331 lr=1.91e-04 elapsed=7332s
+2026-09-12 16:04:48 | INFO | step=14400 loss=2.8429 lr=1.91e-04 elapsed=7383s
+2026-09-12 16:05:39 | INFO | step=14500 loss=3.2258 lr=1.91e-04 elapsed=7434s
+2026-09-12 16:06:30 | INFO | step=14600 loss=2.6777 lr=1.91e-04 elapsed=7485s
+2026-09-12 16:07:21 | INFO | step=14700 loss=3.1903 lr=1.90e-04 elapsed=7536s
+2026-09-12 16:08:12 | INFO | step=14800 loss=3.0123 lr=1.90e-04 elapsed=7587s
+2026-09-12 16:09:03 | INFO | step=14900 loss=2.6587 lr=1.90e-04 elapsed=7638s
+2026-09-12 16:09:54 | INFO | step=15000 loss=2.7165 lr=1.90e-04 elapsed=7689s
+2026-09-12 16:09:59 | INFO | [eval] step=15000 dev_loss=4.3596
+2026-09-12 16:10:50 | INFO | step=15100 loss=2.5557 lr=1.90e-04 elapsed=7745s
+2026-09-12 16:11:41 | INFO | step=15200 loss=3.3545 lr=1.89e-04 elapsed=7795s
+2026-09-12 16:12:32 | INFO | step=15300 loss=2.9668 lr=1.89e-04 elapsed=7847s
+2026-09-12 16:13:23 | INFO | step=15400 loss=2.3544 lr=1.89e-04 elapsed=7897s
+2026-09-12 16:14:14 | INFO | step=15500 loss=2.6437 lr=1.89e-04 elapsed=7948s
+2026-09-12 16:15:05 | INFO | step=15600 loss=2.8851 lr=1.89e-04 elapsed=8000s
+2026-09-12 16:15:56 | INFO | step=15700 loss=2.7690 lr=1.89e-04 elapsed=8051s
+2026-09-12 16:16:46 | INFO | step=15800 loss=2.8125 lr=1.88e-04 elapsed=8101s
+2026-09-12 16:17:37 | INFO | step=15900 loss=3.7839 lr=1.88e-04 elapsed=8152s
+2026-09-12 16:18:28 | INFO | step=16000 loss=2.7604 lr=1.88e-04 elapsed=8203s
+2026-09-12 16:18:33 | INFO | [eval] step=16000 dev_loss=4.1682
+2026-09-12 16:19:24 | INFO | step=16100 loss=2.8737 lr=1.88e-04 elapsed=8259s
+2026-09-12 16:20:15 | INFO | step=16200 loss=2.7412 lr=1.88e-04 elapsed=8310s
+2026-09-12 16:21:06 | INFO | step=16300 loss=2.9325 lr=1.87e-04 elapsed=8361s
+2026-09-12 16:21:57 | INFO | step=16400 loss=2.4761 lr=1.87e-04 elapsed=8412s
+2026-09-12 16:22:48 | INFO | step=16500 loss=2.7382 lr=1.87e-04 elapsed=8463s
+2026-09-12 16:23:38 | INFO | step=16600 loss=2.9810 lr=1.87e-04 elapsed=8513s
+2026-09-12 16:24:29 | INFO | step=16700 loss=3.0941 lr=1.87e-04 elapsed=8564s
+2026-09-12 16:25:20 | INFO | step=16800 loss=3.1252 lr=1.86e-04 elapsed=8615s
+2026-09-12 16:26:11 | INFO | step=16900 loss=2.6789 lr=1.86e-04 elapsed=8666s
+2026-09-12 16:27:02 | INFO | step=17000 loss=2.8204 lr=1.86e-04 elapsed=8717s
+2026-09-12 16:27:07 | INFO | [eval] step=17000 dev_loss=4.2793
+2026-09-12 16:27:58 | INFO | step=17100 loss=3.1756 lr=1.86e-04 elapsed=8773s
+2026-09-12 16:28:48 | INFO | step=17200 loss=2.8584 lr=1.85e-04 elapsed=8823s
+2026-09-12 16:29:39 | INFO | step=17300 loss=2.8385 lr=1.85e-04 elapsed=8874s
+2026-09-12 16:30:30 | INFO | step=17400 loss=2.7295 lr=1.85e-04 elapsed=8925s
+2026-09-12 16:31:21 | INFO | step=17500 loss=3.1058 lr=1.85e-04 elapsed=8976s
+2026-09-12 16:32:12 | INFO | step=17600 loss=2.7649 lr=1.85e-04 elapsed=9027s
+2026-09-12 16:33:03 | INFO | step=17700 loss=2.8573 lr=1.84e-04 elapsed=9078s
+2026-09-12 16:33:54 | INFO | step=17800 loss=2.6331 lr=1.84e-04 elapsed=9129s
+2026-09-12 16:34:45 | INFO | step=17900 loss=2.9748 lr=1.84e-04 elapsed=9180s
+2026-09-12 16:35:36 | INFO | step=18000 loss=2.7402 lr=1.84e-04 elapsed=9230s
+2026-09-12 16:35:40 | INFO | [eval] step=18000 dev_loss=4.2215
+2026-09-12 16:36:31 | INFO | step=18100 loss=2.7956 lr=1.83e-04 elapsed=9286s
+2026-09-12 16:37:22 | INFO | step=18200 loss=2.5299 lr=1.83e-04 elapsed=9337s
+2026-09-12 16:38:13 | INFO | step=18300 loss=2.7500 lr=1.83e-04 elapsed=9388s
+2026-09-12 16:39:03 | INFO | step=18400 loss=2.9024 lr=1.83e-04 elapsed=9438s
+2026-09-12 16:39:54 | INFO | step=18500 loss=2.5286 lr=1.83e-04 elapsed=9489s
+2026-09-12 16:40:45 | INFO | step=18600 loss=2.4124 lr=1.82e-04 elapsed=9540s
+2026-09-12 16:41:36 | INFO | step=18700 loss=2.4937 lr=1.82e-04 elapsed=9591s
+2026-09-12 16:42:27 | INFO | step=18800 loss=3.1251 lr=1.82e-04 elapsed=9642s
+2026-09-12 16:43:18 | INFO | step=18900 loss=2.7567 lr=1.82e-04 elapsed=9693s
+2026-09-12 16:44:09 | INFO | step=19000 loss=2.6366 lr=1.81e-04 elapsed=9744s
+2026-09-12 16:44:13 | INFO | [eval] step=19000 dev_loss=4.2603
+2026-09-12 16:45:04 | INFO | step=19100 loss=2.8996 lr=1.81e-04 elapsed=9799s
+2026-09-12 16:45:55 | INFO | step=19200 loss=2.6990 lr=1.81e-04 elapsed=9849s
+2026-09-12 16:46:45 | INFO | step=19300 loss=2.8593 lr=1.81e-04 elapsed=9900s
+2026-09-12 16:47:36 | INFO | step=19400 loss=2.5791 lr=1.80e-04 elapsed=9951s
+2026-09-12 16:48:27 | INFO | step=19500 loss=2.8151 lr=1.80e-04 elapsed=10002s
+2026-09-12 16:49:18 | INFO | step=19600 loss=2.8564 lr=1.80e-04 elapsed=10053s
+2026-09-12 16:50:09 | INFO | step=19700 loss=3.0923 lr=1.80e-04 elapsed=10103s
+2026-09-12 16:50:59 | INFO | step=19800 loss=3.1767 lr=1.79e-04 elapsed=10154s
+2026-09-12 16:51:50 | INFO | step=19900 loss=3.1236 lr=1.79e-04 elapsed=10205s
+2026-09-12 16:52:41 | INFO | step=20000 loss=2.7312 lr=1.79e-04 elapsed=10256s
+2026-09-12 16:52:45 | INFO | [eval] step=20000 dev_loss=4.4107
+2026-09-12 16:53:59 | INFO | step=20100 loss=3.1496 lr=1.79e-04 elapsed=10333s
+2026-09-12 16:54:49 | INFO | step=20200 loss=2.6586 lr=1.78e-04 elapsed=10384s
+2026-09-12 16:55:40 | INFO | step=20300 loss=3.1258 lr=1.78e-04 elapsed=10435s
+2026-09-12 16:56:30 | INFO | step=20400 loss=3.4950 lr=1.78e-04 elapsed=10485s
+2026-09-12 16:57:21 | INFO | step=20500 loss=3.2823 lr=1.78e-04 elapsed=10536s
+2026-09-12 16:58:11 | INFO | step=20600 loss=2.7214 lr=1.77e-04 elapsed=10586s
+2026-09-12 16:59:02 | INFO | step=20700 loss=2.8599 lr=1.77e-04 elapsed=10637s
+2026-09-12 16:59:53 | INFO | step=20800 loss=2.5675 lr=1.77e-04 elapsed=10687s
+2026-09-12 17:00:43 | INFO | step=20900 loss=3.1287 lr=1.77e-04 elapsed=10738s
+2026-09-12 17:01:33 | INFO | step=21000 loss=2.6353 lr=1.76e-04 elapsed=10788s
+2026-09-12 17:01:38 | INFO | [eval] step=21000 dev_loss=4.3563
+2026-09-12 17:01:38 | INFO | Early stopping triggered.
+2026-09-12 17:01:38 | INFO | Training complete. Best dev loss: 4.1116

@@ -1,0 +1,5 @@
+2026-09-12 09:58:53 | INFO | Evaluating 1319 examples from gsm8k/dev
+2026-09-12 09:58:58 | INFO | === Results (gsm8k/dev) ===
+2026-09-12 09:58:58 | INFO |   answer_accuracy: 0.0205
+2026-09-12 09:58:58 | INFO |   n: 1319
+2026-09-12 09:58:58 | INFO | Saved to /home/muhiddin/icde2027_revision/evals/eval_no_gating_s44_v2fixed.json

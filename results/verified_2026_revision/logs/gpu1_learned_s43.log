@@ -1,0 +1,52 @@
+2026-09-12 11:19:39 | INFO | Device: cuda
+2026-09-12 11:19:42 | INFO | Model: relational, k=8, params=464.5M
+2026-09-12 11:19:43 | INFO | Training on 7473 examples, eval on 1319
+2026-09-12 11:19:43 | INFO | Config: TrainingConfig(model_type='relational', hidden_dim=512, num_encoder_layers=12, num_decoder_layers=12, num_heads=8, num_attributes=8, use_gating=True, use_mixing=True, pairing_strategy='learned', pairing_seed=1234, ffn_dim=2048, max_seq_len=512, dropout=0.1, vocab_size=32000, learning_rate=0.0002, weight_decay=0.01, warmup_steps=4000, max_steps=200000, batch_size=32, gradient_accumulation=1, max_grad_norm=1.0, label_smoothing=0.1, eval_every=1000, save_every=10000, patience=3, eval_by_em=False, dataset='gsm8k', nas_dir='/nas/Dataset/nlp', max_src_len=256, max_tgt_len=32, seed=43, num_workers=4, fp16=False, output_dir='/nas/Dataset/experiments/relational-attention/muhiddin_outputs/rel_125m_gsm8k_ablation_learned_s43', log_every=100, copy_mechanism=False, num_copy_heads=1)
+2026-09-12 11:19:44 | INFO | step=0 loss=10.3930 lr=0.00e+00 elapsed=1s
+2026-09-12 11:20:41 | INFO | step=100 loss=8.4087 lr=5.00e-06 elapsed=58s
+2026-09-12 11:21:39 | INFO | step=200 loss=7.7393 lr=1.00e-05 elapsed=117s
+2026-09-12 11:22:36 | INFO | step=300 loss=6.6956 lr=1.50e-05 elapsed=173s
+2026-09-12 11:23:34 | INFO | step=400 loss=5.4127 lr=2.00e-05 elapsed=232s
+2026-09-12 11:24:32 | INFO | step=500 loss=4.1911 lr=2.50e-05 elapsed=289s
+2026-09-12 11:25:28 | INFO | step=600 loss=3.2700 lr=3.00e-05 elapsed=346s
+2026-09-12 11:26:25 | INFO | step=700 loss=2.7671 lr=3.50e-05 elapsed=403s
+2026-09-12 11:27:22 | INFO | step=800 loss=2.6447 lr=4.00e-05 elapsed=459s
+2026-09-12 11:28:18 | INFO | step=900 loss=2.7391 lr=4.50e-05 elapsed=516s
+2026-09-12 11:29:14 | INFO | step=1000 loss=3.0713 lr=5.00e-05 elapsed=572s
+2026-09-12 11:29:18 | INFO | [eval] step=1000 dev_loss=4.0934
+2026-09-12 11:29:35 | INFO |   -> New best model saved (dev_loss=4.0934)
+2026-09-12 11:30:32 | INFO | step=1100 loss=2.8540 lr=5.50e-05 elapsed=650s
+2026-09-12 11:31:29 | INFO | step=1200 loss=2.5753 lr=6.00e-05 elapsed=706s
+2026-09-12 11:32:25 | INFO | step=1300 loss=2.5206 lr=6.50e-05 elapsed=762s
+2026-09-12 11:33:21 | INFO | step=1400 loss=2.5601 lr=7.00e-05 elapsed=819s
+2026-09-12 11:34:18 | INFO | step=1500 loss=2.5471 lr=7.50e-05 elapsed=875s
+2026-09-12 11:35:14 | INFO | step=1600 loss=2.7486 lr=8.00e-05 elapsed=932s
+2026-09-12 11:36:10 | INFO | step=1700 loss=2.5840 lr=8.50e-05 elapsed=987s
+2026-09-12 11:37:08 | INFO | step=1800 loss=2.4128 lr=9.00e-05 elapsed=1045s
+2026-09-12 11:38:04 | INFO | step=1900 loss=2.4636 lr=9.50e-05 elapsed=1101s
+2026-09-12 11:38:59 | INFO | step=2000 loss=2.4678 lr=1.00e-04 elapsed=1157s
+2026-09-12 11:39:03 | INFO | [eval] step=2000 dev_loss=4.5494
+2026-09-12 11:39:59 | INFO | step=2100 loss=2.5553 lr=1.05e-04 elapsed=1216s
+2026-09-12 11:40:55 | INFO | step=2200 loss=2.4274 lr=1.10e-04 elapsed=1273s
+2026-09-12 11:41:52 | INFO | step=2300 loss=2.2523 lr=1.15e-04 elapsed=1329s
+2026-09-12 11:42:48 | INFO | step=2400 loss=2.2856 lr=1.20e-04 elapsed=1385s
+2026-09-12 11:43:43 | INFO | step=2500 loss=2.2884 lr=1.25e-04 elapsed=1441s
+2026-09-12 11:44:40 | INFO | step=2600 loss=2.4571 lr=1.30e-04 elapsed=1498s
+2026-09-12 11:45:36 | INFO | step=2700 loss=2.3834 lr=1.35e-04 elapsed=1554s
+2026-09-12 11:46:33 | INFO | step=2800 loss=2.4402 lr=1.40e-04 elapsed=1610s
+2026-09-12 11:47:30 | INFO | step=2900 loss=2.7259 lr=1.45e-04 elapsed=1667s
+2026-09-12 11:48:27 | INFO | step=3000 loss=2.0539 lr=1.50e-04 elapsed=1724s
+2026-09-12 11:48:30 | INFO | [eval] step=3000 dev_loss=4.9863
+2026-09-12 11:49:27 | INFO | step=3100 loss=2.1643 lr=1.55e-04 elapsed=1784s
+2026-09-12 11:50:24 | INFO | step=3200 loss=2.1599 lr=1.60e-04 elapsed=1841s
+2026-09-12 11:51:20 | INFO | step=3300 loss=1.9817 lr=1.65e-04 elapsed=1898s
+2026-09-12 11:52:17 | INFO | step=3400 loss=2.1228 lr=1.70e-04 elapsed=1954s
+2026-09-12 11:53:13 | INFO | step=3500 loss=2.0537 lr=1.75e-04 elapsed=2011s
+2026-09-12 11:54:10 | INFO | step=3600 loss=1.9966 lr=1.80e-04 elapsed=2067s
+2026-09-12 11:55:07 | INFO | step=3700 loss=2.2122 lr=1.85e-04 elapsed=2124s
+2026-09-12 11:56:02 | INFO | step=3800 loss=2.1020 lr=1.90e-04 elapsed=2180s
+2026-09-12 11:56:58 | INFO | step=3900 loss=2.0502 lr=1.95e-04 elapsed=2236s
+2026-09-12 11:57:55 | INFO | step=4000 loss=2.1001 lr=2.00e-04 elapsed=2292s
+2026-09-12 11:57:59 | INFO | [eval] step=4000 dev_loss=5.4860
+2026-09-12 11:57:59 | INFO | Early stopping triggered.
+2026-09-12 11:57:59 | INFO | Training complete. Best dev loss: 4.0934

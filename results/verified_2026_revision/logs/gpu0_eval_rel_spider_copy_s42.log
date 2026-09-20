@@ -1,0 +1,11 @@
+2026-09-14 20:49:20 | INFO | Evaluating 1034 examples from spider/dev
+2026-09-14 20:58:04 | INFO | Spider eval output:
+Traceback (most recent call last):
+  File "/nas/Dataset/nlp/spider/test-suite-sql-eval/evaluation.py", line 27, in <module>
+    from process_sql import get_schema, Schema, get_sql
+  File "/nas/Dataset/nlp/spider/test-suite-sql-eval/process_sql.py", line 29, in <module>
+    from nltk import word_tokenize
+ModuleNotFoundError: No module named 'nltk'
+
+2026-09-14 20:58:04 | INFO | === Results (spider/dev) ===
+2026-09-14 20:58:04 | INFO | Saved to /home/muhiddin/icde2027_revision/evals/eval_rel_spider_copy_s42.json
