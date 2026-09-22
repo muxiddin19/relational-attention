@@ -1,3 +1,48 @@
 [GPU0 TRUE-STD-512 CHAIN START] 2026. 09. 20. (일) 19:57:34 KST
 [PHASE: GSM8K, 8 seeds] 2026. 09. 20. (일) 19:57:34 KST
 [TRAIN START true_std_512_gsm8k s42] 2026. 09. 20. (일) 19:57:34 KST
+[TRAIN DONE true_std_512_gsm8k s42 rc=0] 2026. 09. 20. (일) 20:18:56 KST
+[EVAL DONE true_std_512_gsm8k s42 rc=0] 2026. 09. 20. (일) 20:19:00 KST
+[TRAIN START true_std_512_gsm8k s43] 2026. 09. 20. (일) 20:19:00 KST
+[TRAIN DONE true_std_512_gsm8k s43 rc=0] 2026. 09. 20. (일) 20:40:31 KST
+[EVAL DONE true_std_512_gsm8k s43 rc=0] 2026. 09. 20. (일) 20:40:35 KST
+[TRAIN START true_std_512_gsm8k s44] 2026. 09. 20. (일) 20:40:35 KST
+[TRAIN DONE true_std_512_gsm8k s44 rc=0] 2026. 09. 20. (일) 21:01:58 KST
+[EVAL DONE true_std_512_gsm8k s44 rc=0] 2026. 09. 20. (일) 21:02:01 KST
+[TRAIN START true_std_512_gsm8k s45] 2026. 09. 20. (일) 21:02:01 KST
+[TRAIN DONE true_std_512_gsm8k s45 rc=0] 2026. 09. 20. (일) 21:23:25 KST
+[EVAL DONE true_std_512_gsm8k s45 rc=0] 2026. 09. 20. (일) 21:23:29 KST
+[TRAIN START true_std_512_gsm8k s46] 2026. 09. 20. (일) 21:23:29 KST
+[TRAIN DONE true_std_512_gsm8k s46 rc=0] 2026. 09. 20. (일) 21:44:58 KST
+[EVAL DONE true_std_512_gsm8k s46 rc=0] 2026. 09. 20. (일) 21:45:02 KST
+[TRAIN START true_std_512_gsm8k s47] 2026. 09. 20. (일) 21:45:02 KST
+[TRAIN DONE true_std_512_gsm8k s47 rc=0] 2026. 09. 20. (일) 22:06:32 KST
+[EVAL DONE true_std_512_gsm8k s47 rc=0] 2026. 09. 20. (일) 22:06:36 KST
+[TRAIN START true_std_512_gsm8k s48] 2026. 09. 20. (일) 22:06:36 KST
+[TRAIN DONE true_std_512_gsm8k s48 rc=0] 2026. 09. 20. (일) 22:27:58 KST
+[EVAL DONE true_std_512_gsm8k s48 rc=0] 2026. 09. 20. (일) 22:28:02 KST
+[TRAIN START true_std_512_gsm8k s49] 2026. 09. 20. (일) 22:28:02 KST
+[TRAIN DONE true_std_512_gsm8k s49 rc=0] 2026. 09. 20. (일) 22:49:20 KST
+[EVAL DONE true_std_512_gsm8k s49 rc=0] 2026. 09. 20. (일) 22:49:24 KST
+[PHASE: COGS, 5 seeds] 2026. 09. 20. (일) 22:49:24 KST
+[TRAIN START true_std_512_cogs s42] 2026. 09. 20. (일) 22:49:24 KST
+[TRAIN DONE true_std_512_cogs s42 rc=0] 2026. 09. 20. (일) 23:57:23 KST
+[EVAL DONE true_std_512_cogs s42 dev rc=0] 2026. 09. 21. (월) 00:02:55 KST
+[EVAL DONE true_std_512_cogs s42 gen rc=0] 2026. 09. 21. (월) 00:54:43 KST
+[TRAIN START true_std_512_cogs s43] 2026. 09. 21. (월) 00:54:43 KST
+[TRAIN DONE true_std_512_cogs s43 rc=0] 2026. 09. 21. (월) 02:04:21 KST
+[EVAL DONE true_std_512_cogs s43 dev rc=0] 2026. 09. 21. (월) 02:09:51 KST
+[EVAL DONE true_std_512_cogs s43 gen rc=0] 2026. 09. 21. (월) 02:59:34 KST
+[TRAIN START true_std_512_cogs s44] 2026. 09. 21. (월) 02:59:34 KST
+[TRAIN DONE true_std_512_cogs s44 rc=0] 2026. 09. 21. (월) 03:24:38 KST
+[EVAL DONE true_std_512_cogs s44 dev rc=0] 2026. 09. 21. (월) 03:29:52 KST
+[EVAL DONE true_std_512_cogs s44 gen rc=0] 2026. 09. 21. (월) 04:17:07 KST
+[TRAIN START true_std_512_cogs s45] 2026. 09. 21. (월) 04:17:07 KST
+[TRAIN DONE true_std_512_cogs s45 rc=0] 2026. 09. 21. (월) 04:57:43 KST
+[EVAL DONE true_std_512_cogs s45 dev rc=0] 2026. 09. 21. (월) 05:03:11 KST
+[EVAL DONE true_std_512_cogs s45 gen rc=0] 2026. 09. 21. (월) 05:56:32 KST
+[TRAIN START true_std_512_cogs s46] 2026. 09. 21. (월) 05:56:32 KST
+[TRAIN DONE true_std_512_cogs s46 rc=0] 2026. 09. 21. (월) 09:09:41 KST
+[EVAL DONE true_std_512_cogs s46 dev rc=0] 2026. 09. 21. (월) 09:20:23 KST
+[EVAL DONE true_std_512_cogs s46 gen rc=0] 2026. 09. 21. (월) 11:02:24 KST
+[GPU0 TRUE-STD-512 CHAIN DONE] 2026. 09. 21. (월) 11:02:24 KST

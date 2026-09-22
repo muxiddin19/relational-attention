@@ -1,0 +1,5 @@
+2026-09-21 03:29:55 | INFO | Evaluating 21000 examples from cogs/gen
+2026-09-21 04:17:07 | INFO | === Results (cogs/gen) ===
+2026-09-21 04:17:07 | INFO |   exact_match: 0.0250
+2026-09-21 04:17:07 | INFO |   n: 21000
+2026-09-21 04:17:07 | INFO | Saved to /home/muhiddin/relational-attention/results/verified_2026_revision/eval_true_std_512_cogs_s44_gen.json

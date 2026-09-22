@@ -1,0 +1,239 @@
+2026-09-21 01:32:27 | INFO | Device: cuda
+2026-09-21 01:32:29 | INFO | Model: standard, k=1, params=464.5M
+2026-09-21 01:32:30 | INFO | Training on 7473 examples, eval on 1319
+2026-09-21 01:32:30 | INFO | Config: TrainingConfig(model_type='standard', hidden_dim=512, num_encoder_layers=12, num_decoder_layers=12, num_heads=8, num_attributes=1, use_gating=False, use_mixing=False, pairing_strategy='cyclic', pairing_seed=1234, use_composed_join=False, use_true_standard=True, ffn_dim=15979, max_seq_len=512, dropout=0.1, vocab_size=32000, learning_rate=0.0002, weight_decay=0.01, warmup_steps=4000, max_steps=80000, batch_size=16, gradient_accumulation=1, max_grad_norm=1.0, label_smoothing=0.1, eval_every=1000, save_every=10000, patience=20, eval_by_em=False, dataset='gsm8k', nas_dir='/nas/Dataset/nlp', max_src_len=256, max_tgt_len=64, seed=48, num_workers=4, fp16=False, output_dir='/nas/Dataset/experiments/relational-attention/muhiddin_outputs/true_std_matched_gsm8k_s48', log_every=100, copy_mechanism=False, num_copy_heads=1)
+2026-09-21 01:32:30 | INFO | step=0 loss=10.2636 lr=0.00e+00 elapsed=1s
+2026-09-21 01:32:46 | INFO | step=100 loss=8.3666 lr=5.00e-06 elapsed=16s
+2026-09-21 01:33:02 | INFO | step=200 loss=7.8059 lr=1.00e-05 elapsed=32s
+2026-09-21 01:33:17 | INFO | step=300 loss=6.6026 lr=1.50e-05 elapsed=47s
+2026-09-21 01:33:32 | INFO | step=400 loss=5.6408 lr=2.00e-05 elapsed=63s
+2026-09-21 01:33:48 | INFO | step=500 loss=3.9820 lr=2.50e-05 elapsed=78s
+2026-09-21 01:34:03 | INFO | step=600 loss=3.2619 lr=3.00e-05 elapsed=93s
+2026-09-21 01:34:18 | INFO | step=700 loss=2.8427 lr=3.50e-05 elapsed=108s
+2026-09-21 01:34:34 | INFO | step=800 loss=2.5000 lr=4.00e-05 elapsed=124s
+2026-09-21 01:34:49 | INFO | step=900 loss=3.2896 lr=4.50e-05 elapsed=139s
+2026-09-21 01:35:04 | INFO | step=1000 loss=3.1170 lr=5.00e-05 elapsed=155s
+2026-09-21 01:35:07 | INFO | [eval] step=1000 dev_loss=4.1275
+2026-09-21 01:35:24 | INFO |   -> New best model saved (dev_loss=4.1275)
+2026-09-21 01:35:39 | INFO | step=1100 loss=2.9564 lr=5.50e-05 elapsed=189s
+2026-09-21 01:35:54 | INFO | step=1200 loss=2.9415 lr=6.00e-05 elapsed=205s
+2026-09-21 01:36:10 | INFO | step=1300 loss=2.8997 lr=6.50e-05 elapsed=220s
+2026-09-21 01:36:25 | INFO | step=1400 loss=2.7574 lr=7.00e-05 elapsed=235s
+2026-09-21 01:36:40 | INFO | step=1500 loss=3.2439 lr=7.50e-05 elapsed=250s
+2026-09-21 01:36:56 | INFO | step=1600 loss=2.7630 lr=8.00e-05 elapsed=266s
+2026-09-21 01:37:11 | INFO | step=1700 loss=2.4124 lr=8.50e-05 elapsed=281s
+2026-09-21 01:37:26 | INFO | step=1800 loss=2.7565 lr=9.00e-05 elapsed=296s
+2026-09-21 01:37:41 | INFO | step=1900 loss=3.0238 lr=9.50e-05 elapsed=312s
+2026-09-21 01:37:57 | INFO | step=2000 loss=2.4715 lr=1.00e-04 elapsed=327s
+2026-09-21 01:37:59 | INFO | [eval] step=2000 dev_loss=4.3821
+2026-09-21 01:38:15 | INFO | step=2100 loss=2.6622 lr=1.05e-04 elapsed=345s
+2026-09-21 01:38:30 | INFO | step=2200 loss=2.4229 lr=1.10e-04 elapsed=360s
+2026-09-21 01:38:45 | INFO | step=2300 loss=2.8305 lr=1.15e-04 elapsed=375s
+2026-09-21 01:39:00 | INFO | step=2400 loss=2.7634 lr=1.20e-04 elapsed=390s
+2026-09-21 01:39:16 | INFO | step=2500 loss=2.6940 lr=1.25e-04 elapsed=406s
+2026-09-21 01:39:31 | INFO | step=2600 loss=2.6755 lr=1.30e-04 elapsed=421s
+2026-09-21 01:39:47 | INFO | step=2700 loss=2.6316 lr=1.35e-04 elapsed=437s
+2026-09-21 01:40:02 | INFO | step=2800 loss=2.4206 lr=1.40e-04 elapsed=452s
+2026-09-21 01:40:17 | INFO | step=2900 loss=2.5979 lr=1.45e-04 elapsed=467s
+2026-09-21 01:40:33 | INFO | step=3000 loss=2.5660 lr=1.50e-04 elapsed=483s
+2026-09-21 01:40:35 | INFO | [eval] step=3000 dev_loss=4.4068
+2026-09-21 01:40:50 | INFO | step=3100 loss=2.6524 lr=1.55e-04 elapsed=501s
+2026-09-21 01:41:06 | INFO | step=3200 loss=2.5443 lr=1.60e-04 elapsed=516s
+2026-09-21 01:41:21 | INFO | step=3300 loss=2.5197 lr=1.65e-04 elapsed=531s
+2026-09-21 01:41:36 | INFO | step=3400 loss=2.3896 lr=1.70e-04 elapsed=546s
+2026-09-21 01:41:52 | INFO | step=3500 loss=2.4107 lr=1.75e-04 elapsed=562s
+2026-09-21 01:42:07 | INFO | step=3600 loss=2.2680 lr=1.80e-04 elapsed=577s
+2026-09-21 01:42:22 | INFO | step=3700 loss=2.8528 lr=1.85e-04 elapsed=592s
+2026-09-21 01:42:37 | INFO | step=3800 loss=2.7843 lr=1.90e-04 elapsed=607s
+2026-09-21 01:42:53 | INFO | step=3900 loss=2.3659 lr=1.95e-04 elapsed=623s
+2026-09-21 01:43:08 | INFO | step=4000 loss=2.8450 lr=2.00e-04 elapsed=638s
+2026-09-21 01:43:10 | INFO | [eval] step=4000 dev_loss=4.5291
+2026-09-21 01:43:26 | INFO | step=4100 loss=2.4365 lr=2.00e-04 elapsed=656s
+2026-09-21 01:43:41 | INFO | step=4200 loss=2.5140 lr=2.00e-04 elapsed=671s
+2026-09-21 01:43:56 | INFO | step=4300 loss=2.8309 lr=2.00e-04 elapsed=686s
+2026-09-21 01:44:12 | INFO | step=4400 loss=2.3613 lr=2.00e-04 elapsed=702s
+2026-09-21 01:44:27 | INFO | step=4500 loss=2.7557 lr=2.00e-04 elapsed=717s
+2026-09-21 01:44:42 | INFO | step=4600 loss=2.2285 lr=2.00e-04 elapsed=732s
+2026-09-21 01:44:58 | INFO | step=4700 loss=2.5913 lr=2.00e-04 elapsed=748s
+2026-09-21 01:45:13 | INFO | step=4800 loss=2.6144 lr=2.00e-04 elapsed=763s
+2026-09-21 01:45:28 | INFO | step=4900 loss=2.4712 lr=2.00e-04 elapsed=779s
+2026-09-21 01:45:44 | INFO | step=5000 loss=2.6030 lr=2.00e-04 elapsed=794s
+2026-09-21 01:45:46 | INFO | [eval] step=5000 dev_loss=4.6879
+2026-09-21 01:46:01 | INFO | step=5100 loss=2.4305 lr=2.00e-04 elapsed=811s
+2026-09-21 01:46:17 | INFO | step=5200 loss=2.6403 lr=2.00e-04 elapsed=827s
+2026-09-21 01:46:32 | INFO | step=5300 loss=2.2112 lr=2.00e-04 elapsed=842s
+2026-09-21 01:46:48 | INFO | step=5400 loss=2.2911 lr=2.00e-04 elapsed=858s
+2026-09-21 01:47:03 | INFO | step=5500 loss=2.2146 lr=2.00e-04 elapsed=873s
+2026-09-21 01:47:18 | INFO | step=5600 loss=2.1014 lr=2.00e-04 elapsed=888s
+2026-09-21 01:47:33 | INFO | step=5700 loss=2.2985 lr=2.00e-04 elapsed=903s
+2026-09-21 01:47:49 | INFO | step=5800 loss=2.2376 lr=2.00e-04 elapsed=919s
+2026-09-21 01:48:04 | INFO | step=5900 loss=2.1737 lr=2.00e-04 elapsed=934s
+2026-09-21 01:48:19 | INFO | step=6000 loss=2.8804 lr=2.00e-04 elapsed=949s
+2026-09-21 01:48:22 | INFO | [eval] step=6000 dev_loss=4.9570
+2026-09-21 01:48:37 | INFO | step=6100 loss=1.9946 lr=2.00e-04 elapsed=967s
+2026-09-21 01:48:52 | INFO | step=6200 loss=2.5203 lr=2.00e-04 elapsed=983s
+2026-09-21 01:49:08 | INFO | step=6300 loss=2.0927 lr=2.00e-04 elapsed=998s
+2026-09-21 01:49:23 | INFO | step=6400 loss=1.8496 lr=2.00e-04 elapsed=1013s
+2026-09-21 01:49:38 | INFO | step=6500 loss=2.3733 lr=1.99e-04 elapsed=1028s
+2026-09-21 01:49:53 | INFO | step=6600 loss=1.8662 lr=1.99e-04 elapsed=1043s
+2026-09-21 01:50:09 | INFO | step=6700 loss=1.9392 lr=1.99e-04 elapsed=1059s
+2026-09-21 01:50:24 | INFO | step=6800 loss=1.9995 lr=1.99e-04 elapsed=1074s
+2026-09-21 01:50:40 | INFO | step=6900 loss=2.7607 lr=1.99e-04 elapsed=1090s
+2026-09-21 01:50:55 | INFO | step=7000 loss=2.6627 lr=1.99e-04 elapsed=1105s
+2026-09-21 01:50:57 | INFO | [eval] step=7000 dev_loss=5.0144
+2026-09-21 01:51:13 | INFO | step=7100 loss=1.7871 lr=1.99e-04 elapsed=1123s
+2026-09-21 01:51:28 | INFO | step=7200 loss=2.0952 lr=1.99e-04 elapsed=1138s
+2026-09-21 01:51:44 | INFO | step=7300 loss=2.4437 lr=1.99e-04 elapsed=1154s
+2026-09-21 01:51:59 | INFO | step=7400 loss=2.3530 lr=1.99e-04 elapsed=1169s
+2026-09-21 01:52:14 | INFO | step=7500 loss=2.2522 lr=1.99e-04 elapsed=1184s
+2026-09-21 01:52:30 | INFO | step=7600 loss=1.8471 lr=1.99e-04 elapsed=1200s
+2026-09-21 01:52:45 | INFO | step=7700 loss=2.3255 lr=1.99e-04 elapsed=1215s
+2026-09-21 01:53:00 | INFO | step=7800 loss=1.9973 lr=1.99e-04 elapsed=1230s
+2026-09-21 01:53:16 | INFO | step=7900 loss=2.0352 lr=1.99e-04 elapsed=1246s
+2026-09-21 01:53:31 | INFO | step=8000 loss=2.1763 lr=1.99e-04 elapsed=1261s
+2026-09-21 01:53:34 | INFO | [eval] step=8000 dev_loss=5.2131
+2026-09-21 01:53:49 | INFO | step=8100 loss=2.0225 lr=1.99e-04 elapsed=1279s
+2026-09-21 01:54:04 | INFO | step=8200 loss=2.3331 lr=1.98e-04 elapsed=1294s
+2026-09-21 01:54:20 | INFO | step=8300 loss=2.0491 lr=1.98e-04 elapsed=1310s
+2026-09-21 01:54:35 | INFO | step=8400 loss=2.3570 lr=1.98e-04 elapsed=1325s
+2026-09-21 01:54:51 | INFO | step=8500 loss=2.2862 lr=1.98e-04 elapsed=1341s
+2026-09-21 01:55:06 | INFO | step=8600 loss=2.5369 lr=1.98e-04 elapsed=1356s
+2026-09-21 01:55:21 | INFO | step=8700 loss=2.2579 lr=1.98e-04 elapsed=1371s
+2026-09-21 01:55:36 | INFO | step=8800 loss=2.7150 lr=1.98e-04 elapsed=1386s
+2026-09-21 01:55:52 | INFO | step=8900 loss=2.2122 lr=1.98e-04 elapsed=1402s
+2026-09-21 01:56:07 | INFO | step=9000 loss=2.2221 lr=1.98e-04 elapsed=1417s
+2026-09-21 01:56:10 | INFO | [eval] step=9000 dev_loss=5.4659
+2026-09-21 01:56:25 | INFO | step=9100 loss=2.4397 lr=1.98e-04 elapsed=1435s
+2026-09-21 01:56:40 | INFO | step=9200 loss=2.2663 lr=1.98e-04 elapsed=1450s
+2026-09-21 01:56:56 | INFO | step=9300 loss=2.1488 lr=1.98e-04 elapsed=1466s
+2026-09-21 01:57:11 | INFO | step=9400 loss=1.8997 lr=1.98e-04 elapsed=1481s
+2026-09-21 01:57:26 | INFO | step=9500 loss=2.2282 lr=1.97e-04 elapsed=1496s
+2026-09-21 01:57:42 | INFO | step=9600 loss=1.6711 lr=1.97e-04 elapsed=1512s
+2026-09-21 01:57:57 | INFO | step=9700 loss=2.2413 lr=1.97e-04 elapsed=1527s
+2026-09-21 01:58:13 | INFO | step=9800 loss=1.9726 lr=1.97e-04 elapsed=1543s
+2026-09-21 01:58:28 | INFO | step=9900 loss=2.5003 lr=1.97e-04 elapsed=1558s
+2026-09-21 01:58:43 | INFO | step=10000 loss=2.1031 lr=1.97e-04 elapsed=1573s
+2026-09-21 01:58:46 | INFO | [eval] step=10000 dev_loss=5.7776
+2026-09-21 01:59:18 | INFO | step=10100 loss=2.0434 lr=1.97e-04 elapsed=1608s
+2026-09-21 01:59:33 | INFO | step=10200 loss=2.0881 lr=1.97e-04 elapsed=1623s
+2026-09-21 01:59:49 | INFO | step=10300 loss=2.2376 lr=1.97e-04 elapsed=1639s
+2026-09-21 02:00:04 | INFO | step=10400 loss=2.0405 lr=1.97e-04 elapsed=1654s
+2026-09-21 02:00:19 | INFO | step=10500 loss=1.6093 lr=1.96e-04 elapsed=1669s
+2026-09-21 02:00:35 | INFO | step=10600 loss=1.8290 lr=1.96e-04 elapsed=1685s
+2026-09-21 02:00:50 | INFO | step=10700 loss=2.0965 lr=1.96e-04 elapsed=1700s
+2026-09-21 02:01:05 | INFO | step=10800 loss=1.8586 lr=1.96e-04 elapsed=1715s
+2026-09-21 02:01:21 | INFO | step=10900 loss=1.8977 lr=1.96e-04 elapsed=1731s
+2026-09-21 02:01:36 | INFO | step=11000 loss=1.6554 lr=1.96e-04 elapsed=1746s
+2026-09-21 02:01:39 | INFO | [eval] step=11000 dev_loss=5.6633
+2026-09-21 02:01:54 | INFO | step=11100 loss=1.7036 lr=1.96e-04 elapsed=1764s
+2026-09-21 02:02:09 | INFO | step=11200 loss=2.0787 lr=1.96e-04 elapsed=1779s
+2026-09-21 02:02:25 | INFO | step=11300 loss=1.9143 lr=1.95e-04 elapsed=1795s
+2026-09-21 02:02:40 | INFO | step=11400 loss=2.2037 lr=1.95e-04 elapsed=1810s
+2026-09-21 02:02:55 | INFO | step=11500 loss=1.9561 lr=1.95e-04 elapsed=1825s
+2026-09-21 02:03:11 | INFO | step=11600 loss=1.9824 lr=1.95e-04 elapsed=1841s
+2026-09-21 02:03:26 | INFO | step=11700 loss=2.1513 lr=1.95e-04 elapsed=1856s
+2026-09-21 02:03:42 | INFO | step=11800 loss=1.9225 lr=1.95e-04 elapsed=1872s
+2026-09-21 02:03:57 | INFO | step=11900 loss=2.0674 lr=1.95e-04 elapsed=1887s
+2026-09-21 02:04:12 | INFO | step=12000 loss=1.6686 lr=1.95e-04 elapsed=1902s
+2026-09-21 02:04:15 | INFO | [eval] step=12000 dev_loss=5.9051
+2026-09-21 02:04:30 | INFO | step=12100 loss=2.1416 lr=1.94e-04 elapsed=1920s
+2026-09-21 02:04:46 | INFO | step=12200 loss=2.0780 lr=1.94e-04 elapsed=1936s
+2026-09-21 02:05:01 | INFO | step=12300 loss=2.0619 lr=1.94e-04 elapsed=1951s
+2026-09-21 02:05:16 | INFO | step=12400 loss=1.6381 lr=1.94e-04 elapsed=1966s
+2026-09-21 02:05:31 | INFO | step=12500 loss=1.7966 lr=1.94e-04 elapsed=1982s
+2026-09-21 02:05:47 | INFO | step=12600 loss=2.3859 lr=1.94e-04 elapsed=1997s
+2026-09-21 02:06:02 | INFO | step=12700 loss=1.7652 lr=1.94e-04 elapsed=2012s
+2026-09-21 02:06:17 | INFO | step=12800 loss=1.9019 lr=1.93e-04 elapsed=2027s
+2026-09-21 02:06:32 | INFO | step=12900 loss=1.9522 lr=1.93e-04 elapsed=2042s
+2026-09-21 02:06:48 | INFO | step=13000 loss=1.6795 lr=1.93e-04 elapsed=2058s
+2026-09-21 02:06:50 | INFO | [eval] step=13000 dev_loss=6.0245
+2026-09-21 02:07:06 | INFO | step=13100 loss=2.1661 lr=1.93e-04 elapsed=2076s
+2026-09-21 02:07:21 | INFO | step=13200 loss=1.8672 lr=1.93e-04 elapsed=2091s
+2026-09-21 02:07:37 | INFO | step=13300 loss=2.1004 lr=1.93e-04 elapsed=2107s
+2026-09-21 02:07:52 | INFO | step=13400 loss=1.7737 lr=1.93e-04 elapsed=2122s
+2026-09-21 02:08:08 | INFO | step=13500 loss=1.6918 lr=1.92e-04 elapsed=2138s
+2026-09-21 02:08:23 | INFO | step=13600 loss=1.9679 lr=1.92e-04 elapsed=2153s
+2026-09-21 02:08:38 | INFO | step=13700 loss=2.0550 lr=1.92e-04 elapsed=2168s
+2026-09-21 02:08:53 | INFO | step=13800 loss=1.8012 lr=1.92e-04 elapsed=2184s
+2026-09-21 02:09:09 | INFO | step=13900 loss=1.5378 lr=1.92e-04 elapsed=2199s
+2026-09-21 02:09:24 | INFO | step=14000 loss=1.7004 lr=1.92e-04 elapsed=2214s
+2026-09-21 02:09:27 | INFO | [eval] step=14000 dev_loss=6.1165
+2026-09-21 02:09:42 | INFO | step=14100 loss=1.4205 lr=1.91e-04 elapsed=2232s
+2026-09-21 02:09:58 | INFO | step=14200 loss=1.6789 lr=1.91e-04 elapsed=2248s
+2026-09-21 02:10:13 | INFO | step=14300 loss=2.1272 lr=1.91e-04 elapsed=2263s
+2026-09-21 02:10:28 | INFO | step=14400 loss=1.3884 lr=1.91e-04 elapsed=2278s
+2026-09-21 02:10:44 | INFO | step=14500 loss=1.5076 lr=1.91e-04 elapsed=2294s
+2026-09-21 02:10:59 | INFO | step=14600 loss=1.3752 lr=1.91e-04 elapsed=2309s
+2026-09-21 02:11:14 | INFO | step=14700 loss=1.0633 lr=1.90e-04 elapsed=2324s
+2026-09-21 02:11:30 | INFO | step=14800 loss=1.3557 lr=1.90e-04 elapsed=2340s
+2026-09-21 02:11:45 | INFO | step=14900 loss=1.3812 lr=1.90e-04 elapsed=2355s
+2026-09-21 02:12:00 | INFO | step=15000 loss=1.3364 lr=1.90e-04 elapsed=2370s
+2026-09-21 02:12:03 | INFO | [eval] step=15000 dev_loss=6.2866
+2026-09-21 02:12:18 | INFO | step=15100 loss=1.7878 lr=1.90e-04 elapsed=2389s
+2026-09-21 02:12:34 | INFO | step=15200 loss=1.6703 lr=1.89e-04 elapsed=2404s
+2026-09-21 02:12:49 | INFO | step=15300 loss=1.4653 lr=1.89e-04 elapsed=2419s
+2026-09-21 02:13:04 | INFO | step=15400 loss=1.5271 lr=1.89e-04 elapsed=2434s
+2026-09-21 02:13:20 | INFO | step=15500 loss=1.4830 lr=1.89e-04 elapsed=2450s
+2026-09-21 02:13:35 | INFO | step=15600 loss=2.3757 lr=1.89e-04 elapsed=2465s
+2026-09-21 02:13:50 | INFO | step=15700 loss=1.8085 lr=1.89e-04 elapsed=2480s
+2026-09-21 02:14:06 | INFO | step=15800 loss=1.5223 lr=1.88e-04 elapsed=2496s
+2026-09-21 02:14:21 | INFO | step=15900 loss=2.4678 lr=1.88e-04 elapsed=2511s
+2026-09-21 02:14:36 | INFO | step=16000 loss=2.2302 lr=1.88e-04 elapsed=2526s
+2026-09-21 02:14:39 | INFO | [eval] step=16000 dev_loss=6.5964
+2026-09-21 02:14:54 | INFO | step=16100 loss=1.3500 lr=1.88e-04 elapsed=2544s
+2026-09-21 02:15:10 | INFO | step=16200 loss=2.0242 lr=1.88e-04 elapsed=2560s
+2026-09-21 02:15:25 | INFO | step=16300 loss=1.8065 lr=1.87e-04 elapsed=2575s
+2026-09-21 02:15:40 | INFO | step=16400 loss=1.3379 lr=1.87e-04 elapsed=2590s
+2026-09-21 02:15:55 | INFO | step=16500 loss=1.7120 lr=1.87e-04 elapsed=2606s
+2026-09-21 02:16:11 | INFO | step=16600 loss=2.0278 lr=1.87e-04 elapsed=2621s
+2026-09-21 02:16:26 | INFO | step=16700 loss=1.3561 lr=1.87e-04 elapsed=2636s
+2026-09-21 02:16:41 | INFO | step=16800 loss=1.7934 lr=1.86e-04 elapsed=2652s
+2026-09-21 02:16:57 | INFO | step=16900 loss=1.2779 lr=1.86e-04 elapsed=2667s
+2026-09-21 02:17:12 | INFO | step=17000 loss=1.0343 lr=1.86e-04 elapsed=2682s
+2026-09-21 02:17:15 | INFO | [eval] step=17000 dev_loss=6.5805
+2026-09-21 02:17:30 | INFO | step=17100 loss=1.8189 lr=1.86e-04 elapsed=2700s
+2026-09-21 02:17:46 | INFO | step=17200 loss=1.8549 lr=1.85e-04 elapsed=2716s
+2026-09-21 02:18:01 | INFO | step=17300 loss=1.7415 lr=1.85e-04 elapsed=2731s
+2026-09-21 02:18:16 | INFO | step=17400 loss=1.2366 lr=1.85e-04 elapsed=2746s
+2026-09-21 02:18:32 | INFO | step=17500 loss=1.7358 lr=1.85e-04 elapsed=2762s
+2026-09-21 02:18:47 | INFO | step=17600 loss=1.7293 lr=1.85e-04 elapsed=2777s
+2026-09-21 02:19:02 | INFO | step=17700 loss=1.4884 lr=1.84e-04 elapsed=2792s
+2026-09-21 02:19:18 | INFO | step=17800 loss=1.2811 lr=1.84e-04 elapsed=2808s
+2026-09-21 02:19:33 | INFO | step=17900 loss=1.4788 lr=1.84e-04 elapsed=2823s
+2026-09-21 02:19:48 | INFO | step=18000 loss=1.5203 lr=1.84e-04 elapsed=2838s
+2026-09-21 02:19:51 | INFO | [eval] step=18000 dev_loss=6.8476
+2026-09-21 02:20:06 | INFO | step=18100 loss=0.9576 lr=1.83e-04 elapsed=2856s
+2026-09-21 02:20:21 | INFO | step=18200 loss=1.5814 lr=1.83e-04 elapsed=2872s
+2026-09-21 02:20:37 | INFO | step=18300 loss=1.6105 lr=1.83e-04 elapsed=2887s
+2026-09-21 02:20:52 | INFO | step=18400 loss=1.1027 lr=1.83e-04 elapsed=2902s
+2026-09-21 02:21:07 | INFO | step=18500 loss=1.3907 lr=1.83e-04 elapsed=2917s
+2026-09-21 02:21:23 | INFO | step=18600 loss=1.9162 lr=1.82e-04 elapsed=2933s
+2026-09-21 02:21:38 | INFO | step=18700 loss=0.9638 lr=1.82e-04 elapsed=2948s
+2026-09-21 02:21:53 | INFO | step=18800 loss=1.6786 lr=1.82e-04 elapsed=2963s
+2026-09-21 02:22:09 | INFO | step=18900 loss=1.1356 lr=1.82e-04 elapsed=2979s
+2026-09-21 02:22:24 | INFO | step=19000 loss=1.2049 lr=1.81e-04 elapsed=2994s
+2026-09-21 02:22:27 | INFO | [eval] step=19000 dev_loss=7.1689
+2026-09-21 02:22:42 | INFO | step=19100 loss=1.3617 lr=1.81e-04 elapsed=3012s
+2026-09-21 02:22:57 | INFO | step=19200 loss=0.8561 lr=1.81e-04 elapsed=3027s
+2026-09-21 02:23:12 | INFO | step=19300 loss=1.6566 lr=1.81e-04 elapsed=3042s
+2026-09-21 02:23:28 | INFO | step=19400 loss=1.2217 lr=1.80e-04 elapsed=3058s
+2026-09-21 02:23:43 | INFO | step=19500 loss=1.4609 lr=1.80e-04 elapsed=3074s
+2026-09-21 02:23:59 | INFO | step=19600 loss=1.5232 lr=1.80e-04 elapsed=3089s
+2026-09-21 02:24:14 | INFO | step=19700 loss=1.1122 lr=1.80e-04 elapsed=3104s
+2026-09-21 02:24:29 | INFO | step=19800 loss=1.0995 lr=1.79e-04 elapsed=3119s
+2026-09-21 02:24:45 | INFO | step=19900 loss=1.5309 lr=1.79e-04 elapsed=3135s
+2026-09-21 02:25:00 | INFO | step=20000 loss=1.4925 lr=1.79e-04 elapsed=3150s
+2026-09-21 02:25:02 | INFO | [eval] step=20000 dev_loss=6.9311
+2026-09-21 02:25:35 | INFO | step=20100 loss=1.1385 lr=1.79e-04 elapsed=3185s
+2026-09-21 02:25:50 | INFO | step=20200 loss=0.9785 lr=1.78e-04 elapsed=3200s
+2026-09-21 02:26:06 | INFO | step=20300 loss=1.4859 lr=1.78e-04 elapsed=3216s
+2026-09-21 02:26:21 | INFO | step=20400 loss=1.2373 lr=1.78e-04 elapsed=3231s
+2026-09-21 02:26:37 | INFO | step=20500 loss=1.2720 lr=1.78e-04 elapsed=3247s
+2026-09-21 02:26:52 | INFO | step=20600 loss=1.3540 lr=1.77e-04 elapsed=3262s
+2026-09-21 02:27:07 | INFO | step=20700 loss=1.0879 lr=1.77e-04 elapsed=3277s
+2026-09-21 02:27:22 | INFO | step=20800 loss=1.0290 lr=1.77e-04 elapsed=3292s
+2026-09-21 02:27:38 | INFO | step=20900 loss=1.4987 lr=1.77e-04 elapsed=3308s
+2026-09-21 02:27:53 | INFO | step=21000 loss=1.7734 lr=1.76e-04 elapsed=3323s
+2026-09-21 02:27:56 | INFO | [eval] step=21000 dev_loss=7.1068
+2026-09-21 02:27:56 | INFO | Early stopping triggered.
+2026-09-21 02:27:56 | INFO | Training complete. Best dev loss: 4.1275

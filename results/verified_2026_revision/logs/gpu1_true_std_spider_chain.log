@@ -1,0 +1,5 @@
+[GPU1 TRUE-STD-SPIDER CHAIN START] 2026. 09. 22. (화) 07:20:37 KST
+[TRAIN START true_std_spider_copy s42] 2026. 09. 22. (화) 07:20:37 KST
+[TRAIN DONE true_std_spider_copy s42 rc=0] 2026. 09. 22. (화) 08:41:54 KST
+[EVAL DONE true_std_spider_copy s42 rc=0] 2026. 09. 22. (화) 08:43:48 KST
+[TRAIN START true_std_spider_copy s43] 2026. 09. 22. (화) 08:43:48 KST

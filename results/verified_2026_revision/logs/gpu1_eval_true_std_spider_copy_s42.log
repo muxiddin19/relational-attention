@@ -1,0 +1,10 @@
+2026-09-22 08:41:56 | INFO | Evaluating 1034 examples from spider/dev
+2026-09-22 08:43:47 | INFO | Spider eval output:
+                     easy                 medium               hard                 extra                all                 
+count                248                  446                  174                  166                  1034                
+=====================   EXECUTION ACCURACY     =====================
+execution            0.020                0.002                0.006                0.000                0.007               
+
+2026-09-22 08:43:47 | INFO | === Results (spider/dev) ===
+2026-09-22 08:43:47 | INFO |   execution_accuracy: 0.0070
+2026-09-22 08:43:47 | INFO | Saved to /home/muhiddin/relational-attention/results/verified_2026_revision/eval_true_std_spider_copy_s42.json

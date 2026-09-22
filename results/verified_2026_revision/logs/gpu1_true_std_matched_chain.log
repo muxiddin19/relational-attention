@@ -1,3 +1,46 @@
 [GPU1 TRUE-STD-matched CHAIN START] 2026. 09. 20. (일) 19:57:34 KST
 [PHASE: GSM8K, 8 seeds] 2026. 09. 20. (일) 19:57:34 KST
 [TRAIN START true_std_matched_gsm8k s42] 2026. 09. 20. (일) 19:57:34 KST
+[TRAIN DONE true_std_matched_gsm8k s42 rc=0] 2026. 09. 20. (일) 20:53:10 KST
+[EVAL DONE true_std_matched_gsm8k s42 rc=0] 2026. 09. 20. (일) 20:53:34 KST
+[TRAIN START true_std_matched_gsm8k s43] 2026. 09. 20. (일) 20:53:34 KST
+[TRAIN DONE true_std_matched_gsm8k s43 rc=0] 2026. 09. 20. (일) 21:49:10 KST
+[EVAL DONE true_std_matched_gsm8k s43 rc=0] 2026. 09. 20. (일) 21:49:21 KST
+[TRAIN START true_std_matched_gsm8k s44] 2026. 09. 20. (일) 21:49:21 KST
+[TRAIN DONE true_std_matched_gsm8k s44 rc=0] 2026. 09. 20. (일) 22:45:00 KST
+[EVAL DONE true_std_matched_gsm8k s44 rc=0] 2026. 09. 20. (일) 22:45:11 KST
+[TRAIN START true_std_matched_gsm8k s45] 2026. 09. 20. (일) 22:45:11 KST
+[TRAIN DONE true_std_matched_gsm8k s45 rc=0] 2026. 09. 20. (일) 23:40:48 KST
+[EVAL DONE true_std_matched_gsm8k s45 rc=0] 2026. 09. 20. (일) 23:40:58 KST
+[TRAIN START true_std_matched_gsm8k s46] 2026. 09. 20. (일) 23:40:58 KST
+[TRAIN DONE true_std_matched_gsm8k s46 rc=0] 2026. 09. 21. (월) 00:36:30 KST
+[EVAL DONE true_std_matched_gsm8k s46 rc=0] 2026. 09. 21. (월) 00:36:40 KST
+[TRAIN START true_std_matched_gsm8k s47] 2026. 09. 21. (월) 00:36:40 KST
+[TRAIN DONE true_std_matched_gsm8k s47 rc=0] 2026. 09. 21. (월) 01:32:16 KST
+[EVAL DONE true_std_matched_gsm8k s47 rc=0] 2026. 09. 21. (월) 01:32:26 KST
+[TRAIN START true_std_matched_gsm8k s48] 2026. 09. 21. (월) 01:32:26 KST
+[TRAIN DONE true_std_matched_gsm8k s48 rc=0] 2026. 09. 21. (월) 02:27:56 KST
+[EVAL DONE true_std_matched_gsm8k s48 rc=0] 2026. 09. 21. (월) 02:28:06 KST
+[TRAIN START true_std_matched_gsm8k s49] 2026. 09. 21. (월) 02:28:06 KST
+[TRAIN DONE true_std_matched_gsm8k s49 rc=0] 2026. 09. 21. (월) 03:23:37 KST
+[EVAL DONE true_std_matched_gsm8k s49 rc=0] 2026. 09. 21. (월) 03:23:47 KST
+[PHASE: COGS, 5 seeds] 2026. 09. 21. (월) 03:23:47 KST
+[TRAIN START true_std_matched_cogs s42] 2026. 09. 21. (월) 03:23:47 KST
+[TRAIN DONE true_std_matched_cogs s42 rc=0] 2026. 09. 21. (월) 05:17:18 KST
+[EVAL DONE true_std_matched_cogs s42 dev rc=0] 2026. 09. 21. (월) 05:25:42 KST
+[EVAL DONE true_std_matched_cogs s42 gen rc=0] 2026. 09. 21. (월) 07:37:08 KST
+[TRAIN START true_std_matched_cogs s43] 2026. 09. 21. (월) 07:37:08 KST
+[TRAIN DONE true_std_matched_cogs s43 rc=137] 2026. 09. 21. (월) 18:42:09 KST
+[TRAIN START true_std_matched_cogs s44] 2026. 09. 21. (월) 18:42:09 KST
+[TRAIN DONE true_std_matched_cogs s44 rc=0] 2026. 09. 21. (월) 21:28:33 KST
+[EVAL DONE true_std_matched_cogs s44 dev rc=0] 2026. 09. 21. (월) 21:36:55 KST
+[EVAL DONE true_std_matched_cogs s44 gen rc=0] 2026. 09. 21. (월) 23:09:12 KST
+[TRAIN START true_std_matched_cogs s45] 2026. 09. 21. (월) 23:09:12 KST
+[TRAIN DONE true_std_matched_cogs s45 rc=0] 2026. 09. 22. (화) 00:32:10 KST
+[EVAL DONE true_std_matched_cogs s45 dev rc=0] 2026. 09. 22. (화) 00:40:39 KST
+[EVAL DONE true_std_matched_cogs s45 gen rc=0] 2026. 09. 22. (화) 02:14:41 KST
+[TRAIN START true_std_matched_cogs s46] 2026. 09. 22. (화) 02:14:41 KST
+[TRAIN DONE true_std_matched_cogs s46 rc=0] 2026. 09. 22. (화) 04:01:33 KST
+[EVAL DONE true_std_matched_cogs s46 dev rc=0] 2026. 09. 22. (화) 04:09:59 KST
+[EVAL DONE true_std_matched_cogs s46 gen rc=0] 2026. 09. 22. (화) 05:33:45 KST
+[GPU1 TRUE-STD-matched CHAIN DONE] 2026. 09. 22. (화) 05:33:45 KST

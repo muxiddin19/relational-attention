@@ -1,0 +1,5 @@
+2026-09-21 01:32:21 | INFO | Evaluating 1319 examples from gsm8k/dev
+2026-09-21 01:32:26 | INFO | === Results (gsm8k/dev) ===
+2026-09-21 01:32:26 | INFO |   answer_accuracy: 0.0265
+2026-09-21 01:32:26 | INFO |   n: 1319
+2026-09-21 01:32:26 | INFO | Saved to /home/muhiddin/relational-attention/results/verified_2026_revision/eval_true_std_matched_gsm8k_s47.json

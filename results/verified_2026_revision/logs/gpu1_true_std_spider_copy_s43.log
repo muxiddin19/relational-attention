@@ -1,0 +1,28 @@
+2026-09-22 08:43:49 | INFO | Device: cuda
+2026-09-22 08:43:49 | INFO | Model: standard, k=1, params=122.3M
+2026-09-22 08:43:50 | INFO | Training on 7000 examples, eval on 1034
+2026-09-22 08:43:50 | INFO | Config: TrainingConfig(model_type='standard', hidden_dim=512, num_encoder_layers=12, num_decoder_layers=12, num_heads=8, num_attributes=1, use_gating=False, use_mixing=False, pairing_strategy='cyclic', pairing_seed=1234, use_composed_join=False, use_true_standard=True, ffn_dim=2048, max_seq_len=512, dropout=0.1, vocab_size=32000, learning_rate=8e-05, weight_decay=0.01, warmup_steps=4000, max_steps=300000, batch_size=4, gradient_accumulation=16, max_grad_norm=1.0, label_smoothing=0.05, eval_every=2000, save_every=20000, patience=30, eval_by_em=True, dataset='spider', nas_dir='/nas/Dataset/nlp', max_src_len=384, max_tgt_len=200, seed=43, num_workers=4, fp16=False, output_dir='/nas/Dataset/experiments/relational-attention/muhiddin_outputs/true_std_spider_copy_s43', log_every=100, copy_mechanism=True, num_copy_heads=1)
+2026-09-22 08:43:50 | INFO | step=0 loss=8.9344 lr=0.00e+00 elapsed=1s
+2026-09-22 08:43:53 | INFO | step=100 loss=8.4306 lr=2.00e-06 elapsed=3s
+2026-09-22 08:43:56 | INFO | step=200 loss=8.5175 lr=4.00e-06 elapsed=6s
+2026-09-22 08:43:59 | INFO | step=300 loss=9.4884 lr=6.00e-06 elapsed=9s
+2026-09-22 08:44:02 | INFO | step=400 loss=8.1153 lr=8.00e-06 elapsed=12s
+2026-09-22 08:44:05 | INFO | step=500 loss=8.2372 lr=1.00e-05 elapsed=15s
+2026-09-22 08:44:08 | INFO | step=600 loss=8.6961 lr=1.20e-05 elapsed=18s
+2026-09-22 08:44:11 | INFO | step=700 loss=7.7521 lr=1.40e-05 elapsed=21s
+2026-09-22 08:44:14 | INFO | step=800 loss=7.9444 lr=1.60e-05 elapsed=24s
+2026-09-22 08:44:17 | INFO | step=900 loss=8.0540 lr=1.80e-05 elapsed=27s
+2026-09-22 08:44:20 | INFO | step=1000 loss=8.1023 lr=2.00e-05 elapsed=30s
+2026-09-22 08:44:23 | INFO | step=1100 loss=7.7431 lr=2.20e-05 elapsed=33s
+2026-09-22 08:44:26 | INFO | step=1200 loss=7.4580 lr=2.40e-05 elapsed=36s
+2026-09-22 08:44:29 | INFO | step=1300 loss=7.2885 lr=2.60e-05 elapsed=39s
+2026-09-22 08:44:32 | INFO | step=1400 loss=8.3526 lr=2.80e-05 elapsed=42s
+2026-09-22 08:44:35 | INFO | step=1500 loss=7.1711 lr=3.00e-05 elapsed=45s
+2026-09-22 08:44:37 | INFO | step=1600 loss=7.7418 lr=3.20e-05 elapsed=48s
+2026-09-22 08:44:40 | INFO | step=1700 loss=6.7485 lr=3.40e-05 elapsed=50s
+2026-09-22 08:44:43 | INFO | step=1800 loss=6.7794 lr=3.60e-05 elapsed=53s
+2026-09-22 08:44:46 | INFO | step=1900 loss=6.8597 lr=3.80e-05 elapsed=56s
+2026-09-22 08:44:49 | INFO | step=2000 loss=7.1571 lr=4.00e-05 elapsed=59s
+2026-09-22 08:44:51 | INFO | [eval] step=2000 dev_loss=6.8474
+2026-09-22 08:45:25 | INFO |   EM on dev subset (200 samples): 0.00%
+2026-09-22 08:45:30 | INFO |   -> New best model saved (dev_loss=6.8474)
